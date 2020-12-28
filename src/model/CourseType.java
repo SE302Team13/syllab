@@ -1,14 +1,11 @@
 package model;
 
-public enum SemesterOptions {
-	
-	FALL,
-	SPRING,
-	BOTH;
-	
-	
-	
-	
+public enum CourseType {
+
+	REQUIRED,
+	ELECTIVE,
+	SERVICE;
+
 	@Override
 	public String toString() {
 		String[] arr = this.name().split("_");
