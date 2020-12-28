@@ -11,7 +11,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent parent = new BorderPane();
-		
+		System.out.println("New Branch");
 	}
 	
 	
