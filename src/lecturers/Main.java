@@ -1,25 +1,22 @@
-package AddCourse;
-	
+package lecturers;
+
 import javafx.application.Application;
-
-
-import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-//import javafx.scene.layout.BorderPane;
-import javafx.fxml.FXMLLoader;
-
+import javafx.stage.Stage;
 
 public class Main extends Application {
-	private Stage stage;
-	private Scene scene;
+	
+	private static final Scene scene = null;
+	private static final Stage stage = null;
 
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-			Parent root = FXMLLoader.load(getClass().getResource("Create_Syllabus.fxml"));
-		//	Scene scene = new Scene(root,650,500);
+			Parent root = FXMLLoader.load(getClass().getResource("lecturer.fxml"));
+		
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -34,3 +31,5 @@ public class Main extends Application {
 		launch(args);
 	}
 }
+
+
