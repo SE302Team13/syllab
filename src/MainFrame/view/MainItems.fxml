@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<BorderPane prefHeight="400.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainFrame.view.MainItemsController">
+   <center>
+      <FlowPane hgap="20.0" prefHeight="200.0" prefWidth="200.0" vgap="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goCreateanewSyllabus" prefHeight="25.0" prefWidth="67.0" text="Create a new Syllabus" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#goGetSyllabusFromInternet" prefHeight="25.0" prefWidth="67.0" text="Get Syllabus from Internet" />
+            <Button mnemonicParsing="false" text="Open" />
+            <Button mnemonicParsing="false" text="Open Recent" />
+            <Button mnemonicParsing="false" text="Exit" />
+            <Button mnemonicParsing="false" text="About" />
+            <Button mnemonicParsing="false" text="Help File" />
+            <Button mnemonicParsing="false" text="GitHub Repository" />
+         </children>
+         <padding>
+            <Insets left="20.0" top="20.0" />
+         </padding>
+      </FlowPane>
+   </center>
+</BorderPane>
