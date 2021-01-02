@@ -7,14 +7,14 @@
 
 <BorderPane prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="900.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="62.0" prefWidth="900.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#gookay" text="Ok" />
+            <Button mnemonicParsing="false" onAction="#gookay" text="Ok">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
             <Button mnemonicParsing="false" onAction="#gocancel" text="Cancel" />
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
       </HBox>
    </bottom>
 </BorderPane>
