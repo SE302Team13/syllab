@@ -2,11 +2,30 @@ package model;
 
 public class SemesterActivity {
 	
+	/**
+	 * Name of the Semester Activity.
+	 */
 	private String activityName;
+	/**
+	 * Number of the occurrence of the activity in one semester.
+	 */
 	private int number;
+	/**
+	 * Expected duration for one occurrence of the activity.
+	 */
 	private int duration;
+	/**
+	 * Total workload of the activity in hour(s) for one semester. 
+	 */
 	private int workload;
 
+	/**
+	 * Constructor does not contain any validation. Arguments should be validated <b>before</b> passed to
+	 * this constructor.
+	 * @param actName Name of the Semester Activity.
+	 * @param number Number of the occurrence of the activity in one semester.
+	 * @param duration Expected duration for one occurrence of the activity.
+	 */
 	public SemesterActivity(String actName, int number, int duration) {
 		this.activityName = actName;
 		this.number = number;
@@ -43,8 +62,12 @@ public class SemesterActivity {
 	}
 
 
-	public void setActivityName(String activityName) {
-		this.activityName = activityName;
+	public boolean setActivityName(String activityName) {
+		if ((activityName != null) && !(activityName.isBlank())) {
+			this.activityName = activityName;
+			return true;
+		}
+		return false;
 	}
 
 

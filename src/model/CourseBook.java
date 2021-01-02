@@ -47,7 +47,7 @@ public class CourseBook {
 	}
 
 	public boolean setName(String name) {
-		if(!(name.isBlank())) {
+		if((name != null) && !(name.isBlank())) {
 			this.name = name;
 			return true;
 		}
@@ -55,7 +55,7 @@ public class CourseBook {
 	}
 
 	public boolean setEdition(int edition) {
-		if (edition > 0) {
+		if (edition >= 0) {
 			this.edition = edition;
 			return true;
 		}
@@ -63,6 +63,9 @@ public class CourseBook {
 	}
 
 	public void setAuthor(String author) {
+		if ((author == null) || (author.isBlank())) {
+			author = "Anonymous";
+		}
 		this.author = author;
 	}
 

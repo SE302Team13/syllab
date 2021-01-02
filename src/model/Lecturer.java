@@ -4,8 +4,17 @@ public class Lecturer {
 	
 	//Field(s)
 	
+	/**
+	 * Name of the lecturer.
+	 */
 	private String name;
+	/**
+	 * Surname of the lecturer.
+	 */
 	private String surname;
+	/**
+	 * {@link AcademicTitle} for a lecturer.
+	 */
 	private AcademicTitle title;
 	
 	
@@ -36,16 +45,28 @@ public class Lecturer {
 		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public boolean setName(String name) {
+		if ((name != null) && (name.isBlank())) {
+			this.name = name;
+			return true;
+		}
+		return false;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public boolean setSurname(String surname) {
+		if ((surname != null) && (surname.isBlank())) {
+			this.surname = surname;
+			return true;
+		}
+		return false;
 	}
-
-	public void setTitle(AcademicTitle title) {
-		this.title = title;
+	
+	public boolean setTitle(AcademicTitle title) {
+		if (title != null) {
+			this.title = title;
+			return true;
+		}
+		return false;
 	}
 	
 	
