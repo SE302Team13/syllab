@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainFrame.view.MainViewController">
+   <top>
+      <MenuBar prefHeight="38.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Create a new Syllabus" />
+                  <MenuItem mnemonicParsing="false" text="Get Syllabus from Internet" />
+                  <MenuItem mnemonicParsing="false" text="Open" />
+                  <Menu mnemonicParsing="false" text="Open Recent">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="CE350.syb" />
+                        <MenuItem mnemonicParsing="false" text="SE302.syb" />
+                    </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Exit                              ALT+F4" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="Help File" />
+                  <MenuItem mnemonicParsing="false" text="GitHub Repository" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
