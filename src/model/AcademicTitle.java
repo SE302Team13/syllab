@@ -1,11 +1,14 @@
 package model;
 
-public enum SemesterOptions {
-	
-	FALL,
-	SPRING,
-	BOTH;
-	
+public enum AcademicTitle {
+
+	RESEARCH_ASSISTANT,
+	TEACHING_ASSISTANT,
+	INSTRUCTOR,
+	LECTURER,
+	ASSISTANT_PROFESSOR,
+	ASSOCIATE_PROFESSOR,
+	FULL_PROFESSOR;
 	
 	
 	
@@ -23,4 +26,5 @@ public enum SemesterOptions {
 		}
 		return builder.toString();
 	}
+	
 }
