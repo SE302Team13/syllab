@@ -9,13 +9,13 @@ import MainFrame.Main;
 
 public class MainViewController {
 	
+	/*
 	private Main main;
 	
 	@FXML
 	private void gohomepage() throws IOException {
 	main.showMainItems();
-
-}
 	
+	*/
 }
 

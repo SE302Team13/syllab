@@ -5,5 +5,8 @@ module TermProject {
 	requires javafx.graphics;
 	
 	opens mainfunctions;
-	
+	opens MainFrame;
+	opens MainFrame.file;
+	opens MainFrame.about;
+	opens MainFrame.GetSyllabusFromInternet;
 }

@@ -1,9 +1,11 @@
 package MainFrame;
 
 import java.io.IOException;
+import java.nio.file.FileSystems;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -11,20 +13,20 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-	
+	/*
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
-	
+	*/
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("IEU Syllabus Manager");
-		showMainFrame();
-		showMainItems();
-		
+		FXMLLoader loader =  new FXMLLoader(FileSystems.getDefault().getPath("src", "MainFrame", "MainView.fxml").toAbsolutePath().toUri().toURL());
+		Parent root = loader.load();
+		primaryStage.setScene(new Scene(root));
+		primaryStage.show();
 	}
-
+	
+	/*
 	public void showMainItems() throws IOException {
 		// TODO Auto-generated method stub
 		FXMLLoader loader = new FXMLLoader();
@@ -58,7 +60,7 @@ public class Main extends Application {
 		BorderPane file = loader.load();
 		mainLayout.setCenter(file);
 		
-	} */
+	}
 	
 	
 	
@@ -76,7 +78,7 @@ public class Main extends Application {
 		BorderPane open = loader.load();
 		mainLayout.setCenter(open);
 		
-	} */
+	}
 	
 	public static void showabout() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
@@ -102,6 +104,8 @@ public class Main extends Application {
 		
 	}
 	
+	*/
+	
 	/*public static void showaddStage() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("view/Add.fxml"));
@@ -121,15 +125,8 @@ public class Main extends Application {
 //}
 	
 	public static void main(String[] args) {
-		launch(args);
-	
+		Application.launch(args);
 	}
-
-	
-
-	
-
-	
 
 	
 
