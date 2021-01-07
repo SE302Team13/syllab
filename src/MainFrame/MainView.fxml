@@ -22,7 +22,7 @@
                             </items>
                         </Menu>
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Exit                              ALT+F4" />
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit                              ALT+F4" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

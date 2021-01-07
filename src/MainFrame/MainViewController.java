@@ -32,6 +32,11 @@ public class MainViewController {
     public void githubRepo(ActionEvent actionEvent) {
         System.out.println("Clicked On Item:");
     }
+    
+    @FXML
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
 	/*
 	private Main main;
 	
