@@ -10,26 +10,26 @@
    <top>
       <MenuBar prefHeight="38.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" onAction="#gofile" text="File">
+          <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#gocreatesyllabus" text="Create a new Syllabus" />
-                  <MenuItem mnemonicParsing="false" onAction="#gogetsyllabus" text="Get Syllabus from Internet" />
-                  <MenuItem mnemonicParsing="false" onAction="#goopen" text="Open" />
-                  <Menu mnemonicParsing="false" onAction="#goopenrecent" text="Open Recent">
+              <MenuItem mnemonicParsing="false" text="Create a new Syllabus" />
+                  <MenuItem mnemonicParsing="false" text="Get Syllabus from Internet" />
+                  <MenuItem mnemonicParsing="false" text="Open" />
+                  <Menu mnemonicParsing="false" text="Open Recent">
                     <items>
                       <MenuItem mnemonicParsing="false" text="CE350.syb" />
                         <MenuItem mnemonicParsing="false" text="SE302.syb" />
                     </items>
                   </Menu>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#goexit" text="Exit                              ALT+F4" />
+                  <MenuItem mnemonicParsing="false" text="Exit                              ALT+F4" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" onAction="#gohelp" text="Help">
+          <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#goabout" text="About" />
-                  <MenuItem mnemonicParsing="false" onAction="#gohelpfile" text="Help File" />
-                  <MenuItem mnemonicParsing="false" onAction="#gogithubrepository" text="GitHub Repository" />
+              <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="Help File" />
+                  <MenuItem mnemonicParsing="false" text="GitHub Repository" />
             </items>
           </Menu>
         </menus>
