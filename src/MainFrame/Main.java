@@ -13,10 +13,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-	/*
+	
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
-	*/
+	
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -95,6 +95,7 @@ public class Main extends Application {
 		mainLayout.setCenter(helpfile);
 		
 	}
+	*/
 	
 	public static void showGitHubRepository() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
@@ -104,7 +105,7 @@ public class Main extends Application {
 		
 	}
 	
-	*/
+	
 	
 	/*public static void showaddStage() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
