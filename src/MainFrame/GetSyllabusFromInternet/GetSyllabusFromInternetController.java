@@ -1,4 +1,4 @@
-package MainFrame.getsyllabusfrominternet;
+package MainFrame.GetSyllabusFromInternet;
 
 public class GetSyllabusFromInternetController {
 
