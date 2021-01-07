@@ -7,32 +7,32 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainFrame.MainViewController">
-   <top>
-      <MenuBar prefHeight="38.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Create a new Syllabus" />
-                  <MenuItem mnemonicParsing="false" text="Get Syllabus from Internet" />
-                  <MenuItem mnemonicParsing="false" text="Open" />
-                  <Menu mnemonicParsing="false" text="Open Recent">
+    <top>
+        <MenuBar prefHeight="38.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="CE350.syb" />
-                        <MenuItem mnemonicParsing="false" text="SE302.syb" />
+                        <MenuItem mnemonicParsing="false" onAction="createSyllabus" text="Create a new Syllabus" />
+                        <MenuItem mnemonicParsing="false" onAction="getSyllabus" text="Get Syllabus from Internet" />
+                        <MenuItem mnemonicParsing="false" onAction="open" text="Open" />
+                        <Menu mnemonicParsing="false" onAction="openRecent" text="Open Recent">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="CE350.syb" />
+                                <MenuItem mnemonicParsing="false" text="SE302.syb" />
+                            </items>
+                        </Menu>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Exit                              ALT+F4" />
                     </items>
-                  </Menu>
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Exit                              ALT+F4" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-                  <MenuItem mnemonicParsing="false" text="Help File" />
-                  <MenuItem mnemonicParsing="false" text="GitHub Repository" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="about" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="helpFile" text="Help File" />
+                        <MenuItem mnemonicParsing="false" onAction="githubRepo" text="GitHub Repository" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
 </BorderPane>

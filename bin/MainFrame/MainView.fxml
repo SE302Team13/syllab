@@ -27,9 +27,9 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-                  <MenuItem mnemonicParsing="false" text="Help File" />
-                  <MenuItem mnemonicParsing="false" text="GitHub Repository" />
+              <MenuItem mnemonicParsing="false" onAction="about" text="About" />
+                  <MenuItem mnemonicParsing="false" onAction="helpFile" text="Help File" />
+                  <MenuItem mnemonicParsing="false" onAction="githubRepo" text="GitHub Repository" />
             </items>
           </Menu>
         </menus>
