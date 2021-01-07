@@ -1,12 +1,18 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class EvaluationCriteria {
+public class EvaluationCriteria implements Serializable {
 	
 	
 	//Field(s)
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 825385954927560599L;
+
 	/**
 	 * Name of the criteria
 	 */

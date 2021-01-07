@@ -1,10 +1,17 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
-public class CourseCompetency {
+public class CourseCompetency implements Serializable {
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5542884675479939170L;
+	
 	// Field(s)
 
 	/**

@@ -1,8 +1,15 @@
 package model;
 
-public class Lecturer {
+import java.io.Serializable;
+
+public class Lecturer implements Serializable {
 	
 	//Field(s)
+	
+	/**
+	 * Constant to distinguish Lecturer class
+	 */
+	private static final long serialVersionUID = 5453095877438929937L;
 	
 	/**
 	 * Name of the lecturer.

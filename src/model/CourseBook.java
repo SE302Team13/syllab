@@ -1,39 +1,47 @@
 package model;
 
-public class CourseBook {
+import java.io.Serializable;
 
-	//Field(s)
+public class CourseBook implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6081704061435108474L;
+
+	// Field(s)
 	/**
 	 * Full name of the book without specified edition
 	 */
 	private String name;
-	
+
 	/**
 	 * Edition number of the book.
 	 */
 	private int edition;
-	
+
 	/**
 	 * Author of the book.
 	 */
 	private String author;
-	
-	
-	//Constructor(s)
-	
+
+	// Constructor(s)
+
 	/**
 	 * General constructor for {@link CourseBook} class
-	 * @param name
-	 * @param edition
-	 * @param author
+	 * 
+	 * @param name    Name of the book.
+	 * @param edition Edition number of the book.
+	 * @param author  Author of the book. If you pass null or empty string it will
+	 *                be considered as "anonymous".
 	 */
 	public CourseBook(String name, int edition, String author) {
 		this.name = name;
 		this.edition = edition;
 		this.author = author;
 	}
-	
-	//Getter(s) and Setter(s)
+
+	// Getter(s) and Setter(s)
 	public String getName() {
 		return name;
 	}
@@ -47,7 +55,7 @@ public class CourseBook {
 	}
 
 	public boolean setName(String name) {
-		if((name != null) && !(name.isBlank())) {
+		if ((name != null) && !(name.isBlank())) {
 			this.name = name;
 			return true;
 		}
@@ -69,7 +77,6 @@ public class CourseBook {
 		this.author = author;
 	}
 
-	
 	/**
 	 * Overridden method equals() to identify object with exactly same properties
 	 */
@@ -83,6 +90,5 @@ public class CourseBook {
 		}
 		return false;
 	}
-
 
 }

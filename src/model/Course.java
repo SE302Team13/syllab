@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -11,9 +12,14 @@ import java.util.List;
  * @version 1.0
  * 
  */
-public class Course {
+public class Course implements Serializable {
 
 	// Field(s)
+
+	/**
+	 * Constant to distinguish Lecturer class
+	 */
+	private static final long serialVersionUID = -1454515434510036767L;
 
 	/**
 	 * Complete name of the course
@@ -225,8 +231,6 @@ public class Course {
 		this.courseLang = courseLang;
 		this.labHour = labHour;
 		this.theoreticalHour = theoreticalHour;
-		this.localCredit = calculateLocalCredit();
-		this.ects = calculateECTS();
 		this.type = type;
 		this.courseCordinator = coordinator;
 		this.courseLecturers = new ArrayList<>(lecturers);
@@ -241,10 +245,40 @@ public class Course {
 		this.evaluationCriterias = new ArrayList<>(evaluationCriterias);
 		this.workloadTable = new ArrayList<>(workloadTable);
 		this.courseCompetencies = new ArrayList<>(courseCompetencies);
+		this.localCredit = calculateLocalCredit();
+		this.ects = calculateECTS();
 	}
 
-	// FIXME add a default constructor for newly created courses without a
-	// sufficient information supplied.
+	/**
+	 * Default constructor for the Course class. It's added to be used in creation
+	 * of a new syllabus without any prior information. It will assign default
+	 * values for the fields and create empty ArrayLists.
+	 */
+	public Course() {
+		this.courseName = "Not Specified";
+		this.code = "Not Specified";
+		this.creationDate = LocalDateTime.now();
+		this.prerequisites = new ArrayList<>();
+		this.courseLang = Language.ENGLISH;
+		this.labHour = 0;
+		this.theoreticalHour = 0;
+		this.type = CourseType.REQUIRED;
+		this.courseCordinator = null;
+		this.courseLecturers = new ArrayList<>();
+		this.assistants = new ArrayList<>();
+		this.courseObjective = "-";
+		this.courseDescription = "-";
+		this.learningOutcomes = new ArrayList<>();
+		this.courseCategory = CourseCategory.CORE_COURSE;
+		this.courseSchedule = WeeklySubject.createDefaultSemester();
+		this.courseTextBook = null;
+		this.suggestedReading = new ArrayList<>();
+		this.evaluationCriterias = new ArrayList<>();
+		this.workloadTable = new ArrayList<>();
+		this.courseCompetencies = new ArrayList<>();
+		this.ects = calculateECTS();
+		this.localCredit = calculateLocalCredit();
+	}
 
 	// Method(s)
 	/**
@@ -897,7 +931,7 @@ public class Course {
 
 	// TRYIT Regex testing may be added for further validation.
 	public boolean setCode(String code) {
-		if ((code != null) && (code.length() > 4)) {
+		if ((code != null) && (code.length() >= 4)) {
 			this.code = code;
 			return true;
 		}
