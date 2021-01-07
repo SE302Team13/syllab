@@ -4,9 +4,15 @@ module TermProject {
 	requires javafx.fxml;
 	requires javafx.graphics;
 	
-	opens mainfunctions;
+	
 	opens MainFrame;
+	opens MainFrame.view;
 	opens MainFrame.file;
 	opens MainFrame.about;
-	opens MainFrame.GetSyllabusFromInternet;
+	opens MainFrame.getsyllabusfrominternet;
+	opens MainFrame.githubrepository;
+	opens MainFrame.helpfile;
+	opens MainFrame.open_;
+	opens MainFrame.openrecent;
+	
 }

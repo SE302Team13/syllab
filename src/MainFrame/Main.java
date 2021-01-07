@@ -12,125 +12,149 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	
-	/*
-	private static Stage primaryStage;
-	private static BorderPane mainLayout;
-	*/
+
+	private static Stage primaryStage = null;
+	private static BorderPane mainLayout = null;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader loader =  new FXMLLoader(FileSystems.getDefault().getPath("src", "MainFrame", "MainView.fxml").toAbsolutePath().toUri().toURL());
-		Parent root = loader.load();
-		primaryStage.setScene(new Scene(root));
+		this.primaryStage = primaryStage;
+		showMainFrame();
+		// showfileScene(); Exception is thrown because the use of an unavailable element.
+		// showOpen(); Exception is thrown because of the fxml file configuration. No Controller specified.
+		// showOpenRecent(); Exception is thrown because of the fxml file configuration. No Controller specified.
+		// showAbout() Exception is thrown because of the fxml file configuration. No Controller specified.
+		// showhelpFile(); Exception is thrown because of the fxml file configuration. No Controller specified.
+	}
+	
+	
+	/**
+	 * Private method to initialize core pane. Should not be used by any other method except start().
+	 * @throws IOException 
+	 */
+	private static void showMainFrame() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("MainView.fxml"));
+		mainLayout = loader.load();
+		Scene scene = new Scene(mainLayout, 800, 600);
+		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 	
-	/*
-	public void showMainItems() throws IOException {
-		// TODO Auto-generated method stub
+	/**
+	 * Method to change the scene to MainItems.fxml
+	 * @throws IOException
+	 */
+	public static void showMainItems() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("view/MainItems.fxml"));
 		BorderPane mainItems = loader.load();
 		mainLayout.setCenter(mainItems);
-	
-		
 	}
 
-	private void showMainFrame() throws IOException {
-	FXMLLoader loader = new FXMLLoader();
-	loader.setLocation(Main.class.getResource("view/MainView.fxml"));
-	mainLayout = loader.load();
-	Scene scene = new Scene(mainLayout);
-	primaryStage.setScene(scene);
-	primaryStage.show();
-	}
-	
-	public void showGetSyllabusFromInternetScene() throws IOException {
+
+	/**
+	 * Method to change the scene to getSyllabusFromInternet.fxml
+	 * @throws IOException
+	 */
+	public static void showGetSyllabusFromInternetScene() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("Get Syllabus from Internet/GetSyllabusFromInternet.fxml"));
+		loader.setLocation(Main.class.getResource("getsyllabusfrominternet/GetSyllabusFromInternet.fxml"));
 		BorderPane GetSyllabusFromInternet = loader.load();
 		mainLayout.setCenter(GetSyllabusFromInternet);
-		
+
 	}
 	
-	/*public static void showfileScene() throws IOException {
+	/**
+	 * Method to change the scene to file.fxml
+	 * @throws IOException
+	 */
+	public static void showfileScene() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("Create a new Syllabus/file.fxml"));
+		loader.setLocation(Main.class.getResource("file/file.fxml"));
 		BorderPane file = loader.load();
 		mainLayout.setCenter(file);
-		
+
 	}
-	
-	
-	
+
+	/**
+	 * Method to change the scene to OpenRecent.fxml
+	 * @throws IOException
+	 */
 	public static void showOpenRecent() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("Open Recent/OpenRecent.fxml"));
+		loader.setLocation(Main.class.getResource("openrecent/OpenRecent.fxml"));
 		BorderPane OpenRecent = loader.load();
 		mainLayout.setCenter(OpenRecent);
-		
+
 	}
-	
-	/*public static void showOpen() throws IOException {
+
+	/**
+	 * Method to change the scene to open.fxml
+	 * @throws IOException
+	 */
+	public static void showOpen() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("Open/open.fxml"));
+		loader.setLocation(Main.class.getResource("open_/open.fxml"));
 		BorderPane open = loader.load();
 		mainLayout.setCenter(open);
-		
 	}
 	
-	public static void showabout() throws IOException {
+	/**
+	 * Method to change the scene to about.fxml
+	 * @throws IOException
+	 */
+	public static void showAbout() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("About/about.fxml"));
+		loader.setLocation(Main.class.getResource("about/about.fxml"));
 		BorderPane about = loader.load();
 		mainLayout.setCenter(about);
-		
 	}
-	
+
+	/**
+	 * Method to change the scene to helpfile.fxml
+	 * @throws IOException
+	 */
 	public static void showhelpFile() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("Help File/helpfile.fxml"));
+		loader.setLocation(Main.class.getResource("helpfile/helpfile.fxml"));
 		BorderPane helpfile = loader.load();
 		mainLayout.setCenter(helpfile);
-		
+
 	}
-	
+
+	/**
+	 * Method to change the scene to githubrepository.fxml
+	 * @throws IOException
+	 */
 	public static void showGitHubRepository() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("GitHub Repository/githubrepository.fxml"));
+		loader.setLocation(Main.class.getResource("githubrepository/githubrepository.fxml"));
 		BorderPane githubrepository = loader.load();
 		mainLayout.setCenter(githubrepository);
-		
+
 	}
-	
-	*/
-	
-	/*public static void showaddStage() throws IOException {
+
+	/**
+	 * Method to open a child {@code Stage} to create a new Syllabus
+	 * @throws IOException
+	 */
+	public static void showaddStage() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("view/Add.fxml"));
-		BorderPane Add = loader.load(); */
-		
-		
-	
-	
-	/*Stage addDialogStage = new Stage();
-	addDialogStage.setTitle("Add");
-	addDialogStage.initModality(Modality.WINDOW_MODAL);
-	addDialogStage.initOwner(primaryStage);
-	Scene scene = new Scene(Add);
-	addDialogStage.setScene(scene);
-	addDialogStage.showAndWait(); */
-	
-//}
-	
+		loader.setLocation(Main.class.getResource("Add.fxml"));
+		BorderPane Add = loader.load();
+
+		Stage addDialogStage = new Stage();
+		addDialogStage.setTitle("Add");
+		addDialogStage.initModality(Modality.WINDOW_MODAL);
+		addDialogStage.initOwner(primaryStage);
+		Scene scene = new Scene(Add);
+		addDialogStage.setScene(scene);
+		addDialogStage.showAndWait();
+	}
+
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
 
-	
-
-	
 }
-
-
