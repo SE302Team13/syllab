@@ -12,10 +12,10 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="createSyllabus" text="Create a new Syllabus" />
-                        <MenuItem mnemonicParsing="false" onAction="getSyllabus" text="Get Syllabus from Internet" />
-                        <MenuItem mnemonicParsing="false" onAction="open" text="Open" />
-                        <Menu mnemonicParsing="false" onAction="openRecent" text="Open Recent">
+                        <MenuItem mnemonicParsing="false" onAction="#createSyllabus" text="Create a new Syllabus"/>
+                        <MenuItem mnemonicParsing="false" onAction="#getSyllabus" text="Get Syllabus from Internet" />
+                        <MenuItem mnemonicParsing="false" onAction="#open" text="Open" />
+                        <Menu mnemonicParsing="false" onAction="#openRecent" text="Open Recent">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="CE350.syb" />
                                 <MenuItem mnemonicParsing="false" text="SE302.syb" />
@@ -27,9 +27,9 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="about" text="About" />
-                        <MenuItem mnemonicParsing="false" onAction="helpFile" text="Help File" />
-                        <MenuItem mnemonicParsing="false" onAction="githubRepo" text="GitHub Repository" />
+                        <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#helpFile" text="Help File" />
+                        <MenuItem mnemonicParsing="false" onAction="#githubRepo" text="GitHub Repository" />
                     </items>
                 </Menu>
             </menus>
