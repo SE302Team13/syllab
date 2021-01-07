@@ -32,7 +32,9 @@ public class Course {
 	private LocalDateTime creationDate;
 
 	/**
-	 * The courses that should be completed before taking this one
+	 * The courses that should be completed before taking this course or
+	 * requirements of this course which should be satisfied before taking the
+	 * course.
 	 */
 	private ArrayList<String> prerequisites;
 
@@ -175,10 +177,11 @@ public class Course {
 
 	// Constructor(s)
 	/**
-	 * This constructor is design to be used in the event of importing and
-	 *  creation in availability of complete information set. 
-	 *  Every field will be passed in construction phase and syllabus will be ready to use and export
-	 *  directly after instantiation.
+	 * This constructor is design to be used in the event of importing and creation
+	 * in availability of complete information set. Every field will be passed in
+	 * construction phase and syllabus will be ready to use and export directly
+	 * after instantiation.
+	 * 
 	 * @param courseName          Name of the course.
 	 * @param code                Abbreviated name of the course.
 	 * @param prerequisites       List of prerequisite courses for this course.
@@ -239,22 +242,23 @@ public class Course {
 		this.workloadTable = new ArrayList<>(workloadTable);
 		this.courseCompetencies = new ArrayList<>(courseCompetencies);
 	}
-	
-	//FIXME add a default constructor for newly created courses without a sufficient information supplied.
+
+	// FIXME add a default constructor for newly created courses without a
+	// sufficient information supplied.
 
 	// Method(s)
 	/**
 	 * Add a prerequisite to the course.
 	 * 
-	 * @param courseCode Code of course that will be added as a prerequisites.
+	 * @param prerequisite Code of course that will be added as a prerequisites.
 	 * @return {@code true} if the new course added successfully to the
 	 *         {@link #prerequisites} list, return {@code false} otherwise.
 	 */
-	public boolean addPrerequisite(String courseCode) {
-		if (doesContain(prerequisites, courseCode)) {
+	public boolean addPrerequisite(String prerequisite) {
+		if (doesContain(prerequisites, prerequisite)) {
 			return false;
 		} else {
-			return prerequisites.add(courseCode);
+			return prerequisites.add(prerequisite);
 		}
 
 	}
@@ -554,9 +558,10 @@ public class Course {
 		return evaluationCriterias.remove(criteria);
 	}
 
-	//TRYIT add a proper adjustment method without using lazy approach. 
+	// TRYIT add a proper adjustment method without using lazy approach.
 	/**
 	 * This is a lazy method to make changes in a criteria.
+	 * 
 	 * @param criteria           Criteria that you want to change
 	 * @param name               New name for the criteria
 	 * @param count              New count of the criteria
@@ -613,7 +618,7 @@ public class Course {
 		return workloadTable.remove(act);
 	}
 
-	//TRYIT add a proper adjustment method without using lazy approach. 
+	// TRYIT add a proper adjustment method without using lazy approach.
 	/**
 	 * It is a lazy method to adjust a {@link SemesterActivity} in the workload
 	 * table.
@@ -648,7 +653,8 @@ public class Course {
 	}
 
 	/**
-	 * Method to add a new competency to the course. 
+	 * Method to add a new competency to the course.
+	 * 
 	 * @param description             Description of the competency.
 	 * @param contLevel               Contribution level of the competency to the
 	 *                                related learning outcomes.
@@ -657,13 +663,22 @@ public class Course {
 	 * @return return {@code true} if new {@link CourseCompetency} object can be
 	 *         added to the competency list, returns {@code false} if it cannot be
 	 *         added.
-	 * @throws NullPointerException     Description for the competency is mandatory.
-	 *                                  If you pass a null parameter, to the
-	 *                                  description a {@link NullPointerException}
-	 *                                  will be thrown.
-	 * @throws IllegalArgumentException If description is blank or contribution value is not between [1-5]
-	 * method will throw an {@code IllegalArgumentException}.
-	 * @throws IndexOutOfBoundsException  
+	 * @throws NullPointerException      Description for the competency is
+	 *                                   mandatory. If you pass a null parameter, to
+	 *                                   the description a
+	 *                                   {@link NullPointerException} will be
+	 *                                   thrown.
+	 * @throws IllegalArgumentException  If description is blank or contribution
+	 *                                   value is not between [1-5] method will
+	 *                                   throw an {@code IllegalArgumentException}.
+	 *                                   Also if total contribution sum for the
+	 *                                   competencies of the course exceeds the 2.5
+	 *                                   times of the ects value, method will throw
+	 *                                   a {@code IllegalArgumentException} too.
+	 * @throws IndexOutOfBoundsException If an index added for a learning outcome is
+	 *                                   greater than the indexes of the available
+	 *                                   learning outcomes method will throw an
+	 *                                   {@code IndexOutOfBoundsException}.
 	 */
 	public boolean addCompetency(String description, int contLevel, LinkedHashSet<Integer> relatedLearningOutcomes)
 			throws NullPointerException, IllegalArgumentException, IndexOutOfBoundsException {
@@ -676,6 +691,10 @@ public class Course {
 		}
 		if (relatedLearningOutcomes == null) {
 			relatedLearningOutcomes = new LinkedHashSet<>();
+		}
+		if ((calculateContLevel() + contLevel) > 2.5 * ects) {
+			throw new IllegalArgumentException("Contribution level exceeds the 2.5 times of the ects value.\n"
+					+ "This is prohibited by the system rules. Please specify a smaller value for contribution level or decrease the value of the other competencies.");
 		}
 		for (int outcomeIndex : relatedLearningOutcomes) {
 			if (outcomeIndex >= learningOutcomes.size()) {
@@ -698,7 +717,7 @@ public class Course {
 		return courseCompetencies.remove(competency);
 	}
 
-	//TRYIT add a proper adjustment method without using lazy approach.
+	// TRYIT add a proper adjustment method without using lazy approach.
 	/**
 	 * Lazy method to adjust a competency. You can change description, contribution
 	 * level and related learning outcomes.
@@ -744,6 +763,14 @@ public class Course {
 			return list.contains(item);
 		}
 		return false;
+	}
+
+	private int calculateContLevel() {
+		int sum = 0;
+		for (CourseCompetency competency : courseCompetencies) {
+			sum += competency.getContributionLevel();
+		}
+		return sum;
 	}
 
 	// Getter(s) and Setter(s)
