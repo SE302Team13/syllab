@@ -2,15 +2,18 @@ package MainFrame;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 
 public class MainViewController {
-	
+	final Stage stage = new Stage();
 
 	@FXML
 	public void createSyllabus(ActionEvent actionEvent) throws IOException {
@@ -24,7 +27,12 @@ public class MainViewController {
 
 	@FXML
 	public void open(ActionEvent actionEvent) throws IOException {
-		Main.showOpen();
+        final FileChooser fileChooser = new FileChooser();
+        
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+        	System.out.print(file);
+        }
 	}
 
 	@FXML
@@ -40,6 +48,7 @@ public class MainViewController {
 	@FXML
 	public void helpFile(ActionEvent actionEvent) throws IOException {
         try {
+        	//example url
             Desktop.getDesktop().browse(new URI("http://setps.ieu.edu.tr/static/tasks/task_point_system.pdf"));
         } catch (IOException e1) {
             e1.printStackTrace();

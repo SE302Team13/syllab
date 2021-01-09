@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ToggleGroup?>
 
-<BorderPane prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <TabPane prefHeight="900.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Link" />
-          <Tab text="Language" />
-        </tabs>
-      </TabPane>
-   </top>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="900.0" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" text="Ok" />
-            <Button mnemonicParsing="false" text="Cancel" />
-         </children>
-      </HBox>
-   </bottom>
+
+<BorderPane prefHeight="451.0" prefWidth="442.0"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<center>
+
+	</center>
+	<center>
+		<DialogPane expanded="true" maxHeight="-Infinity"
+			maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+			prefHeight="224.0" prefWidth="442.0" BorderPane.alignment="CENTER">
+			<content>
+				<AnchorPane minHeight="0.0" minWidth="0.0"
+					prefHeight="200.0" prefWidth="400.0">
+					<children>
+						<fx:define>
+							<ToggleGroup fx:id="group" />
+						</fx:define>
+						<RadioButton fx:id="turkishButton" layoutX="193.0"
+							layoutY="118.0" mnemonicParsing="false" text="Turkish" toggleGroup="$group"/>
+						<RadioButton fx:id="englishButton" layoutX="290.0"
+							layoutY="118.0" mnemonicParsing="false" text="English" toggleGroup="$group"/>
+						<Label layoutX="90.0" layoutY="109.0" prefHeight="35.0"
+							prefWidth="79.0" text="Language" />
+						<TextField layoutX="193.0" layoutY="70.0" />
+						<Label layoutX="90.0" layoutY="66.0" prefHeight="35.0"
+							prefWidth="79.0" text="Course Code" />
+						<Button layoutX="194.0" layoutY="159.0"
+							mnemonicParsing="false" text="Submit" />
+					</children>
+				</AnchorPane>
+			</content>
+		</DialogPane>
+	</center>
 </BorderPane>
