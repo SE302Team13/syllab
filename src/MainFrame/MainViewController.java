@@ -39,8 +39,13 @@ public class MainViewController {
 
 	@FXML
 	public void helpFile(ActionEvent actionEvent) throws IOException {
-       Main.showhelpFile();
-	}
+        try {
+            Desktop.getDesktop().browse(new URI("http://setps.ieu.edu.tr/static/tasks/task_point_system.pdf"));
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (URISyntaxException e1) {
+            e1.printStackTrace();
+        }	}
 
 	@FXML
 	public void githubRepo(ActionEvent actionEvent) throws IOException {
