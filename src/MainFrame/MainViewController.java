@@ -3,9 +3,15 @@ package MainFrame;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 
 public class MainViewController {
+	
+
 	@FXML
 	public void createSyllabus(ActionEvent actionEvent) throws IOException {
         Main.showMainItems();
@@ -38,13 +44,20 @@ public class MainViewController {
 
 	@FXML
 	public void githubRepo(ActionEvent actionEvent) throws IOException {
-       Main.showGitHubRepository();
+        try {
+            Desktop.getDesktop().browse(new URI("http://www.github.com/SE302Team13/syllab"));
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (URISyntaxException e1) {
+            e1.printStackTrace();
+        }
 	}
 
 	@FXML
 	public void exit(ActionEvent actionEvent) {
 		System.exit(0);
 	}
+	
 	/*
 	 * private Main main;
 	 * 
