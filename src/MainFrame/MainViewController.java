@@ -14,7 +14,7 @@ import java.net.URISyntaxException;
 
 public class MainViewController {
 	final Stage stage = new Stage();
-
+	
 	@FXML
 	public void createSyllabus(ActionEvent actionEvent) throws IOException {
         Main.showMainItems();
