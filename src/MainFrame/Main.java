@@ -36,6 +36,7 @@ public class Main extends Application {
 		Scene scene = new Scene(mainLayout, 800, 600);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		primaryStage.setTitle("IEU Syllabus Manager");
 	}
 	
 	/**
@@ -47,6 +48,7 @@ public class Main extends Application {
 		loader.setLocation(Main.class.getResource("view/MainItems.fxml"));
 		BorderPane mainItems = loader.load();
 		mainLayout.setCenter(mainItems);
+		primaryStage.setTitle("Create a new Syllabus");
 	}
 
 
@@ -59,7 +61,7 @@ public class Main extends Application {
 		loader.setLocation(Main.class.getResource("getsyllabusfrominternet/GetSyllabusFromInternet.fxml"));
 		BorderPane GetSyllabusFromInternet = loader.load();
 		mainLayout.setCenter(GetSyllabusFromInternet);
-
+		primaryStage.setTitle("Get Syllabus From Internet");
 	}
 	
 	/**
@@ -106,6 +108,7 @@ public class Main extends Application {
 		loader.setLocation(Main.class.getResource("about/about.fxml"));
 		BorderPane about = loader.load();
 		mainLayout.setCenter(about);
+		primaryStage.setTitle("About");
 	}
 
 	/**

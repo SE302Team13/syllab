@@ -1,5 +1,6 @@
 package MainFrame.GetSyllabusFromInternet;
 
-public class GetSyllabusFromInternetController {
 
+public class GetSyllabusFromInternetController {
+	// TODO(mertcb) submit
 }

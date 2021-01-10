@@ -4,10 +4,10 @@ module TermProject {
 	requires javafx.fxml;
 	requires javafx.graphics;
     requires gson;
+	requires java.desktop;
 
 	opens MainFrame;
 	opens MainFrame.view;
-	opens MainFrame.file;
 	opens MainFrame.about;
 	opens MainFrame.GetSyllabusFromInternet;
 	opens MainFrame.GitHubRepository;
