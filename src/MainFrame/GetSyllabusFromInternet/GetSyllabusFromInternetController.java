@@ -12,13 +12,13 @@ import javafx.scene.control.TextField;
 public class GetSyllabusFromInternetController {
 	
 	@FXML
-	public RadioButton turkishButton;
+	private RadioButton turkishButton;
 	@FXML
-	public RadioButton englishButton;
+	private RadioButton englishButton;
 	@FXML
-	public TextField courseCode;
+	private  TextField courseCode;
 	@FXML
-	public Button submit;
+	private Button submit;
 	
 	
 	public void initialize() {
