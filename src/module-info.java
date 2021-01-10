@@ -3,8 +3,9 @@ module TermProject {
 	requires javafx.controls;
 	requires javafx.fxml;
 	requires javafx.graphics;
-    requires gson;
+	requires com.google.gson;
 	requires java.desktop;
+    //requires gson;
 
 	opens MainFrame;
 	opens MainFrame.view;

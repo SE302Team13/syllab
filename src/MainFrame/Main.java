@@ -3,7 +3,9 @@ package MainFrame;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -57,24 +59,40 @@ public class Main extends Application {
 	 * @throws IOException
 	 */
 	public static void showGetSyllabusFromInternetScene() throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("getsyllabusfrominternet/GetSyllabusFromInternet.fxml"));
-		BorderPane GetSyllabusFromInternet = loader.load();
+		/*
 		mainLayout.setCenter(GetSyllabusFromInternet);
 		primaryStage.setTitle("Get Syllabus From Internet");
+		*/
+		FXMLLoader loader = new FXMLLoader();
+		Stage tempStage = new Stage();
+		
+		
+		loader.setLocation(Main.class.getResource("getsyllabusfrominternet/GetSyllabusFromInternet.fxml"));
+		AnchorPane newPane = loader.load();
+		Scene newScene = new Scene(newPane);
+		tempStage.initOwner(primaryStage);
+		
+		tempStage.initModality(Modality.APPLICATION_MODAL);
+		tempStage.setTitle("Import Syllabus from the IEU Website");
+		tempStage.setScene(newScene);
+		
+		tempStage.showAndWait();
 	}
+	
+	
 	
 	/**
 	 * Method to change the scene to file.fxml
 	 * @throws IOException
 	 */
+	/*
 	public static void showfileScene() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("file/file.fxml"));
 		BorderPane file = loader.load();
 		mainLayout.setCenter(file);
-
 	}
+	*/
 
 	/**
 	 * Method to change the scene to OpenRecent.fxml

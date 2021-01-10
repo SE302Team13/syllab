@@ -1,46 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
 
-
-<BorderPane prefHeight="451.0" prefWidth="442.0"
-	xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1">
-	<center>
-
-	</center>
-	<center>
-		<DialogPane expanded="true" maxHeight="-Infinity"
-			maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-			prefHeight="224.0" prefWidth="442.0" BorderPane.alignment="CENTER">
-			<content>
-				<AnchorPane minHeight="0.0" minWidth="0.0"
-					prefHeight="200.0" prefWidth="400.0">
-					<children>
-						<fx:define>
-							<ToggleGroup fx:id="group" />
-						</fx:define>
-						<RadioButton fx:id="turkishButton" layoutX="193.0"
-							layoutY="118.0" mnemonicParsing="false" text="Turkish" toggleGroup="$group"/>
-						<RadioButton fx:id="englishButton" layoutX="290.0"
-							layoutY="118.0" mnemonicParsing="false" text="English" toggleGroup="$group"/>
-						<Label layoutX="90.0" layoutY="109.0" prefHeight="35.0"
-							prefWidth="79.0" text="Language" />
-						<TextField layoutX="193.0" layoutY="70.0" />
-						<Label layoutX="90.0" layoutY="66.0" prefHeight="35.0"
-							prefWidth="79.0" text="Course Code" />
-						<Button layoutX="194.0" layoutY="159.0"
-							mnemonicParsing="false" text="Submit" />
-					</children>
-				</AnchorPane>
-			</content>
-		</DialogPane>
-	</center>
-</BorderPane>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainFrame.GetSyllabusFromInternet.GetSyllabusFromInternetController">
+   <children>
+      <RadioButton fx:id="turkishButton" layoutX="194.0" layoutY="92.0" mnemonicParsing="false" text="Turkish">
+         <toggleGroup>
+            <ToggleGroup fx:id="group" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="englishButton" layoutX="291.0" layoutY="92.0" mnemonicParsing="false" text="English" toggleGroup="$group" />
+      <Label layoutX="91.0" layoutY="83.0" prefHeight="35.0" prefWidth="79.0" text="Language" />
+      <TextField fx:id="courseCode" layoutX="194.0" layoutY="44.0" />
+      <Label layoutX="91.0" layoutY="40.0" prefHeight="35.0" prefWidth="79.0" text="Course Code" />
+      <Button fx:id="submit" layoutX="195.0" layoutY="134.0" mnemonicParsing="false" onAction="#sendRequest" text="Submit" />
+   </children>
+</AnchorPane>
