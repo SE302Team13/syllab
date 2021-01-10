@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -33,8 +32,8 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
@@ -52,112 +51,108 @@
                                  <children>
                                     <TextField GridPane.columnIndex="1" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="10" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="11" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="12" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="13" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="14" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="15" />
                                     <TextField GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                                    <Label text="   Course Name" textAlignment="JUSTIFY">
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                                    <TextField text="   Course Name">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Course Code" textAlignment="JUSTIFY" GridPane.rowIndex="1">
+                                    </TextField>
+                                    <TextField text="   Course Code" GridPane.rowIndex="1">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Semester" textAlignment="JUSTIFY" GridPane.rowIndex="2">
+                                    </TextField>
+                                    <TextField text="   Semester" GridPane.rowIndex="2">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Theory(hour/ week)" textAlignment="JUSTIFY" GridPane.rowIndex="3">
+                                    </TextField>
+                                    <TextField text="   Application/Lab(hour/ week)" GridPane.rowIndex="4">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Application/Lab(hour/ week)" textAlignment="JUSTIFY" GridPane.rowIndex="4">
+                                    </TextField>
+                                    <TextField text="   Theory(hour/ week)" GridPane.rowIndex="3">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Local Credits" textAlignment="JUSTIFY" GridPane.rowIndex="5">
+                                    </TextField>
+                                    <TextField text="   Local Credits" GridPane.rowIndex="5" />
+                                    <TextField text="   ECTS" GridPane.rowIndex="6">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   ECTS" textAlignment="JUSTIFY" GridPane.rowIndex="6">
+                                    </TextField>
+                                    <TextField text="   Prerequisites" GridPane.rowIndex="7">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Prerequisites" textAlignment="JUSTIFY" GridPane.rowIndex="7">
+                                    </TextField>
+                                    <TextField text="   Course Language" GridPane.rowIndex="8">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Course Language" textAlignment="JUSTIFY" GridPane.rowIndex="8">
+                                    </TextField>
+                                    <TextField text="   Course Type" GridPane.rowIndex="9">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Course Type" textAlignment="JUSTIFY" GridPane.rowIndex="9">
+                                    </TextField>
+                                    <TextField text="   Course Level" GridPane.rowIndex="10">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Course Level" textAlignment="JUSTIFY" GridPane.rowIndex="10">
+                                    </TextField>
+                                    <TextField text="   Course Coordinator" GridPane.rowIndex="11">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Course Coordinator" textAlignment="JUSTIFY" GridPane.rowIndex="11">
+                                    </TextField>
+                                    <TextField text="   Course Lecturer(s)" GridPane.rowIndex="12">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Course Lecturer(s)" textAlignment="JUSTIFY" GridPane.rowIndex="12">
+                                    </TextField>
+                                    <TextField text="   Assistant(s)" GridPane.rowIndex="13">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Assistant(s)" textAlignment="JUSTIFY" GridPane.rowIndex="13">
+                                    </TextField>
+                                    <TextField text="   Course Objectives" GridPane.rowIndex="14">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Course Objectives" textAlignment="JUSTIFY" GridPane.rowIndex="14">
+                                    </TextField>
+                                    <TextField text="   Learning Outcomes" GridPane.rowIndex="15">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Learning Outcomes" textAlignment="JUSTIFY" GridPane.rowIndex="15">
+                                    </TextField>
+                                    <TextField text="   Course Description" GridPane.rowIndex="16">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Course Description" textAlignment="JUSTIFY" GridPane.rowIndex="16">
+                                    </TextField>
+                                    <TextField text="   Course Category" GridPane.rowIndex="17">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
-                                    </Label>
-                                    <Label text="   Course Category" textAlignment="JUSTIFY" GridPane.rowIndex="17">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <ChoiceBox fx:id="semesterbox" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <ChoiceBox fx:id="courselanguagebox" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                    <ChoiceBox fx:id="coursetypebox" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                    <ChoiceBox fx:id="courselevelbox" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                    <ChoiceBox fx:id="coursecategorybox" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                                    </TextField>
                                  </children>
                               </GridPane>
                            </children>
