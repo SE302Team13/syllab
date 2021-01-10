@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$USER_HOME$/Downloads/javafx-sdk-11.0.2/javafx-sdk-11.0.2.iml" filepath="$USER_HOME$/Downloads/javafx-sdk-11.0.2/javafx-sdk-11.0.2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/syllab.iml" filepath="$PROJECT_DIR$/syllab.iml" />
+    </modules>
+  </component>
+</project>
