@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <HBox spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button mnemonicParsing="false" style="-fx-border-style: solid; -fx-background-color: transparent;" text="Button">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/create-syllabus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" style="-fx-border-style: solid; -fx-background-color: transparent;" text="Button">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/add-syllabus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" style="-fx-border-style: solid; -fx-background-color: transparent;" text="Button">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/delete-syllabus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <JFXButton buttonType="RAISED" text="Button" />
+               </children>
+            </HBox>
+            <HBox nodeOrientation="RIGHT_TO_LEFT" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/close-button.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/minimize-button.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/help.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </top>
+</BorderPane>
