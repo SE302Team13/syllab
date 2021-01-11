@@ -18,7 +18,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
-		showMainFrame();
+		// showMainFrame();
 		// showfileScene(); Exception is thrown because the use of an unavailable element.
 		// showOpen(); Exception is thrown because of the fxml file configuration. No Controller specified.
 		// showOpenRecent(); Exception is thrown because of the fxml file configuration. No Controller specified.
@@ -59,10 +59,6 @@ public class Main extends Application {
 	 * @throws IOException
 	 */
 	public static void showGetSyllabusFromInternetScene() throws IOException {
-		/*
-		mainLayout.setCenter(GetSyllabusFromInternet);
-		primaryStage.setTitle("Get Syllabus From Internet");
-		*/
 		FXMLLoader loader = new FXMLLoader();
 		Stage tempStage = new Stage();
 		

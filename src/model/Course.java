@@ -78,13 +78,18 @@ public class Course {
 	private int labHour;
 
 	/**
-	 * Course type
+	 * Assigned Course Type.
 	 */
 	private CourseType type;
 
 	/**
-	 * Coordinator of the course. There can only be 1 coordinator and he must be a
-	 * teacher
+	 * Specify the course level according to the predefined values.
+	 */
+	private CourseLevel level;
+
+	/**
+	 * Coordinator of the course. There can only be 1 coordinator and must be a
+	 * teacher.
 	 */
 	private Lecturer courseCordinator;
 
@@ -799,6 +804,10 @@ public class Course {
 		return semester;
 	}
 
+	public CourseLevel getLevel() {
+		return level;
+	}
+
 	public int getLocalCredit() {
 		return localCredit;
 	}
@@ -915,6 +924,14 @@ public class Course {
 	public boolean setSemester(SemesterOptions semester) {
 		if (semester != null) {
 			this.semester = semester;
+			return true;
+		}
+		return false;
+	}
+
+	public boolean setLevel(CourseLevel level) {
+		if (level != null) {
+			this.level = level;
 			return true;
 		}
 		return false;
