@@ -1,4 +1,7 @@
-![](https://img.shields.io/badge/platform-windows-lightgrey)  ![](https://img.shields.io/badge/made%20by-group%2013-blue)
+<p align="center">
+  <img src="https://img.shields.io/badge/made%20by-group%2013-blue" />
+  <img src="https://img.shields.io/badge/platform-windows-lightgrey" />
+</p>
 
 # Syllab
 
