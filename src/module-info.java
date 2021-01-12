@@ -5,8 +5,11 @@ module TermProject {
 	requires javafx.graphics;
 	requires com.google.gson;
 	requires java.desktop;
+	requires com.jfoenix;
+	requires org.controlsfx.controls;
     //requires gson;
-
+	
+	/*
 	opens MainFrame;
 	opens MainFrame.view;
 	opens MainFrame.about;
@@ -15,5 +18,7 @@ module TermProject {
 	opens MainFrame.helpFile;
 	opens MainFrame.open_;
 	opens MainFrame.OpenRecent;
+	*/
+	opens newui;
 	
 }
