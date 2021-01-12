@@ -24,16 +24,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox fx:id="topPane" alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <HBox spacing="10.0" HBox.hgrow="ALWAYS">
+            <HBox fx:id="buttonToolbar" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <JFXButton fx:id="createSyllabus" text="Create">
                      <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/create-syllabus.png" />
                            </image>
@@ -42,25 +41,34 @@
                   </JFXButton>
                   <JFXButton fx:id="addSyllabus" text="Add">
                      <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/add-syllabus.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="deleteSyllabus1" text="Import from IEU">
+                  <JFXButton fx:id="importSyllabus" text="Import from IEU">
                      <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/import.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="exportSyllabus" text="Export">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/export.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton fx:id="deleteSyllabus" text="Delete">
                      <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../assets/delete-syllabus.png" />
                            </image>
@@ -68,20 +76,23 @@
                      </graphic>
                   </JFXButton>
                </children>
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
             </HBox>
             <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="10.0">
                <children>
-                  <ImageView fx:id="closeButton" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="closeButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/close-button.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="minimizeButton" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="minimizeButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/minimize-button.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="helpButton" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="helpButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/help.png" />
                      </image>
@@ -95,14 +106,14 @@
       </HBox>
    </top>
    <left>
-      <JFXListView BorderPane.alignment="CENTER">
+      <JFXListView fx:id="courseList" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </BorderPane.margin>
       </JFXListView>
    </left>
    <center>
-      <JFXTabPane focusTraversable="false" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <JFXTabPane fx:id="generalTabPane" focusTraversable="false" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <tabs>
             <Tab closable="false" text="General Information">
                <content>
@@ -121,19 +132,19 @@
                                     <VBox alignment="CENTER" layoutX="18.0" layoutY="34.0">
                                        <children>
                                           <Label text="Course Name" />
-                                          <JFXTextField />
+                                          <JFXTextField fx:id="courseNameField" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="173.0" layoutY="34.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Code" />
-                                          <JFXTextField />
+                                          <JFXTextField fx:id="courseCodeField" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="334.0" layoutY="33.0">
                                        <children>
                                           <Label text="Creation Date" />
-                                          <JFXDatePicker disable="true" focusTraversable="false" prefHeight="28.0" prefWidth="186.0">
+                                          <JFXDatePicker fx:id="creationDatePicker" disable="true" focusTraversable="false" prefHeight="28.0" prefWidth="186.0">
                                              <VBox.margin>
                                                 <Insets left="8.0" />
                                              </VBox.margin>
@@ -152,7 +163,7 @@
                                                    <children>
                                                       <JFXButton buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" text=" ">
                                                          <graphic>
-                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView fx:id="addPrerequisites" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../assets/create-syllabus.png" />
                                                                </image>
@@ -161,7 +172,7 @@
                                                       </JFXButton>
                                                       <JFXButton buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" text=" ">
                                                          <graphic>
-                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView fx:id="deletePrerequisites" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../assets/delete.png" />
                                                                </image>
@@ -172,7 +183,7 @@
                                                 </VBox>
                                              </left>
                                              <center>
-                                                <JFXListView BorderPane.alignment="CENTER" />
+                                                <JFXListView fx:id="prerequisitesList" BorderPane.alignment="CENTER" />
                                              </center>
                                           </JFXToolbar>
                                        </children>
@@ -183,55 +194,55 @@
                                     <VBox alignment="CENTER" layoutX="217.0" layoutY="110.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Language" />
-                                          <JFXComboBox prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="languageChoice" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="381.0" layoutY="110.0">
                                        <children>
                                           <Label alignment="CENTER" text="Semester" />
-                                          <JFXComboBox prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="semesterChoice" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="223.0" layoutY="187.0">
                                        <children>
                                           <Label alignment="CENTER" text="Theoretical Hours" />
-                                          <JFXTextField />
+                                          <JFXTextField fx:id="theoreticalHoursField" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="387.0" layoutY="187.0">
                                        <children>
                                           <Label alignment="CENTER" text="Application/Lab Hours" />
-                                          <JFXTextField />
+                                          <JFXTextField fx:id="applicationHoursField" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="33.0" layoutY="268.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Type" />
-                                          <JFXComboBox prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="courseTypeChoice" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="217.0" layoutY="268.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Level" />
-                                          <JFXComboBox labelFloat="true" prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="courseLevelChoice" labelFloat="true" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="381.0" layoutY="268.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Category" />
-                                          <JFXComboBox labelFloat="true" prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="courseCategoryChoice" labelFloat="true" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox layoutX="31.0" layoutY="344.0" prefHeight="92.0" prefWidth="495.0">
                                        <children>
                                           <Label text="Course Description" />
-                                          <JFXTextArea />
+                                          <JFXTextArea fx:id="courseDescriptionArea" />
                                        </children>
                                     </VBox>
                                     <VBox layoutX="31.0" layoutY="467.0" prefHeight="92.0" prefWidth="495.0">
                                        <children>
                                           <Label text="Course Objective" />
-                                          <JFXTextArea />
+                                          <JFXTextArea fx:id="courseObjectiveArea" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -248,25 +259,25 @@
                      <children>
                         <VBox layoutX="22.0" layoutY="35.0" prefHeight="390.0" prefWidth="505.0">
                            <children>
-                              <JFXTreeTableView focusTraversable="false" showRoot="false">
+                              <JFXTreeTableView fx:id="learningOutcomesTable" focusTraversable="false" showRoot="false">
                                  <columns>
-                                    <TreeTableColumn editable="false" prefWidth="75.20001220703125" resizable="false" text="Number #" />
-                                    <TreeTableColumn prefWidth="427.99993896484375" resizable="false" sortable="false" text="Learning Outcome" />
+                                    <TreeTableColumn fx:id="learningOutcomesTableNumberColumn" editable="false" prefWidth="75.20001220703125" resizable="false" text="Number #" />
+                                    <TreeTableColumn fx:id="learningOutcomesTableLOColumn" prefWidth="427.99993896484375" resizable="false" sortable="false" text="Learning Outcome" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </JFXTreeTableView>
-                              <HBox>
+                              <HBox fx:id="learninOutcomesToolbar">
                                  <children>
                                     <HBox HBox.hgrow="ALWAYS">
                                        <children>
-                                          <JFXButton buttonType="RAISED" text="Add Learning Outcome" />
+                                          <JFXButton fx:id="addOutcomeButton" buttonType="RAISED" text="Add Learning Outcome" />
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER">
+                                    <HBox layoutX="10.0" layoutY="10.0">
                                        <children>
-                                          <JFXButton buttonType="RAISED" text="Remove Learning Outcome" />
+                                          <JFXButton fx:id="removeOutcomeButton" buttonType="RAISED" text="Remove Learning Outcome" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -283,7 +294,7 @@
                      <children>
                         <VBox layoutX="37.0" layoutY="15.0" prefHeight="422.0" prefWidth="486.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox fx:id="coordinatorCreationBox" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                                  <children>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="64.0">
                                        <children>
@@ -295,19 +306,19 @@
                                           <VBox alignment="CENTER">
                                              <children>
                                                 <Label text="Title" />
-                                                <JFXComboBox prefHeight="26.0" prefWidth="123.0" />
+                                                <JFXComboBox fx:id="coordinatorTitleChoice" prefHeight="26.0" prefWidth="123.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="43.0" prefWidth="158.0">
                                              <children>
                                                 <Label text="Name" />
-                                                <JFXTextField />
+                                                <JFXTextField fx:id="coordinatorNameField" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="43.0" prefWidth="153.0">
                                              <children>
                                                 <Label text="Surname" />
-                                                <JFXTextField />
+                                                <JFXTextField fx:id="coordinatorSurnameField" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -317,36 +328,36 @@
                                     </HBox>
                                  </children>
                                  <padding>
-                                    <Insets bottom="20.0" />
+                                    <Insets bottom="20.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <JFXTreeTableView prefHeight="400.0" prefWidth="529.0">
+                              <JFXTreeTableView fx:id="lecturerTable" prefHeight="400.0" prefWidth="529.0">
                                  <columns>
-                                    <TreeTableColumn prefWidth="76.7999267578125" resizable="false" text="Title" />
-                                    <TreeTableColumn prefWidth="197.60009765625" resizable="false" text="Name" />
-                                    <TreeTableColumn prefWidth="212.0" resizable="false" text="Surname" />
+                                    <TreeTableColumn fx:id="lecturerTableTitleColumn" prefWidth="76.7999267578125" resizable="false" text="Title" />
+                                    <TreeTableColumn fx:id="lecturerTableNameColumn" prefWidth="197.60009765625" resizable="false" text="Name" />
+                                    <TreeTableColumn fx:id="lecturerTableSurnameColumn" prefWidth="212.0" resizable="false" text="Surname" />
                                  </columns>
                               </JFXTreeTableView>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox fx:id="lecturerCreationBox" prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <HBox alignment="CENTER" spacing="10.0">
                                        <children>
                                           <VBox alignment="CENTER">
                                              <children>
                                                 <Label text="Title" />
-                                                <JFXComboBox prefHeight="26.0" prefWidth="123.0" />
+                                                <JFXComboBox fx:id="lecturerTitleChoice" prefHeight="26.0" prefWidth="123.0" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="43.0" prefWidth="158.0">
                                              <children>
                                                 <Label text="Name" />
-                                                <JFXTextField />
+                                                <JFXTextField fx:id="lecturerNameField" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="43.0" prefWidth="153.0">
                                              <children>
                                                 <Label text="Surname" />
-                                                <JFXTextField />
+                                                <JFXTextField fx:id="lecturerSurnameField" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -358,13 +369,13 @@
                                        <children>
                                           <HBox spacing="15.0" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <JFXButton text="Add Lecturer" />
-                                                <JFXButton text="Add Assistant" />
+                                                <JFXButton fx:id="addLecturerButton" text="Add Lecturer" />
+                                                <JFXButton fx:id="addAssistantButton" text="Add Assistant" />
                                              </children>
                                           </HBox>
                                           <HBox>
                                              <children>
-                                                <JFXButton text="Remove from Course" />
+                                                <JFXButton fx:id="removeButton" text="Remove from Course" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -384,11 +395,11 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView editable="true" layoutX="14.0" layoutY="14.0" prefHeight="421.0" prefWidth="522.0">
+                        <TableView fx:id="scheduleTable" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="421.0" prefWidth="522.0">
                           <columns>
-                            <TableColumn editable="false" prefWidth="58.4000244140625" resizable="false" sortable="false" text="Week" />
-                            <TableColumn prefWidth="319.199951171875" resizable="false" sortable="false" text="Description" />
-                              <TableColumn prefWidth="143.20004882812498" resizable="false" sortable="false" text="Related Material" />
+                            <TableColumn fx:id="scheduleTableWeekColumn" editable="false" prefWidth="58.4000244140625" resizable="false" sortable="false" text="Week" />
+                            <TableColumn fx:id="scheduleTableDescriptionTable" prefWidth="319.199951171875" resizable="false" sortable="false" text="Description" />
+                              <TableColumn fx:id="scheduleTableRMRow" prefWidth="143.20004882812498" resizable="false" sortable="false" text="Related Material" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -404,26 +415,26 @@
                      <children>
                         <VBox layoutX="14.0" layoutY="14.0" prefHeight="426.0" prefWidth="530.0">
                            <children>
-                              <JFXTreeTableView focusTraversable="false" showRoot="false">
+                              <JFXTreeTableView fx:id="evaluationCriteriaTable" focusTraversable="false" showRoot="false">
                                  <columns>
-                                    <TreeTableColumn prefWidth="112.0" resizable="false" sortable="false" text="Name" />
-                                    <TreeTableColumn prefWidth="44.800048828125" resizable="false" text="Count" />
-                                    <TreeTableColumn prefWidth="90.39990234375" resizable="false" text="Contribution" />
+                                    <TreeTableColumn fx:id="evaluationCriteriaTableNameColumn" prefWidth="112.0" resizable="false" sortable="false" text="Name" />
+                                    <TreeTableColumn fx:id="evaluationCriteriaTableCountColumn" prefWidth="44.800048828125" resizable="false" text="Count" />
+                                    <TreeTableColumn fx:id="evaluationCriteriaTableContributionColumn" prefWidth="90.39990234375" resizable="false" text="Contribution" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </JFXTreeTableView>
-                              <HBox>
+                              <HBox fx:id="evaluationCriteriaToolbar">
                                  <children>
                                     <HBox HBox.hgrow="ALWAYS">
                                        <children>
-                                          <JFXButton buttonType="RAISED" text="Add Evaluation Criteria" />
+                                          <JFXButton fx:id="addEvaluationCriteriaButton" buttonType="RAISED" text="Add Evaluation Criteria" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <JFXButton buttonType="RAISED" text="Remove Evaluation Criteria" />
+                                          <JFXButton fx:id="removeEvaluationCriteriaButton" buttonType="RAISED" text="Remove Evaluation Criteria" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -440,25 +451,25 @@
                      <children>
                         <VBox layoutX="15.0" layoutY="13.0" prefHeight="426.0" prefWidth="530.0">
                            <children>
-                              <JFXTreeTableView focusTraversable="false" showRoot="false">
+                              <JFXTreeTableView fx:id="competencyTable" focusTraversable="false" showRoot="false">
                                  <columns>
-                                    <TreeTableColumn editable="false" prefWidth="112.0" resizable="false" sortable="false" text="Description" />
-                                    <TreeTableColumn editable="false" prefWidth="84.7998046875" resizable="false" sortable="false" text="Contribution" />
+                                    <TreeTableColumn fx:id="competencyTableDescriptionColumn" editable="false" prefWidth="112.0" resizable="false" sortable="false" text="Description" />
+                                    <TreeTableColumn fx:id="competencyTableContributionColumn" editable="false" prefWidth="84.7998046875" resizable="false" sortable="false" text="Contribution" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </JFXTreeTableView>
-                              <HBox>
+                              <HBox fx:id="competencyToolbar">
                                  <children>
                                     <HBox HBox.hgrow="ALWAYS">
                                        <children>
-                                          <JFXButton buttonType="RAISED" text="Add Competency" />
+                                          <JFXButton fx:id="addCompetencyButton" buttonType="RAISED" text="Add Competency" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <JFXButton buttonType="RAISED" text="Remove Competency" />
+                                          <JFXButton fx:id="removeCompetencyButton" buttonType="RAISED" text="Remove Competency" />
                                        </children>
                                     </HBox>
                                  </children>
