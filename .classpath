@@ -6,7 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Javafx11">
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/controlsfx">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -16,14 +16,16 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/controlsfx">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jfoenix">
 		<attributes>
 			<attribute name="module" value="true"/>
+			<attribute name="add-reads" value="com.jfoenix=javafx.base:com.jfoenix=javafx.web:com.jfoenix=javafx.controls:com.jfoenix=javafx.graphics:com.jfoenix=javafx.fxml:com.jfoenix=javafx.media"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Javafx11">
+		<attributes>
+			<attribute name="module" value="true"/>
+			<attribute name="add-exports" value="javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix:javafx.controls/com.sun.javafx.scene.control=com.jfoenix"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>

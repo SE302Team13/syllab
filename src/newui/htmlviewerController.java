@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.web.WebView;
 
-public class htmlviewerController {
+public class HTMLViewerController {
 	@FXML
 	private WebView webViewer;
 

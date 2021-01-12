@@ -2,19 +2,18 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToolbar?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
@@ -23,8 +22,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.textfield.CustomTextField?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newui.MainController">
    <top>
       <HBox fx:id="topPane" alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -117,12 +117,6 @@
          <tabs>
             <Tab closable="false" text="General Information">
                <content>
-                  <JFXScrollPane />
-               </content>
-               <content>
-                  <JFXScrollPane />
-               </content>
-               <content>
                   <AnchorPane>
                      <children>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="452.0" prefWidth="560.0">
@@ -132,23 +126,19 @@
                                     <VBox alignment="CENTER" layoutX="18.0" layoutY="34.0">
                                        <children>
                                           <Label text="Course Name" />
-                                          <JFXTextField fx:id="courseNameField" />
+                                          <CustomTextField fx:id="courseNameField" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="173.0" layoutY="34.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Code" />
-                                          <JFXTextField fx:id="courseCodeField" />
+                                          <CustomTextField fx:id="courseCodeField" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="334.0" layoutY="33.0">
                                        <children>
                                           <Label text="Creation Date" />
-                                          <JFXDatePicker fx:id="creationDatePicker" disable="true" focusTraversable="false" prefHeight="28.0" prefWidth="186.0">
-                                             <VBox.margin>
-                                                <Insets left="8.0" />
-                                             </VBox.margin>
-                                          </JFXDatePicker>
+                                          <DatePicker fx:id="creationDatePicker" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="14.0" layoutY="110.0" prefHeight="114.0" prefWidth="186.0" spacing="10.0">
@@ -161,7 +151,7 @@
                                                       <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                                                    </padding>
                                                    <children>
-                                                      <JFXButton buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" text=" ">
+                                                      <JFXButton buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="0" layoutY="0" text=".">
                                                          <graphic>
                                                             <ImageView fx:id="addPrerequisites" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -170,9 +160,9 @@
                                                             </ImageView>
                                                          </graphic>
                                                       </JFXButton>
-                                                      <JFXButton buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" text=" ">
+                                                      <JFXButton fx:id="deletePrerequisites" buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" text=".">
                                                          <graphic>
-                                                            <ImageView fx:id="deletePrerequisites" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../assets/delete.png" />
                                                                </image>
@@ -183,7 +173,7 @@
                                                 </VBox>
                                              </left>
                                              <center>
-                                                <JFXListView fx:id="prerequisitesList" BorderPane.alignment="CENTER" />
+                                                <JFXListView fx:id="prerequisitesList" layoutX="1.0" layoutY="1.0" BorderPane.alignment="CENTER" />
                                              </center>
                                           </JFXToolbar>
                                        </children>
@@ -194,55 +184,55 @@
                                     <VBox alignment="CENTER" layoutX="217.0" layoutY="110.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Language" />
-                                          <JFXComboBox fx:id="languageChoice" prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="languageChoice" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="381.0" layoutY="110.0">
                                        <children>
                                           <Label alignment="CENTER" text="Semester" />
-                                          <JFXComboBox fx:id="semesterChoice" prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="semesterChoice" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="223.0" layoutY="187.0">
                                        <children>
                                           <Label alignment="CENTER" text="Theoretical Hours" />
-                                          <JFXTextField fx:id="theoreticalHoursField" />
+                                          <CustomTextField fx:id="theoreticalHoursField" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="387.0" layoutY="187.0">
                                        <children>
                                           <Label alignment="CENTER" text="Application/Lab Hours" />
-                                          <JFXTextField fx:id="applicationHoursField" />
+                                          <CustomTextField fx:id="applicationHoursField" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="33.0" layoutY="268.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Type" />
-                                          <JFXComboBox fx:id="courseTypeChoice" prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="courseTypeChoice" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="217.0" layoutY="268.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Level" />
-                                          <JFXComboBox fx:id="courseLevelChoice" labelFloat="true" prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="courseLevelChoice" labelFloat="true" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="381.0" layoutY="268.0">
                                        <children>
                                           <Label alignment="CENTER" text="Course Category" />
-                                          <JFXComboBox fx:id="courseCategoryChoice" labelFloat="true" prefHeight="26.0" prefWidth="148.0" />
+                                          <JFXComboBox fx:id="courseCategoryChoice" labelFloat="true" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
                                        </children>
                                     </VBox>
                                     <VBox layoutX="31.0" layoutY="344.0" prefHeight="92.0" prefWidth="495.0">
                                        <children>
                                           <Label text="Course Description" />
-                                          <JFXTextArea fx:id="courseDescriptionArea" />
+                                          <TextArea fx:id="courseDescriptionArea" prefHeight="200.0" prefWidth="200.0" />
                                        </children>
                                     </VBox>
                                     <VBox layoutX="31.0" layoutY="467.0" prefHeight="92.0" prefWidth="495.0">
                                        <children>
                                           <Label text="Course Objective" />
-                                          <JFXTextArea fx:id="courseObjectiveArea" />
+                                          <TextArea prefHeight="200.0" prefWidth="200.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -312,13 +302,13 @@
                                           <VBox alignment="CENTER" prefHeight="43.0" prefWidth="158.0">
                                              <children>
                                                 <Label text="Name" />
-                                                <JFXTextField fx:id="coordinatorNameField" />
+                                                <CustomTextField fx:id="coordinatorNameField" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="43.0" prefWidth="153.0">
                                              <children>
                                                 <Label text="Surname" />
-                                                <JFXTextField fx:id="coordinatorSurnameField" />
+                                                <CustomTextField fx:id="coordinatorSurnameField" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -351,13 +341,13 @@
                                           <VBox alignment="CENTER" prefHeight="43.0" prefWidth="158.0">
                                              <children>
                                                 <Label text="Name" />
-                                                <JFXTextField fx:id="lecturerNameField" />
+                                                <CustomTextField fx:id="lecturerNameField" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER" prefHeight="43.0" prefWidth="153.0">
                                              <children>
                                                 <Label text="Surname" />
-                                                <JFXTextField fx:id="lecturerSurnameField" />
+                                                <CustomTextField fx:id="lecturerSurnameField" />
                                              </children>
                                           </VBox>
                                        </children>
