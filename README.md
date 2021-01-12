@@ -1,9 +1,7 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/made%20by-group%2013-blue" />
-  <img src="https://img.shields.io/badge/platform-windows-lightgrey" />
-</p>
-
-# Syllab
+ # Syllab
+![]("https://img.shields.io/badge/contributors%20-4-yellow")
+![]("https://img.shields.io/badge/made%20by-group%2013-blue")
+![]("https://img.shields.io/badge/platform-windows-lightgrey")
 
 Syllab is a Syllabus management application for Izmir University of Economics.
 
