@@ -10,8 +10,12 @@ module TermProject {
 	requires org.controlsfx.controls;
 	requires javafx.web;
 	requires java.desktop;
+<<<<<<< Updated upstream
 	requires gson;
 	
+=======
+	opens newui;
+>>>>>>> Stashed changes
 	
 	/*
 	opens MainFrame;
@@ -23,6 +27,6 @@ module TermProject {
 	opens MainFrame.open_;
 	opens MainFrame.OpenRecent;
 	*/
-	opens newui;
+
 	
 }

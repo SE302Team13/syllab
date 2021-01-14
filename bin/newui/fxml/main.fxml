@@ -97,6 +97,11 @@
                         <Image url="@../assets/help.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="closeButton1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/github-logo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
          </children>
