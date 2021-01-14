@@ -44,15 +44,25 @@ public class GetSyllabusFromInternetController {
 	
 	
 	@FXML
-	public void sendRequest(ActionEvent actionEvent) throws IOException {
+	public void sendRequest(ActionEvent actionEvent, Language language, String code) throws IOException {
+		String codeWithoutSpace = code.replace(" ", "");
+		String inverseOfTheCode = new String();
+		String newCode = new String();
+		int index = 2;
+
+		for(int i = codeWithoutSpace.length(); i > 0; i--){
+			inverseOfTheCode += codeWithoutSpace.charAt(i);
+			if(i == index){
+				inverseOfTheCode += "+";
+			}
+		}
+		for(int i = codeWithoutSpace.length(); i > 0; i--){
+			newCode += codeWithoutSpace.charAt(i);
+		}
+		String syllabUrl = "https://syllab.azurewebsites.net/api/syllab?lang=" + language + "&code=" + newCode;
 		if (validate()) {
-			URL url = new URL("https://syllab.azurewebsites.net/api/syllab?lang=tr&code=CE+221");
+			URL url = new URL(syllabUrl);
 			InputStreamReader reader = new InputStreamReader(url.openStream());
-
-			/*Gson gson = new Gson();
-
-			BufferedReader br = new BufferedReader(
-					new FileReader("E:file.json"));*/
 
 			AcademicTitle academicTitleObj = new Gson().fromJson(reader, AcademicTitle.class);
 			System.out.println(academicTitleObj.name());
@@ -68,7 +78,6 @@ public class GetSyllabusFromInternetController {
 			SemesterOptions semesterOptionsObj = new Gson().fromJson(reader, SemesterOptions.class);
 			WeeklySubject weeklySubjectObj = new Gson().fromJson(reader, WeeklySubject.class);
 
-			//Web service handler must be written here.
 		}
 	}
 	
