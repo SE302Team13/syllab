@@ -51,7 +51,7 @@ Syllab is an open source project and you can follow the steps below if you want 
 
 ## Contact
 
-Buket Cüvelenk -  
-Hakan Ayaz -  
-Mert Can Bilgiç -  
-Zeynep Betül Kaya - 
+Buket Cüvelenk - buket.cuvelenk@std.ieu.edu.tr   
+Hakan Ayaz - hakan.ayaz@std.ieu.edu.tr   
+Mert Can Bilgiç - mert@ieuacm.com   
+Zeynep Betül Kaya - zeynep.betul@std.izmirekonomi.edu.tr
