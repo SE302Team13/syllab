@@ -287,12 +287,11 @@ public class Course {
 	 *         {@link #prerequisites} list, return {@code false} otherwise.
 	 */
 	public boolean addPrerequisite(String prerequisite) {
-		if (doesContain(prerequisites, prerequisite)) {
-			return false;
-		} else {
-			return prerequisites.add(prerequisite);
+		if ((prerequisite != null) && !(prerequisite.isBlank()) && !(prerequisites.contains(prerequisite))) {
+			prerequisites.add(prerequisite);
+			return true;
 		}
-
+		return false;
 	}
 
 	/**
@@ -546,12 +545,13 @@ public class Course {
 	 *         otherwise.
 	 */
 	/*
-	 * Removed method for simplicity
+	 * Removed for the sake of simplicity
 	public boolean addReading(String name, String author) {
 		return addReading(name, 0, author);
 	}
 	*/
-
+	
+	
 	/**
 	 * Method to remove a book from the {@link #suggestedReading} Array.
 	 * 
@@ -561,6 +561,13 @@ public class Course {
 	 */
 	public boolean removeReading(String book) {
 		return suggestedReading.remove(book);
+	}
+	
+	private boolean addLearningOutcome(String learningOutcome) {
+		if ((learningOutcome != null) && !(learningOutcome.isBlank())) {
+			return learningOutcomes.add(learningOutcome);
+		}
+		return false;
 	}
 
 	/**
@@ -894,7 +901,7 @@ public class Course {
 		return type;
 	}
 
-	public String getCourseCordinator() {
+	public String getCourseCoordinator() {
 		return courseCoordinator;
 	}
 
@@ -958,12 +965,12 @@ public class Course {
 
 	// TODO Deliver a deep copy of the array to prevent unsupervised changes on the
 	// data.
-	public ArrayList<CourseCompetency> getCourseCompetency() {
+	public ArrayList<CourseCompetency> getCourseCompetencies() {
 		return courseCompetencies;
 	}
 
 	public boolean setCourseName(String courseName) {
-		if ((courseName != null) && !(courseName.isBlank()) && (courseName.length() > 4)) {
+		if ((courseName != null) && !(courseName.isBlank())) {
 			this.courseName = courseName;
 			return true;
 		}
@@ -972,7 +979,7 @@ public class Course {
 
 	// TRYIT Regex testing may be added for further validation.
 	public boolean setCode(String code) {
-		if ((code != null) && (code.length() > 4)) {
+		if ((code != null) && !(code.isBlank()) && (code.length() > 4)) {
 			this.code = code;
 			return true;
 		}
@@ -1028,7 +1035,7 @@ public class Course {
 
 	}
 
-	public boolean setCourseCordinator(String courseCordinator) {
+	public boolean setCourseCoordinator(String courseCordinator) {
 		if ((courseCordinator != null) && !(courseCordinator.isBlank())) {
 			this.courseCoordinator = courseCordinator;
 			return true;
@@ -1066,5 +1073,122 @@ public class Course {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean setPrerequisites(LinkedHashSet<String> prerequisites) {
+		this.prerequisites = new ArrayList<>();
+		boolean returnValue = true;
+		if (prerequisites != null) {
+			for (String prerequisite : prerequisites) {
+				if (!addPrerequisite(prerequisite)) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
+	}
+
+	public boolean setCourseLecturers(LinkedHashSet<String> courseLecturers) {
+		this.courseLecturers = new ArrayList<>();
+		boolean returnValue = true;
+		if (courseLecturers != null) {
+			for (String lecturer : courseLecturers) {
+				if (!addLecturer(lecturer)) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
+	}
+
+	public boolean setAssistants(LinkedHashSet<String> assistants) {
+		this.assistants = new ArrayList<>();
+		boolean returnValue = true;
+		if (assistants != null) {
+			for (String assistant : assistants) {
+				if (!addAssistant(assistant)) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
+	}
+
+	public boolean setLearningOutcomes(ArrayList<String> learningOutcomes) {
+		this.learningOutcomes = new ArrayList<>();
+		boolean returnValue = true;
+		if (learningOutcomes != null) {
+			for (String learningOutcome : learningOutcomes) {
+				if (!addLearningOutcome(learningOutcome)) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
+	}
+
+	public boolean setCourseSchedule(ArrayList<WeeklySubject> courseSchedule) {
+		this.courseSchedule = new ArrayList<>();
+		boolean returnValue = true;
+		if (courseSchedule != null) {
+			for (WeeklySubject scheduleItem : courseSchedule) {
+				if (!(changeSchedule(scheduleItem.getWeek(), scheduleItem.getDescription(), scheduleItem.getRelatedMaterial()))) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
+	}
+
+	public boolean setSuggestedReading(ArrayList<String> suggestedReading) {
+		this.suggestedReading = new ArrayList<>();
+		boolean returnValue = true;
+		if (suggestedReading != null) {
+			for (String suggesteditem : suggestedReading) {
+				if (!(addReading(suggesteditem))) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
+	}
+
+	public boolean setEvaluationCriterias(ArrayList<EvaluationCriteria> evaluationCriterias) {
+		this.evaluationCriterias = new ArrayList<>();
+		boolean returnValue = true;
+		if (evaluationCriterias != null) {
+			for (EvaluationCriteria criteria : evaluationCriterias) {
+				if (!(addCriteria(criteria))) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
+	}
+
+	public boolean setWorkloadTable(ArrayList<SemesterActivity> workloadTable) {
+		this.workloadTable = new ArrayList<>();
+		boolean returnValue = true;
+		if (workloadTable != null) {
+			for (SemesterActivity activity : workloadTable) {
+				if (!(addWorkload(activity))) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
+	}
+
+	public boolean setCourseCompetencies(ArrayList<CourseCompetency> courseCompetencies) {
+		this.courseCompetencies = new ArrayList<>();
+		boolean returnValue = true;
+		if (courseCompetencies != null) {
+			for (CourseCompetency competency : courseCompetencies) {
+				if (!(addCompetency(competency))) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
 	}
 }
