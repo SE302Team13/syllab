@@ -70,7 +70,7 @@ public class WeeklySubject {
 	 * This method will be used to create a default {@link Course} object.
 	 * @return Returns an <b>ArrayList</b> containing default 16 weeks.
 	 */
-	public ArrayList<WeeklySubject> createDefaultSemester() {
+	public static ArrayList<WeeklySubject> createDefaultSemester() {
 		ArrayList<WeeklySubject> defaultSemester = new ArrayList<>();
 		for (int i = 0; i < 16; i++) {
 			defaultSemester.add(new WeeklySubject(i+1, "Default", "Not Given"));
@@ -83,7 +83,7 @@ public class WeeklySubject {
 	 * @param weekNumber Number of weeks you want in your schedule.
 	 * @return Returns an <b>ArrayList</b> containing {@code weekNumber} weeks.
 	 */
-	public ArrayList<WeeklySubject> createCustomSemester(int weekNumber) {
+	public static ArrayList<WeeklySubject> createCustomSemester(int weekNumber) {
 		ArrayList<WeeklySubject> semester = new ArrayList<>();
 		for (int i = 0; i < weekNumber; i++) {
 			semester.add(new WeeklySubject(i+1, "Default", "Not Given"));
