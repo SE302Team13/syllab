@@ -91,7 +91,7 @@ public class Course {
 	 * Coordinator of the course. There can only be 1 coordinator and must be a
 	 * teacher.
 	 */
-	private String courseCoordinator;
+	private Lecturer courseCordinator;
 
 	/**
 	 * Lecturers who give this course. There can be more then one lecturer
@@ -99,7 +99,7 @@ public class Course {
 	 * @see #addLecturer(Lecturer)
 	 * @see #removeLecturer(Lecturer)
 	 */
-	private ArrayList<String> courseLecturers;
+	private ArrayList<Lecturer> courseLecturers;
 
 	/**
 	 * Assistants of this course. There can be more then one assistant.
@@ -107,7 +107,7 @@ public class Course {
 	 * @see #addAssistant(Lecturer)
 	 * @see #removeAssistant(Lecturer)
 	 */
-	private ArrayList<String> assistants;
+	private ArrayList<Lecturer> assistants;
 
 	/**
 	 * Course objective summary.
@@ -148,12 +148,12 @@ public class Course {
 	/**
 	 * General course textbook.
 	 */
-	private String courseTextBook;
+	private CourseBook courseTextBook;
 
 	/**
 	 * Suggested readings for this course
 	 */
-	private ArrayList<String> suggestedReading;
+	private ArrayList<CourseBook> suggestedReading;
 
 	/**
 	 * Evaluation criterias for the grading of the course. An
@@ -186,46 +186,11 @@ public class Course {
 	 * in availability of complete information set. Every field will be passed in
 	 * construction phase and syllabus will be ready to use and export directly
 	 * after instantiation.
-	 * 
-	 * @param courseName          Name of the course.
-	 * @param code                Abbreviated name of the course.
-	 * @param prerequisites       List of prerequisite courses for this course.
-	 * @param courseLang          Language that the course is given.
-	 * @param semester            Semesters which course is open (available).
-	 * @param theoreticalHour     Theoretical hours in one week of the course.
-	 * @param labHour             Lab/Application hours in one week of the course.
-	 * @param type                Type of the course.
-	 * @param cordinator          Coordinator of the course. Note: (It is a lecturer
+	 *  @param cordinator          Coordinator of the course. Note: (It is a lecturer
 	 *                            too.)
-	 * @param lecturers           List of the lecturers which give this course.
-	 * @param assistants          List of the lab/application assistant for this
-	 *                            course.
-	 * @param courseObjective     Summary of the course objective.
-	 * @param learningOutcomes    Skills and abilities that you will gain after
-	 *                            completing this course.
-	 * @param courseDescription   Description of the course.
-	 * @param category            One of the course categories among
-	 *                            {@link CourseCategory} enum.
-	 * @param schedule            Course schedule for a semester of the course.
-	 * @param courseBook          General book of the course.
-	 * @param suggestedReading    List of suggested readings for more detailed
-	 *                            information.
-	 * @param evaluationCriterias Evaluation criterias of the course to calculate
-	 *                            the total grade. // * @param workloadTable All
-	 *                            workload that a course require in one semester.
-	 * @param courseCompetencies  Competencies of the course with related learning
-	 *                            outcomes.
+	 *
 	 */
-	/*
-	 * Removed because of the complete validation concerns. Please use the other constructor with
-	 * setter(s) and getter(s) 
-	public Course(String courseName, String code, LinkedHashSet<String> prerequisites, Language courseLang,
-			SemesterOptions semester, int theoreticalHour, int labHour, CourseType type, String coordinator,
-			LinkedHashSet<String> lecturers, LinkedHashSet<String> assistants, String courseObjective,
-			LinkedHashSet<String> learningOutcomes, String courseDescription, CourseCategory category,
-			LinkedHashSet<WeeklySubject> schedule, CourseBook courseBook, LinkedHashSet<CourseBook> suggestedReading,
-			LinkedHashSet<EvaluationCriteria> evaluationCriterias, LinkedHashSet<SemesterActivity> workloadTable,
-			LinkedHashSet<CourseCompetency> courseCompetencies) {
+	public Course() {
 		this.courseName = courseName;
 		this.code = code;
 		this.creationDate = LocalDateTime.now();
@@ -236,7 +201,7 @@ public class Course {
 		this.localCredit = calculateLocalCredit();
 		this.ects = calculateECTS();
 		this.type = type;
-		this.courseCoordinator = coordinator;
+		this.courseCordinator = coordinator;
 		this.courseLecturers = new ArrayList<>(lecturers);
 		this.assistants = new ArrayList<>(assistants);
 		this.courseObjective = courseObjective;
@@ -250,33 +215,9 @@ public class Course {
 		this.workloadTable = new ArrayList<>(workloadTable);
 		this.courseCompetencies = new ArrayList<>(courseCompetencies);
 	}
-	*/
 
 	// FIXME add a default constructor for newly created courses without a
 	// sufficient information supplied.
-	public Course() {
-		this.courseName = "Not specified";
-		this.code = "Not Specified";
-		this.creationDate = LocalDateTime.now();
-		this.prerequisites = new ArrayList<>();
-		this.courseLang = Language.ENGLISH;
-		this.labHour = 0;
-		this.theoreticalHour = 0;
-		this.localCredit = calculateLocalCredit();
-		this.ects = calculateECTS();
-		this.type = CourseType.REQUIRED;
-		this.courseCoordinator = "Not Added";
-		this.courseLecturers = new ArrayList<>();
-		this.assistants = new ArrayList<>();
-		this.courseObjective = new String();
-		this.courseCategory = CourseCategory.CORE_COURSE;
-		this.courseSchedule = WeeklySubject.createDefaultSemester();
-		this.courseTextBook = "Not given";
-		this.suggestedReading = new ArrayList<>();
-		this.evaluationCriterias = new ArrayList<>();
-		
-		
-	}
 
 	// Method(s)
 	/**
@@ -340,25 +281,15 @@ public class Course {
 	 * @return {@code true} if the lecturer can be added to the course, otherwise
 	 *         returns {@code false}.
 	 */
-	private boolean addLecturer(String lecturer) {
-		/* 
-		 * Old version simplified for the sake of implementation
+	private boolean addLecturer(Lecturer lecturer) {
 		if (doesContain(courseLecturers, lecturer)) {
 			return false;
 		} else {
 			return courseLecturers.add(lecturer);
 		}
-		*/
-		
-		if ((lecturer != null) && !(lecturer.isBlank()) && !(courseLecturers.contains(lecturer))) {
-			courseLecturers.add(lecturer);
-			return true;
-		}
-		return false;
 	}
 
-	
-	
+	// Add restrictions and confirmation for the validity of inputs on this method
 	/**
 	 * This overwritten method is the used to add a lecturer to the course without
 	 * creating {@link Lecturer} object.
@@ -373,8 +304,6 @@ public class Course {
 	 * @throws IllegalArgumentException is thrown if {@code lecName},
 	 *                                  {@code lecSurname} is blank (or empty).
 	 */
-	/*
-	 * Removed method to create simplicity for other classes.
 	public boolean addLecturer(String lecName, String lecSurname, AcademicTitle title)
 			throws NullPointerException, IllegalArgumentException {
 		if ((lecName == null) || (lecSurname == null) || (title == null)) {
@@ -385,7 +314,6 @@ public class Course {
 		}
 		return addLecturer(new Lecturer(lecName, lecSurname, title));
 	}
-	*/
 
 	/**
 	 * Removes the specified lecturer from the {@link #courseLecturers} list.
@@ -394,7 +322,7 @@ public class Course {
 	 * @return returns {@code true} if it is removed successfully, return
 	 *         {@code false} otherwise.
 	 */
-	public boolean removeLecturer(String lec) {
+	public boolean removeLecturer(Lecturer lec) {
 		return courseLecturers.remove(lec);
 	}
 
@@ -405,19 +333,12 @@ public class Course {
 	 * @return returns {@code true} if it is added to the {@code #assistants}
 	 *         without a problem, return {@code false} otherwise.
 	 */
-	private boolean addAssistant(String assistant) {
-		/*
+	private boolean addAssistant(Lecturer assistant) {
 		if (doesContain(assistants, assistant)) {
 			return false;
 		} else {
 			return courseLecturers.add(assistant);
 		}
-		*/
-		if((assistant != null) && !(assistant.isBlank()) && !(assistants.contains(assistant))) {
-			assistants.add(assistant);
-			return true;
-		}
-		return false;
 	}
 
 	/**
@@ -434,8 +355,6 @@ public class Course {
 	 * @throws IllegalArgumentException is thrown if {@code lecName},
 	 *                                  {@code lecSurname} is blank (or empty).
 	 */
-	/*
-	 * Removed for the simplicity.
 	public boolean addAssistant(String lecName, String lecSurname, AcademicTitle title)
 			throws NullPointerException, IllegalArgumentException {
 		if ((lecName == null) || (lecSurname == null) || (title == null)) {
@@ -446,9 +365,7 @@ public class Course {
 		}
 		return addAssistant(new Lecturer(lecName, lecSurname, title));
 	}
-	*/
-	
-	
+
 	/**
 	 * Removes the specified assistant from the {@link #assistants} list.
 	 * 
@@ -456,7 +373,7 @@ public class Course {
 	 * @return returns {@code true} if it is removed successfully, return
 	 *         {@code false} otherwise.
 	 */
-	public boolean removeAssistant(String lecturer) {
+	public boolean removeAssistant(Lecturer lecturer) {
 		return assistants.remove(lecturer);
 	}
 
@@ -484,21 +401,12 @@ public class Course {
 	 * @return {@code true} if the book is added successfully, return {@code false}
 	 *         otherwise.
 	 */
-	private boolean addReading(String book) {
-		/*
-		 * Removed version for the simplicity
+	private boolean addReading(CourseBook book) {
 		if (doesContain(suggestedReading, book)) {
 			return false;
 		} else {
 			return suggestedReading.add(book);
 		}
-		*/
-		
-		if ((book != null) && !(book.isBlank()) && !(suggestedReading.contains(book))) {
-			suggestedReading.add(book);
-			return true;
-		}
-		return false;
 	}
 
 	/**
@@ -519,8 +427,6 @@ public class Course {
 	 *                                  value is less than 0, it will throw an
 	 *                                  {@code IllegalArgumentException}.
 	 */
-	/*
-	 * Removed method for the simplicity.
 	public boolean addReading(String name, int edition, String author)
 			throws NullPointerException, IllegalArgumentException {
 		if (name == null) {
@@ -535,7 +441,6 @@ public class Course {
 		}
 		return addReading(new CourseBook(name, edition, author));
 	}
-	*/
 
 	/**
 	 * Method to add a book to suggested readings without specifying the edition.
@@ -545,12 +450,9 @@ public class Course {
 	 * @return {@code true} if the book is added successfully, return {@code false}
 	 *         otherwise.
 	 */
-	/*
-	 * Removed method for simplicity
 	public boolean addReading(String name, String author) {
 		return addReading(name, 0, author);
 	}
-	*/
 
 	/**
 	 * Method to remove a book from the {@link #suggestedReading} Array.
@@ -559,7 +461,7 @@ public class Course {
 	 * @return {@code true} if the book is removed successfully, return
 	 *         {@code false} otherwise.
 	 */
-	public boolean removeReading(String book) {
+	public boolean removeReading(CourseBook book) {
 		return suggestedReading.remove(book);
 	}
 
@@ -894,19 +796,19 @@ public class Course {
 		return type;
 	}
 
-	public String getCourseCordinator() {
-		return courseCoordinator;
+	public Lecturer getCourseCordinator() {
+		return courseCordinator;
 	}
 
 	// TODO Deliver a deep copy of the array to prevent unsupervised changes on the
 	// data.
-	public ArrayList<String> getCourseLecturers() {
+	public ArrayList<Lecturer> getCourseLecturers() {
 		return courseLecturers;
 	}
 
 	// TODO Deliver a deep copy of the array to prevent unsupervised changes on the
 	// data.
-	public ArrayList<String> getAssistants() {
+	public ArrayList<Lecturer> getAssistants() {
 		return assistants;
 	}
 
@@ -934,13 +836,13 @@ public class Course {
 		return courseSchedule;
 	}
 
-	public String getCourseTextBook() {
+	public CourseBook getCourseTextBook() {
 		return courseTextBook;
 	}
 
 	// TODO Deliver a deep copy of the array to prevent unsupervised changes on the
 	// data.
-	public ArrayList<String> getSuggestedReading() {
+	public ArrayList<CourseBook> getSuggestedReading() {
 		return suggestedReading;
 	}
 
@@ -1028,9 +930,9 @@ public class Course {
 
 	}
 
-	public boolean setCourseCordinator(String courseCordinator) {
-		if ((courseCordinator != null) && !(courseCordinator.isBlank())) {
-			this.courseCoordinator = courseCordinator;
+	public boolean setCourseCordinator(Lecturer courseCordinator) {
+		if (courseCordinator != null) {
+			this.courseCordinator = courseCordinator;
 			return true;
 		}
 		return false;
@@ -1060,8 +962,8 @@ public class Course {
 		return false;
 	}
 
-	public boolean setCourseTextBook(String courseTextBook) {
-		if ((courseTextBook != null) && !(courseTextBook.isBlank())) {
+	public boolean setCourseTextBook(CourseBook courseTextBook) {
+		if (courseTextBook != null) {
 			this.courseTextBook = courseTextBook;
 			return true;
 		}
