@@ -54,6 +54,14 @@ public class CourseCompetency {
 	public ArrayList<Integer> getRelatedLearningOutcomes() {
 		return relatedLearningOutcomes;
 	}
+	
+	public String getRelatedLearningOutcomesString() {
+		String base = "";
+		for(Integer lo : getRelatedLearningOutcomes()) {
+			base += lo + ",";
+		}
+		return base;
+	}
 
 	
 	/*

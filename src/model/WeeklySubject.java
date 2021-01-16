@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import com.x5.util.AccessAsBean;
 
 public class WeeklySubject {
 

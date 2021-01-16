@@ -12,7 +12,8 @@ module TermProject {
 	requires java.desktop;
 	requires chunk.templates;
 	
-	
+	exports model
+	      to chunk.templates;
 	opens newui;
 
 	

@@ -436,7 +436,7 @@ public class MainController {
 				chooser.getExtensionFilters().add(new ExtensionFilter("HTML File", "*.html"));
 				chooser.setTitle("Choose a save location");
 				File chosenFile = chooser.showSaveDialog(Main.generalStage);
-				if ((chosenFile != null) && !(chosenFile.exists())) {
+				if ((chosenFile != null) && chosenFile.exists()) {
 					// Exporter method will be called from here
 					export.export(selected, chosenFile.toString());
 				}

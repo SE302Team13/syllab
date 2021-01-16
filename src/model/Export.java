@@ -1,12 +1,17 @@
 package model;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 import com.x5.template.Chunk;
 import com.x5.template.Theme;
+import com.x5.util.AccessAsBean;
 
 public class Export {
+	
 	public void export(Course course, String path) {
+	
 		Theme theme = new Theme();
 		Chunk c = theme.makeChunk("syllabus#general");
 
@@ -37,12 +42,23 @@ public class Export {
 		String isSkill = course.getCourseCategory() == CourseCategory.TRANS_SKILL_COURSE ? "X" : "";
 		String isManagement = course.getCourseCategory() == CourseCategory.COM_AND_MAN_COURSE ? "X" : "";
 		String isSupportive = course.getCourseCategory() == CourseCategory.SUPPORTIVE_COURSE ? "X" : "";
+		
 		c.set("coreCourse", isCore);
 		c.set("majorAreaCourse", isMajor);
 		c.set("supportiveCourse", isSupportive);
 		c.set("managementCourse", isManagement);
 		c.set("skillCourse", isSkill);
 
+		c.setToBean("weeklySubjects", course.getCourseSchedule());
+		c.set("courseTextbook", course.getCourseTextBook());
+		c.set("suggestedReadings", course.getSuggestedReading());
+		c.setToBean("evaluationCriterias", course.getEvaluationCriterias());
+		
+		ArrayList<SemesterActivity> sm = course.getWorkloadTable();
+		c.setToBean("semesterActivities", sm);
+
+		ArrayList<CourseCompetency> comp = course.getCourseCompetencies();
+		c.setToBean("competencies", comp);
 		
 		File file = new File(path);
 		FileWriter out;
