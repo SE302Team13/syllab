@@ -1,6 +1,8 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  * @version 1.0
  * 
  */
-public class Course {
+public class Course implements Serializable {
 
 	// Field(s)
 
@@ -27,6 +29,11 @@ public class Course {
 				+ suggestedReading + ", evaluationCriterias=" + evaluationCriterias + ", workloadTable=" + workloadTable
 				+ ", courseCompetencies=" + courseCompetencies + "]";
 	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7336977215035607731L;
 
 	/**
 	 * Complete name of the course
@@ -330,11 +337,7 @@ public class Course {
 	 *         table.
 	 */
 	public int calculateECTS() {
-		int totalWorkload = 0;
-		for (SemesterActivity activity : workloadTable) {
-			totalWorkload += activity.getWorkload();
-		}
-		return ects = (int) Math.round(totalWorkload / 30.0);
+		return ects = (int) Math.round(getTotalWorkload() / 30.0);
 	}
 
 	/**
@@ -985,6 +988,14 @@ public class Course {
 	public ArrayList<CourseCompetency> getCourseCompetencies() {
 		return courseCompetencies;
 	}
+	
+	public int getTotalWorkload() {
+		int totalWorkload = 0;
+		for (SemesterActivity activity : workloadTable) {
+			totalWorkload += activity.getWorkload();
+		}
+		return totalWorkload;
+	}
 
 	public boolean setCourseName(String courseName) {
 		if ((courseName != null) && !(courseName.isBlank())) {
@@ -1207,5 +1218,10 @@ public class Course {
 			}
 		}
 		return returnValue;
+	}
+	
+	@Override
+	public String toString() {
+		return code + "\n" + creationDate.toLocalTime();
 	}
 }
