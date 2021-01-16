@@ -260,12 +260,16 @@ public class Course {
 		this.creationDate = LocalDateTime.now();
 		this.prerequisites = new ArrayList<>();
 		this.courseLang = Language.ENGLISH;
+		this.semester = SemesterOptions.FALL;
 		this.labHour = 0;
 		this.theoreticalHour = 0;
+		this.learningOutcomes = new ArrayList<>();
+		this.workloadTable = new ArrayList<>();
 		this.localCredit = calculateLocalCredit();
 		this.ects = calculateECTS();
 		this.type = CourseType.REQUIRED;
 		this.courseCoordinator = "Not Added";
+		this.courseCompetencies = new ArrayList<>();
 		this.courseLecturers = new ArrayList<>();
 		this.assistants = new ArrayList<>();
 		this.courseObjective = new String();
@@ -563,7 +567,7 @@ public class Course {
 		return suggestedReading.remove(book);
 	}
 	
-	private boolean addLearningOutcome(String learningOutcome) {
+	public boolean addLearningOutcome(String learningOutcome) {
 		if ((learningOutcome != null) && !(learningOutcome.isBlank())) {
 			return learningOutcomes.add(learningOutcome);
 		}
@@ -1114,7 +1118,7 @@ public class Course {
 		return returnValue;
 	}
 
-	public boolean setLearningOutcomes(ArrayList<String> learningOutcomes) {
+	public boolean setLearningOutcomes(LinkedHashSet<String> learningOutcomes) {
 		this.learningOutcomes = new ArrayList<>();
 		boolean returnValue = true;
 		if (learningOutcomes != null) {
@@ -1127,7 +1131,7 @@ public class Course {
 		return returnValue;
 	}
 
-	public boolean setCourseSchedule(ArrayList<WeeklySubject> courseSchedule) {
+	public boolean setCourseSchedule(LinkedHashSet<WeeklySubject> courseSchedule) {
 		this.courseSchedule = new ArrayList<>();
 		boolean returnValue = true;
 		if (courseSchedule != null) {
@@ -1140,7 +1144,7 @@ public class Course {
 		return returnValue;
 	}
 
-	public boolean setSuggestedReading(ArrayList<String> suggestedReading) {
+	public boolean setSuggestedReading(LinkedHashSet<String> suggestedReading) {
 		this.suggestedReading = new ArrayList<>();
 		boolean returnValue = true;
 		if (suggestedReading != null) {
@@ -1153,7 +1157,7 @@ public class Course {
 		return returnValue;
 	}
 
-	public boolean setEvaluationCriterias(ArrayList<EvaluationCriteria> evaluationCriterias) {
+	public boolean setEvaluationCriterias(LinkedHashSet<EvaluationCriteria> evaluationCriterias) {
 		this.evaluationCriterias = new ArrayList<>();
 		boolean returnValue = true;
 		if (evaluationCriterias != null) {
@@ -1166,7 +1170,7 @@ public class Course {
 		return returnValue;
 	}
 
-	public boolean setWorkloadTable(ArrayList<SemesterActivity> workloadTable) {
+	public boolean setWorkloadTable(LinkedHashSet<SemesterActivity> workloadTable) {
 		this.workloadTable = new ArrayList<>();
 		boolean returnValue = true;
 		if (workloadTable != null) {
@@ -1179,7 +1183,7 @@ public class Course {
 		return returnValue;
 	}
 
-	public boolean setCourseCompetencies(ArrayList<CourseCompetency> courseCompetencies) {
+	public boolean setCourseCompetencies(LinkedHashSet<CourseCompetency> courseCompetencies) {
 		this.courseCompetencies = new ArrayList<>();
 		boolean returnValue = true;
 		if (courseCompetencies != null) {

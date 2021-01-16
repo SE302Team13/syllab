@@ -4,8 +4,6 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXToolbar?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -14,8 +12,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,147 +21,259 @@
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newui.MainController">
-   <top>
-      <HBox fx:id="topPane" alignment="CENTER" BorderPane.alignment="CENTER">
+	<top>
+		<HBox fx:id="topPane" alignment="CENTER" BorderPane.alignment="CENTER">
+			<children>
+				<HBox fx:id="buttonToolbar" spacing="10.0" HBox.hgrow="ALWAYS">
+					<children>
+						<JFXButton fx:id="createSyllabus" text="Create">
+							<graphic>
+								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../assets/create-syllabus.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="addSyllabus" text="Add">
+							<graphic>
+								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../assets/add-syllabus.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="importSyllabus" text="Import from IEU">
+							<graphic>
+								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../assets/import.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="exportSyllabus" text="Export">
+							<graphic>
+								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../assets/export.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+						<JFXButton fx:id="deleteSyllabus" text="Delete">
+							<graphic>
+								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../assets/delete-syllabus.png" />
+									</image>
+								</ImageView>
+							</graphic>
+						</JFXButton>
+					</children>
+					<HBox.margin>
+						<Insets right="50.0" />
+					</HBox.margin>
+				</HBox>
+				<HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="10.0">
+					<children>
+						<ImageView fx:id="closeButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../assets/close-button.png" />
+							</image>
+						</ImageView>
+						<ImageView fx:id="minimizeButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../assets/minimize-button.png" />
+							</image>
+						</ImageView>
+						<ImageView fx:id="helpButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../assets/help.png" />
+							</image>
+						</ImageView>
+						<ImageView fx:id="gitHubButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../assets/github-logo.png" />
+							</image>
+						</ImageView>
+					</children>
+				</HBox>
+			</children>
+			<padding>
+				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+			</padding>
+		</HBox>
+	</top>
+	<left>
+      <VBox BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
          <children>
-            <HBox fx:id="buttonToolbar" spacing="10.0" HBox.hgrow="ALWAYS">
+      		<JFXListView fx:id="courseList" VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER">
                <children>
-                  <JFXButton fx:id="createSyllabus" text="Create">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/create-syllabus.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="addSyllabus" text="Add">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/add-syllabus.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="importSyllabus" text="Import from IEU">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/import.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="exportSyllabus" text="Export">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/export.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="deleteSyllabus" text="Delete">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/delete-syllabus.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-               </children>
-               <HBox.margin>
-                  <Insets right="50.0" />
-               </HBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" spacing="10.0">
-               <children>
-                  <ImageView fx:id="closeButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/close-button.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="minimizeButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/minimize-button.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="helpButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/help.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="closeButton1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/github-logo.png" />
-                     </image>
-                  </ImageView>
+                  <JFXButton fx:id="saveButton" buttonType="RAISED" prefHeight="26.0" prefWidth="200.0" text="Save Current" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
-      </HBox>
-   </top>
-   <left>
-      <JFXListView fx:id="courseList" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </BorderPane.margin>
-      </JFXListView>
-   </left>
-   <center>
-      <JFXTabPane fx:id="generalTabPane" focusTraversable="false" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-         <tabs>
-            <Tab closable="false" text="General Information">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="452.0" prefWidth="560.0">
-                           <content>
-                              <AnchorPane prefHeight="640.0" prefWidth="557.0">
-                                 <children>
-                                    <VBox alignment="CENTER" layoutX="18.0" layoutY="34.0">
+      </VBox>
+	</left>
+	<center>
+		<JFXTabPane fx:id="generalTabPane" focusTraversable="false" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+			<tabs>
+				<Tab closable="false" text="General Information">
+					<content>
+						<AnchorPane>
+							<children>
+								<ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="452.0" prefWidth="560.0">
+									<content>
+										<AnchorPane prefHeight="750.0" prefWidth="557.0">
+											<children>
+												<VBox alignment="CENTER" layoutX="18.0" layoutY="34.0">
+													<children>
+														<Label text="Course Name" />
+														<CustomTextField fx:id="courseNameField" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="173.0" layoutY="34.0">
+													<children>
+														<Label alignment="CENTER" text="Course Code" />
+														<CustomTextField fx:id="courseCodeField" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="334.0" layoutY="33.0">
+													<children>
+														<Label text="Creation Date" />
+														<DatePicker fx:id="creationDatePicker" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="14.0" layoutY="110.0" prefHeight="114.0" prefWidth="186.0" spacing="10.0">
+													<children>
+														<Label text="Prerequisites" />
+														<HBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+															<VBox.margin>
+																<Insets />
+															</VBox.margin>
+															<children>
+																<JFXListView fx:id="prerequisitesList" editable="true" HBox.hgrow="ALWAYS" />
+																<VBox fx:id="prerequisitesToolbar" alignment="CENTER" spacing="15.0">
+																	<padding>
+																		<Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
+																	</padding>
+																	<children>
+																		<JFXButton fx:id="addPrerequisites" buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="0" layoutY="0" text=".">
+																			<graphic>
+																				<ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+																					<image>
+																						<Image url="@../assets/create-syllabus.png" />
+																					</image>
+																				</ImageView>
+																			</graphic>
+																		</JFXButton>
+																		<JFXButton fx:id="deletePrerequisites" buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" text=".">
+																			<graphic>
+																				<ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+																					<image>
+																						<Image url="@../assets/delete.png" />
+																					</image>
+																				</ImageView>
+																			</graphic>
+																		</JFXButton>
+																	</children>
+																</VBox>
+															</children>
+														</HBox>
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="217.0" layoutY="110.0">
+													<children>
+														<Label alignment="CENTER" text="Course Language" />
+														<JFXComboBox fx:id="languageChoice" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="381.0" layoutY="110.0">
+													<children>
+														<Label alignment="CENTER" text="Semester" />
+														<JFXComboBox fx:id="semesterChoice" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="223.0" layoutY="187.0">
+													<children>
+														<Label alignment="CENTER" text="Theoretical Hours" />
+														<CustomTextField fx:id="theoreticalHoursField" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="387.0" layoutY="187.0">
+													<children>
+														<Label alignment="CENTER" text="Application/Lab Hours" />
+														<CustomTextField fx:id="applicationHoursField" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="33.0" layoutY="268.0">
+													<children>
+														<Label alignment="CENTER" text="Course Type" />
+														<JFXComboBox fx:id="courseTypeChoice" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="217.0" layoutY="268.0">
+													<children>
+														<Label alignment="CENTER" text="Course Level" />
+														<JFXComboBox fx:id="courseLevelChoice" labelFloat="true" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER" layoutX="381.0" layoutY="268.0">
+													<children>
+														<Label alignment="CENTER" text="Course Category" />
+														<JFXComboBox fx:id="courseCategoryChoice" labelFloat="true" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
+													</children>
+												</VBox>
+												<VBox layoutX="31.0" layoutY="344.0" prefHeight="92.0" prefWidth="495.0">
+													<children>
+														<Label text="Course Description" />
+														<TextArea fx:id="courseDescriptionArea" prefHeight="200.0" prefWidth="200.0" />
+													</children>
+												</VBox>
+												<VBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="467.0" prefHeight="92.0" prefWidth="495.0">
+													<children>
+														<Label text="Course Objective" />
+														<TextArea fx:id="courseObjectiveArea" prefHeight="200.0" prefWidth="200.0" />
+													</children>
+												</VBox>
+                                    <VBox fx:id="booksSection" layoutX="31.0" layoutY="580.0" prefHeight="100.0" prefWidth="495.0" spacing="20.0">
                                        <children>
-                                          <Label text="Course Name" />
-                                          <CustomTextField fx:id="courseNameField" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="173.0" layoutY="34.0">
-                                       <children>
-                                          <Label alignment="CENTER" text="Course Code" />
-                                          <CustomTextField fx:id="courseCodeField" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="334.0" layoutY="33.0">
-                                       <children>
-                                          <Label text="Creation Date" />
-                                          <DatePicker fx:id="creationDatePicker" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="14.0" layoutY="110.0" prefHeight="114.0" prefWidth="186.0" spacing="10.0">
-                                       <children>
-                                          <Label text="Prerequisites" />
-                                          <JFXToolbar>
-                                             <left>
-                                                <VBox alignment="CENTER" spacing="15.0" BorderPane.alignment="CENTER">
+                                          <HBox alignment="CENTER_LEFT" spacing="20.0">
+                                             <children>
+                                                <Label text="Main Course Book:" />
+                                                <CustomTextField fx:id="mainCourseBookField" HBox.hgrow="ALWAYS" />
+                                             </children>
+                                             <padding>
+                                                <Insets right="52.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="BOTTOM_CENTER">
+                                             <children>
+                                                <JFXListView fx:id="suggestedReadingList" HBox.hgrow="ALWAYS" />
+                                                <VBox fx:id="readingsToolbar" alignment="CENTER" spacing="15.0">
                                                    <padding>
                                                       <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
                                                    </padding>
                                                    <children>
-                                                      <JFXButton buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="0" layoutY="0" text=".">
+                                                      <JFXButton fx:id="addReadingButton" buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="0" layoutY="0" text=".">
                                                          <graphic>
-                                                            <ImageView fx:id="addPrerequisites" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../assets/create-syllabus.png" />
                                                                </image>
                                                             </ImageView>
                                                          </graphic>
                                                       </JFXButton>
-                                                      <JFXButton fx:id="deletePrerequisites" buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" text=".">
+                                                      <JFXButton fx:id="deleteReadingButton" buttonType="RAISED" contentDisplay="CENTER" graphicTextGap="0.0" text=".">
                                                          <graphic>
                                                             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -176,306 +284,293 @@
                                                       </JFXButton>
                                                    </children>
                                                 </VBox>
-                                             </left>
-                                             <center>
-                                                <JFXListView fx:id="prerequisitesList" layoutX="1.0" layoutY="1.0" BorderPane.alignment="CENTER" />
-                                             </center>
-                                          </JFXToolbar>
-                                       </children>
-                                       <padding>
-                                          <Insets right="15.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="217.0" layoutY="110.0">
-                                       <children>
-                                          <Label alignment="CENTER" text="Course Language" />
-                                          <JFXComboBox fx:id="languageChoice" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="381.0" layoutY="110.0">
-                                       <children>
-                                          <Label alignment="CENTER" text="Semester" />
-                                          <JFXComboBox fx:id="semesterChoice" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="223.0" layoutY="187.0">
-                                       <children>
-                                          <Label alignment="CENTER" text="Theoretical Hours" />
-                                          <CustomTextField fx:id="theoreticalHoursField" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="387.0" layoutY="187.0">
-                                       <children>
-                                          <Label alignment="CENTER" text="Application/Lab Hours" />
-                                          <CustomTextField fx:id="applicationHoursField" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="33.0" layoutY="268.0">
-                                       <children>
-                                          <Label alignment="CENTER" text="Course Type" />
-                                          <JFXComboBox fx:id="courseTypeChoice" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="217.0" layoutY="268.0">
-                                       <children>
-                                          <Label alignment="CENTER" text="Course Level" />
-                                          <JFXComboBox fx:id="courseLevelChoice" labelFloat="true" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" layoutX="381.0" layoutY="268.0">
-                                       <children>
-                                          <Label alignment="CENTER" text="Course Category" />
-                                          <JFXComboBox fx:id="courseCategoryChoice" labelFloat="true" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="148.0" />
-                                       </children>
-                                    </VBox>
-                                    <VBox layoutX="31.0" layoutY="344.0" prefHeight="92.0" prefWidth="495.0">
-                                       <children>
-                                          <Label text="Course Description" />
-                                          <TextArea fx:id="courseDescriptionArea" prefHeight="200.0" prefWidth="200.0" />
-                                       </children>
-                                    </VBox>
-                                    <VBox layoutX="31.0" layoutY="467.0" prefHeight="92.0" prefWidth="495.0">
-                                       <children>
-                                          <Label text="Course Objective" />
-                                          <TextArea prefHeight="200.0" prefWidth="200.0" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab closable="false" text="Learning Outcomes">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <VBox layoutX="22.0" layoutY="35.0" prefHeight="390.0" prefWidth="505.0">
-                           <children>
-                              <JFXTreeTableView fx:id="learningOutcomesTable" focusTraversable="false" showRoot="false">
-                                 <columns>
-                                    <TreeTableColumn fx:id="learningOutcomesTableNumberColumn" editable="false" prefWidth="75.20001220703125" resizable="false" text="Number #" />
-                                    <TreeTableColumn fx:id="learningOutcomesTableLOColumn" prefWidth="427.99993896484375" resizable="false" sortable="false" text="Learning Outcome" />
-                                 </columns>
-                                 <columnResizePolicy>
-                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </JFXTreeTableView>
-                              <HBox fx:id="learninOutcomesToolbar">
-                                 <children>
-                                    <HBox HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <JFXButton fx:id="addOutcomeButton" buttonType="RAISED" text="Add Learning Outcome" />
-                                       </children>
-                                    </HBox>
-                                    <HBox layoutX="10.0" layoutY="10.0">
-                                       <children>
-                                          <JFXButton fx:id="removeOutcomeButton" buttonType="RAISED" text="Remove Learning Outcome" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab closable="false" text="Lecturers">
-              <content>
-                <AnchorPane minHeight="0.0">
-                     <children>
-                        <VBox layoutX="37.0" layoutY="15.0" prefHeight="422.0" prefWidth="486.0">
-                           <children>
-                              <VBox fx:id="coordinatorCreationBox" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                                 <children>
-                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="64.0">
-                                       <children>
-                                          <Label text="Course Coordinator" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" spacing="10.0">
-                                       <children>
-                                          <VBox alignment="CENTER">
-                                             <children>
-                                                <Label text="Title" />
-                                                <JFXComboBox fx:id="coordinatorTitleChoice" prefHeight="26.0" prefWidth="123.0" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" prefHeight="43.0" prefWidth="158.0">
-                                             <children>
-                                                <Label text="Name" />
-                                                <CustomTextField fx:id="coordinatorNameField" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" prefHeight="43.0" prefWidth="153.0">
-                                             <children>
-                                                <Label text="Surname" />
-                                                <CustomTextField fx:id="coordinatorSurnameField" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" top="5.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="20.0" top="10.0" />
-                                 </padding>
-                              </VBox>
-                              <JFXTreeTableView fx:id="lecturerTable" prefHeight="400.0" prefWidth="529.0">
-                                 <columns>
-                                    <TreeTableColumn fx:id="lecturerTableTitleColumn" prefWidth="76.7999267578125" resizable="false" text="Title" />
-                                    <TreeTableColumn fx:id="lecturerTableNameColumn" prefWidth="197.60009765625" resizable="false" text="Name" />
-                                    <TreeTableColumn fx:id="lecturerTableSurnameColumn" prefWidth="212.0" resizable="false" text="Surname" />
-                                 </columns>
-                              </JFXTreeTableView>
-                              <VBox fx:id="lecturerCreationBox" prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <HBox alignment="CENTER" spacing="10.0">
-                                       <children>
-                                          <VBox alignment="CENTER">
-                                             <children>
-                                                <Label text="Title" />
-                                                <JFXComboBox fx:id="lecturerTitleChoice" prefHeight="26.0" prefWidth="123.0" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" prefHeight="43.0" prefWidth="158.0">
-                                             <children>
-                                                <Label text="Name" />
-                                                <CustomTextField fx:id="lecturerNameField" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" prefHeight="43.0" prefWidth="153.0">
-                                             <children>
-                                                <Label text="Surname" />
-                                                <CustomTextField fx:id="lecturerSurnameField" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" top="5.0" />
-                                       </padding>
-                                    </HBox>
-                                    <HBox>
-                                       <children>
-                                          <HBox spacing="15.0" HBox.hgrow="ALWAYS">
-                                             <children>
-                                                <JFXButton fx:id="addLecturerButton" text="Add Lecturer" />
-                                                <JFXButton fx:id="addAssistantButton" text="Add Assistant" />
-                                             </children>
-                                          </HBox>
-                                          <HBox>
-                                             <children>
-                                                <JFXButton fx:id="removeButton" text="Remove from Course" />
                                              </children>
                                           </HBox>
                                        </children>
-                                       <padding>
-                                          <Insets top="13.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab closable="false" text="Course Schedule">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="scheduleTable" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="421.0" prefWidth="522.0">
-                          <columns>
-                            <TableColumn fx:id="scheduleTableWeekColumn" editable="false" prefWidth="58.4000244140625" resizable="false" sortable="false" text="Week" />
-                            <TableColumn fx:id="scheduleTableDescriptionTable" prefWidth="319.199951171875" resizable="false" sortable="false" text="Description" />
-                              <TableColumn fx:id="scheduleTableRMRow" prefWidth="143.20004882812498" resizable="false" sortable="false" text="Related Material" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab closable="false" text="Evaluation Criterias">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <VBox layoutX="14.0" layoutY="14.0" prefHeight="426.0" prefWidth="530.0">
-                           <children>
-                              <JFXTreeTableView fx:id="evaluationCriteriaTable" focusTraversable="false" showRoot="false">
-                                 <columns>
-                                    <TreeTableColumn fx:id="evaluationCriteriaTableNameColumn" prefWidth="112.0" resizable="false" sortable="false" text="Name" />
-                                    <TreeTableColumn fx:id="evaluationCriteriaTableCountColumn" prefWidth="44.800048828125" resizable="false" text="Count" />
-                                    <TreeTableColumn fx:id="evaluationCriteriaTableContributionColumn" prefWidth="90.39990234375" resizable="false" text="Contribution" />
-                                 </columns>
-                                 <columnResizePolicy>
-                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </JFXTreeTableView>
-                              <HBox fx:id="evaluationCriteriaToolbar">
-                                 <children>
-                                    <HBox HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <JFXButton fx:id="addEvaluationCriteriaButton" buttonType="RAISED" text="Add Evaluation Criteria" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <JFXButton fx:id="removeEvaluationCriteriaButton" buttonType="RAISED" text="Remove Evaluation Criteria" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab closable="false" text="Course Competencies">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <VBox layoutX="15.0" layoutY="13.0" prefHeight="426.0" prefWidth="530.0">
-                           <children>
-                              <JFXTreeTableView fx:id="competencyTable" focusTraversable="false" showRoot="false">
-                                 <columns>
-                                    <TreeTableColumn fx:id="competencyTableDescriptionColumn" editable="false" prefWidth="112.0" resizable="false" sortable="false" text="Description" />
-                                    <TreeTableColumn fx:id="competencyTableContributionColumn" editable="false" prefWidth="84.7998046875" resizable="false" sortable="false" text="Contribution" />
-                                 </columns>
-                                 <columnResizePolicy>
-                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </JFXTreeTableView>
-                              <HBox fx:id="competencyToolbar">
-                                 <children>
-                                    <HBox HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <JFXButton fx:id="addCompetencyButton" buttonType="RAISED" text="Add Competency" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <JFXButton fx:id="removeCompetencyButton" buttonType="RAISED" text="Remove Competency" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
-   </center>
+                                    </VBox>
+											</children>
+										</AnchorPane>
+									</content>
+								</ScrollPane>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab closable="false" text="Learning Outcomes">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<VBox layoutX="22.0" layoutY="35.0" prefHeight="390.0" prefWidth="505.0">
+									<children>
+										<TableView fx:id="learningOutcomesTable" fixedCellSize="2.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+											<columns>
+												<TableColumn fx:id="learningOutcomesTableNumberColumn" editable="false" prefWidth="75.0" resizable="false" text="Number #" />
+												<TableColumn fx:id="learningOutcomesTableLOColumn" prefWidth="429.6" resizable="false" sortable="false" text="Learning Outcomes" />
+											</columns>
+											<columnResizePolicy>
+												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+											</columnResizePolicy>
+										</TableView>
+										<HBox fx:id="learninOutcomesToolbar">
+											<children>
+												<HBox HBox.hgrow="ALWAYS">
+													<children>
+														<JFXButton fx:id="addOutcomeButton" buttonType="RAISED" text="Add Learning Outcome" />
+													</children>
+												</HBox>
+												<HBox layoutX="10.0" layoutY="10.0">
+													<children>
+														<JFXButton fx:id="removeOutcomeButton" buttonType="RAISED" text="Remove Learning Outcome" />
+													</children>
+												</HBox>
+											</children>
+										</HBox>
+									</children>
+								</VBox>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab closable="false" text="Lecturers">
+					<content>
+						<AnchorPane minHeight="0.0">
+							<children>
+								<VBox layoutX="37.0" layoutY="15.0" prefHeight="422.0" prefWidth="486.0">
+									<children>
+										<VBox fx:id="coordinatorCreationBox" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+											<children>
+												<HBox alignment="CENTER" layoutX="10.0" layoutY="64.0">
+													<children>
+														<Label text="Course Coordinator" />
+													</children>
+												</HBox>
+												<HBox alignment="CENTER" spacing="10.0">
+													<children>
+														<VBox alignment="CENTER">
+															<children>
+																<Label text="Title" />
+																<JFXComboBox fx:id="coordinatorTitleChoice" prefHeight="26.0" prefWidth="123.0" />
+															</children>
+														</VBox>
+														<VBox alignment="CENTER" prefHeight="43.0" prefWidth="158.0">
+															<children>
+																<Label text="Name" />
+																<CustomTextField fx:id="coordinatorNameField" />
+															</children>
+														</VBox>
+														<VBox alignment="CENTER" prefHeight="43.0" prefWidth="153.0">
+															<children>
+																<Label text="Surname" />
+																<CustomTextField fx:id="coordinatorSurnameField" />
+															</children>
+														</VBox>
+													</children>
+													<padding>
+														<Insets bottom="5.0" top="5.0" />
+													</padding>
+												</HBox>
+											</children>
+											<padding>
+												<Insets bottom="20.0" top="10.0" />
+											</padding>
+										</VBox>
+										<TableView fx:id="lecturerTable" editable="true" prefHeight="200.0" prefWidth="200.0">
+											<columns>
+												<TableColumn fx:id="lecturerTableTitleColumn" editable="false" prefWidth="134.39990234375" resizable="false" text="Title" />
+												<TableColumn fx:id="lecturerTableNameColumn" prefWidth="179.2000732421875" resizable="false" text="Name" />
+												<TableColumn fx:id="lecturerTableSurnameColumn" prefWidth="172.7999267578125" resizable="false" text="Surname" />
+											</columns>
+											<columnResizePolicy>
+												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+											</columnResizePolicy>
+										</TableView>
+										<TableView fx:id="assistantTable" prefHeight="200.0" prefWidth="200.0">
+											<columns>
+												<TableColumn fx:id="assistantTableTitleColumn" prefWidth="131.9998779296875" resizable="false" text="Title" />
+												<TableColumn fx:id="assistantTableNameColumn" prefWidth="184.800048828125" resizable="false" text="Name" />
+												<TableColumn fx:id="assistantTableSurnameColumn" prefWidth="170.39990234375" resizable="false" text="Surname" />
+											</columns>
+										</TableView>
+										<VBox fx:id="lecturerCreationBox" prefHeight="200.0" prefWidth="100.0">
+											<children>
+												<HBox alignment="CENTER" spacing="10.0">
+													<children>
+														<VBox alignment="CENTER">
+															<children>
+																<Label text="Title" />
+																<JFXComboBox fx:id="lecturerTitleChoice" prefHeight="26.0" prefWidth="123.0" />
+															</children>
+														</VBox>
+														<VBox alignment="CENTER" prefHeight="43.0" prefWidth="158.0">
+															<children>
+																<Label text="Name" />
+																<CustomTextField fx:id="lecturerNameField" />
+															</children>
+														</VBox>
+														<VBox alignment="CENTER" prefHeight="43.0" prefWidth="153.0">
+															<children>
+																<Label text="Surname" />
+																<CustomTextField fx:id="lecturerSurnameField" />
+															</children>
+														</VBox>
+													</children>
+													<padding>
+														<Insets bottom="5.0" top="5.0" />
+													</padding>
+												</HBox>
+												<HBox>
+													<children>
+														<HBox spacing="15.0" HBox.hgrow="ALWAYS">
+															<children>
+																<JFXButton fx:id="addLecturerButton" text="Add Lecturer" />
+																<JFXButton fx:id="addAssistantButton" text="Add Assistant" />
+															</children>
+														</HBox>
+														<HBox>
+															<children>
+																<JFXButton fx:id="removeButton" text="Remove from Course" />
+															</children>
+														</HBox>
+													</children>
+													<padding>
+														<Insets top="13.0" />
+													</padding>
+												</HBox>
+											</children>
+										</VBox>
+									</children>
+								</VBox>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab closable="false" text="Course Schedule">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<TableView fx:id="scheduleTable" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="421.0" prefWidth="522.0">
+									<columns>
+										<TableColumn fx:id="scheduleTableWeekColumn" editable="false" prefWidth="58.4000244140625" resizable="false" sortable="false" text="Week" />
+										<TableColumn fx:id="scheduleTableDescriptionColumn" prefWidth="319.199951171875" resizable="false" sortable="false" text="Description" />
+										<TableColumn fx:id="scheduleTableRMColumn" prefWidth="143.20004882812498" resizable="false" sortable="false" text="Related Material" />
+									</columns>
+									<columnResizePolicy>
+										<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+									</columnResizePolicy>
+								</TableView>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab closable="false" text="Evaluation Criterias">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<VBox layoutX="14.0" layoutY="14.0" prefHeight="426.0" prefWidth="530.0">
+									<children>
+										<TableView fx:id="evaluationCriteriaTable" editable="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+											<columns>
+												<TableColumn fx:id="evaluationCriteriaTableNameColumn" prefWidth="92.0" resizable="false" text="Name" />
+												<TableColumn fx:id="evaluationCriteriaTableCountColumn" prefWidth="55.999755859375" resizable="false" text="Count" />
+												<TableColumn fx:id="evaluationCriteriaTableContributionColumn" prefWidth="100.000244140625" resizable="false" text="Contribution" />
+											</columns>
+											<columnResizePolicy>
+												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+											</columnResizePolicy>
+										</TableView>
+										<HBox fx:id="evaluationCriteriaToolbar">
+											<children>
+												<HBox HBox.hgrow="ALWAYS">
+													<children>
+														<JFXButton fx:id="addEvaluationCriteriaButton" buttonType="RAISED" text="Add Evaluation Criteria" />
+													</children>
+												</HBox>
+												<HBox alignment="CENTER">
+													<children>
+														<JFXButton fx:id="removeEvaluationCriteriaButton" buttonType="RAISED" text="Remove Evaluation Criteria" />
+													</children>
+												</HBox>
+											</children>
+										</HBox>
+									</children>
+								</VBox>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab closable="false" text="Workload Table">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<VBox layoutX="14.0" layoutY="14.0" prefHeight="426.0" prefWidth="530.0">
+									<children>
+										<TableView fx:id="workloadTable" editable="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+											<columns>
+												<TableColumn fx:id="workloadTableNameColumn" prefWidth="254.39990234375" resizable="false" sortable="false" text="Name" />
+												<TableColumn fx:id="workloadTableNumberColumn" prefWidth="85.60009765625" resizable="false" text="Number" />
+												<TableColumn fx:id="workloadTableHoursColumn" prefWidth="70.39990234375" resizable="false" text="Hours" />
+                                    <TableColumn fx:id="workloadTableWorkloadColumn" editable="false" prefWidth="119.199951171875" resizable="false" text="Workload" />
+											</columns>
+											<columnResizePolicy>
+												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+											</columnResizePolicy>
+										</TableView>
+										<HBox fx:id="workloadTableToolbar">
+											<children>
+												<HBox HBox.hgrow="ALWAYS">
+													<children>
+														<JFXButton fx:id="addWorkloadButton" buttonType="RAISED" text="Add Evaluation Criteria" />
+													</children>
+												</HBox>
+												<HBox alignment="CENTER">
+													<children>
+														<JFXButton fx:id="removeWorkloadButton" buttonType="RAISED" text="Remove Evaluation Criteria" />
+													</children>
+												</HBox>
+											</children>
+										</HBox>
+									</children>
+								</VBox>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab closable="false" text="Course Competencies">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<VBox layoutX="15.0" layoutY="13.0" prefHeight="426.0" prefWidth="530.0">
+									<children>
+										<TableView fx:id="competencyTable" editable="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+											<columns>
+												<TableColumn fx:id="competencyTableDescriptionColumn" prefWidth="230.39990234375" resizable="false" sortable="false" text="Description" />
+												<TableColumn fx:id="competencyTableContributionColumn" prefWidth="78.400146484375" resizable="false" text="Contribution" />
+											</columns>
+											<columnResizePolicy>
+												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+											</columnResizePolicy>
+										</TableView>
+										<HBox fx:id="competencyToolbar">
+											<children>
+												<HBox HBox.hgrow="ALWAYS">
+													<children>
+														<JFXButton fx:id="addCompetencyButton" buttonType="RAISED" text="Add Competency" />
+													</children>
+												</HBox>
+												<HBox alignment="CENTER">
+													<children>
+														<JFXButton fx:id="removeCompetencyButton" buttonType="RAISED" text="Remove Competency" />
+													</children>
+												</HBox>
+											</children>
+										</HBox>
+									</children>
+								</VBox>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</JFXTabPane>
+	</center>
 </BorderPane>
