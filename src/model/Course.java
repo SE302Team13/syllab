@@ -972,6 +972,14 @@ public class Course {
 	public ArrayList<CourseCompetency> getCourseCompetencies() {
 		return courseCompetencies;
 	}
+	
+	public int getTotalWorkload() {
+		int totalWorkload = 0;
+		for (SemesterActivity activity : workloadTable) {
+			totalWorkload += activity.getWorkload();
+		}
+		return totalWorkload;
+	}
 
 	public boolean setCourseName(String courseName) {
 		if ((courseName != null) && !(courseName.isBlank())) {
