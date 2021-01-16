@@ -15,6 +15,19 @@ public class Course {
 
 	// Field(s)
 
+	public String logCourse() {
+		return "Course [courseName=" + courseName + ", code=" + code + ", creationDate=" + creationDate
+				+ ", prerequisites=" + prerequisites + ", courseLang=" + courseLang + ", semester=" + semester
+				+ ", localCredit=" + localCredit + ", ects=" + ects + ", theoreticalHour=" + theoreticalHour
+				+ ", labHour=" + labHour + ", type=" + type + ", level=" + level + ", courseCoordinator="
+				+ courseCoordinator + ", courseLecturers=" + courseLecturers + ", assistants=" + assistants
+				+ ", courseObjective=" + courseObjective + ", learningOutcomes=" + learningOutcomes
+				+ ", courseDescription=" + courseDescription + ", courseCategory=" + courseCategory
+				+ ", courseSchedule=" + courseSchedule + ", courseTextBook=" + courseTextBook + ", suggestedReading="
+				+ suggestedReading + ", evaluationCriterias=" + evaluationCriterias + ", workloadTable=" + workloadTable
+				+ ", courseCompetencies=" + courseCompetencies + "]";
+	}
+
 	/**
 	 * Complete name of the course
 	 */

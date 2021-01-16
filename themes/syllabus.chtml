@@ -1,0 +1,961 @@
+{#general}
+<html>
+
+<head>
+    <title>Izmir University of Economics Course Outline Form</title>
+    <style>
+        .a-table {
+            width: 65%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            height: 50px;
+            padding: 10px;
+        }
+
+        .th.no-border {
+            border: 0
+        }
+    </style>
+</head>
+
+<body style="font-family:'Helvetica'">
+    <center>
+        <div>
+            <b>IZMIR UNIVERSITY OF ECONOMICS</b><br />
+            <b>COURSE OUTLINE FORM</b>
+        </div>
+        <br /><br />
+        <div>
+            <table class="a-table" style="background-color: #ff9900;">
+                <tr>
+                    <th style="text-align: left;">1. GENERAL INFORMATION</th>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc;">Course Name</th>
+                    <td id="course_name">{$courseName}</td>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc;">Code</th>
+                    <th style="background-color: #cccccc;">Fall<br></th>
+                    <th style="background-color: #cccccc;">Spring<br></th>
+                    <th style="background-color: #cccccc;">Theory<br>(hour/week)</th>
+                    <th style="background-color: #cccccc;">Application/Lab<br>(hour/week)</th>
+                    <th style="background-color: #cccccc;">Local<br>Credits</th>
+                    <th style="background-color: #cccccc;">ECTS</th>
+                </tr>
+                <tr>
+                    <td id="course_code">{$code}</td>
+                    <td id="fall">{$fall}</td>
+                    <td id="spring">{$spring}</td>
+                    <td id="theory_hour">{$theory_hour}</td>
+                    <td id="application_hour">{$application_hour}</td>
+                    <td id="local_credits">{$local_credits}</td>
+                    <td id="ects">{$ects}</td>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc; width: 35%;">Prerequisites</th>
+                    <td id="prerequisites">
+                    	{% if ($prerequistes) %}
+    					<br/>
+    					<ul>
+    						{% loop in $prerequistes as $prerequiste %}
+  							<li>{$prerequiste}</li>
+  							{% onEmpty %}
+  							-
+    						{% endloop %}
+    						
+  						{% endif %}
+  						</ul>
+  					</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #cccccc;">Course Language</th>
+                    <td id="language">
+                        &nbsp {$courseLang}
+                    </td>
+                </tr>
+                <tr id="course_type">
+                    <th style="background-color: #cccccc;">Course Type</th>
+                    <td>&nbsp {$type}</td>
+                </tr>
+                <tr id="course_level">
+                    <th style="background-color: #cccccc;">Course Level </th>
+                    <td>&nbsp {$level}</td>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc; width: 35%;">Course Coordinator</th>
+                    <td id="Coordinator">&nbsp {$courseCoordinator}</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #cccccc;">Course Lecturer(s)</th>
+                    <td id="lecturer_list">
+                        {% if ($courseLecturers) %}
+    					<br/>
+    					<ul>
+    						{% loop in $courseLecturers as $lecturer %}
+  							<li>{$lecturer}</li>
+  							{% onEmpty %}-
+    						{% endloop %}
+    					</ul>
+  						{% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #cccccc;">Assistant(s) </th>
+                    <td id="assistant_list"> {% if ($assistants) %}
+    					<br/>
+    					<ul>
+    						{% loop in $assistants as $assistant %}
+  							<li>{$assistant}</li>
+  							{% onEmpty %}-
+    						{% endloop %}
+    					</ul>
+  						{% endif %}</td>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc; width: 35%;">Course Objectives </th>
+                    <td id="objective" style="padding: 10px;">&nbsp {$courseObjective} </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #cccccc;">Learning Outcomes </th>
+                    <td id="outcomes">
+						{% if ($learningOutcomes) %}
+    					<br/>
+    					&nbsp The students who succeed in this course will be able to,
+    					<ul>
+    						{% loop in $learningOutcomes as $outcome %}
+  							<li>{$outcome}</li>
+  							{% onEmpty %}
+    						{% endloop %}
+    					</ul>
+    					{%endif%}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #cccccc;">Course Description </th>
+                    <td id="description">&nbsp {$courseDescription}</td>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <thead>
+                    <tr>
+                        <th colspan="3" rowspan="5" style="width: 35%; background-color: #cccccc;">Course Category</th>
+                        <td id="core_course" style="width: 5%;">{$coreCourse}</td>
+                        <td colspan="8">Core Courses</td>
+                    </tr>
+                    <tr>
+                        <td id="major_area_course">{$majorAreaCourse}</td>
+                        <td colspan="8">Major Area Course</td>
+                    </tr>
+                    <tr>
+                        <td id="supportive_course">{$supportiveCourse}</td>
+                        <td colspan="8">Supportive Course</td>
+                    </tr>
+                    <tr>
+                        <td id="management_course">{$managementCourse}</td>
+                        <td colspan="8">Communication and Management Skills Course</td>
+                    </tr>
+                    <tr>
+                        <td id="skill_course">{$skillCourse}</td>
+                        <td colspan="8">Transferable Skill Course</td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <br /><br />
+        <div>
+            <table class="a-table" style="background-color: #ff9900;">
+                <tr>
+                    <th style="text-align: left;">2. WEEKLY SUBJECTS AND REQUIRED MATERIALS</th>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc; width: 10%;">Week</th>
+                    <th style="background-color: #cccccc; width: 45%;">Subjects</th>
+                    <th style="background-color: #cccccc; width: 45%;">Required Materials </th>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">1</th>
+                    <td id="week_1_subject">
+                        &nbsp {$week1Subject}
+                    </td>
+                    <td id="week_1_reading">
+                        &nbsp {$week1Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">2</th>
+                    <td id="week_2_subject">
+                        &nbsp {$week2Subject}
+                    </td>
+                    <td id="week_2_reading">
+                        &nbsp {$week2Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">3</th>
+                    <td id="week_3_subject">
+                        &nbsp {$week3Subject}
+                    </td>
+                    <td id="week_3_reading">
+                        &nbsp {$week3Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">4</th>
+                    <td id="week_4_subject">
+                        &nbsp {$week4Subject}
+                    </td>
+                    <td id="week_4_reading">
+                        &nbsp {$week4Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">5</th>
+                    <td id="week_5_subject">
+                        &nbsp {$week5Subject}
+                    </td>
+                    <td id="week_5_reading">
+                        &nbsp {$week5Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">6</th>
+                    <td id="week_6_subject">
+                        &nbsp {$week6Subject}
+                    </td>
+                    <td id="week_6_reading">
+                        &nbsp {$week6Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">7</th>
+                    <td id="week_7_subject">
+                        &nbsp {$week7Subject}
+                    </td>
+                    <td id="week_7_reading">
+                        &nbsp {$week7Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">8</th>
+                    <td id="week_8_subject">
+                        &nbsp {$week8Subject}
+                    </td>
+                    <td id="week_8_reading">
+                        &nbsp {$week8Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">9</th>
+                    <td id="week_9_subject">
+                        &nbsp {$week9Subject}
+                    </td>
+                    <td id="week_9_reading">
+                    	&nbsp {$week9Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">10</th>
+                    <td id="week_10_subject">
+                        &nbsp {$week10Subject}
+                    </td>
+                    <td id="week_10_reading">
+                        &nbsp {$week10Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">11</th>
+                    <td id="week_11_subject">
+                        &nbsp {$week11Subject}
+                    </td>
+                    <td id="week_11_reading">
+                        &nbsp {$week11Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">12</th>
+                    <td id="week_12_subject">
+                        &nbsp {$week12Subject}
+                    </td>
+                    <td id="week_12_reading">
+                        &nbsp {$week12Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">13</th>
+                    <td id="week_13_subject">
+                        &nbsp {$week13Subject}
+                    </td>
+                    <td id="week_13_reading">
+                   		 &nbsp {$week13Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">14</th>
+                    <td id="week_14_subject">
+                        &nbsp {$week14Subject}
+                    </td>
+                    <td id="week_14_reading">
+                    &nbsp {$week14Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">15</th>
+                    <td id="week_15_subject">
+                        &nbsp {$week15Subject}
+                    </td>
+                    <td id="week_15_reading">
+                    &nbsp {$week15Reading}
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #efefef;">16</th>
+                    <td id="week_16_subject">
+                        &nbsp {$week16Subject}
+                    </td>
+                    <td id="week_16_reading">
+                    &nbsp {$week16Reading}
+                    </td>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc; width: 35%;">Course Notes/Textbooks</th>
+                    <td id="textbooks">&nbsp {$courseTextbook}</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #cccccc;">Suggested Readings/Materials </th>
+                    <td id="suggested_readings">
+                    	{%if($suggestedReadings)%}
+    					<ul>
+    						{% loop in $suggestedReadings as $reading %}
+  							<li>{$reading}</li>
+  							{% onEmpty %}
+    						{% endloop %}
+    					</ul>
+    					{%endif%}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br /><br />
+        <div>
+            <table class="a-table" style="background-color: #ff9900;">
+                <tr>
+                    <th style="text-align: left;">3. ASSESSMENT</th>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc;">Semester Activities</th>
+                    <th style="background-color: #cccccc;">Number</th>
+                    <th style="background-color: #cccccc;">Weigthing</th>
+                    <th style="background-color: #cccccc;">LO1</th>
+                    <th style="background-color: #cccccc;">LO2</th>
+                    <th style="background-color: #cccccc;">LO3</th>
+                    <th style="background-color: #cccccc;">LO4</th>
+                    <th style="background-color: #cccccc;">LO5</th>
+                    <th style="background-color: #cccccc;">LO6</th>
+                    <th style="background-color: #cccccc;">LO7</th>
+                </tr>
+                <tr>
+                    <td>Participation</td>
+                    <td id="participation_no">{$participationNo}</td>
+                    <td id="participation_weighting">{$participationWeigthing}</td>
+                    <td id="participation_lo1">{$participationLO1}</td>
+                    <td id="participation_lo2">{$participationLO2}</td>
+                    <td id="participation_lo3">{$participationLO3}</td>
+                    <td id="participation_lo4">{$participationLO4}</td>
+                    <td id="participation_lo5">{$participationLO5}</td>
+                    <td id="participation_lo6">{$participationLO6}</td>
+                    <td id="participation_lo7">{$participationLO7}</td>
+                </tr>
+                <tr>
+                    <td>Laboratory/Application</td>
+                    <td id="lab_no">{$labNo}</td>
+                    <td id="lab_weighting">{$labWeighting}</td>
+                    <td id="lab_lo1">{$labLO1}</td>
+                    <td id="lab_lo2">{$labLO2}</td>
+                    <td id="lab_lo3">{$labLO3}</td>
+                    <td id="lab_lo4">{$labLO4}</td>
+                    <td id="lab_lo5">{$labLO5}</td>
+                    <td id="lab_lo6">{$labLO6}</td>
+                    <td id="lab_lo7">{$labLO7}</td>
+                </tr>
+                <tr>
+                    <td>Field Work</td>
+                    <td id="field_no">{$fieldNo}</td>
+                    <td id="field_weighting">{$fieldWeighting}</td>
+                    <td id="field_lo1">{$fieldLO1}</td>
+                    <td id="field_lo2">{$fieldLO2}</td>
+                    <td id="field_lo3">{$fieldLO3}</td>
+                    <td id="field_lo4">{$fieldLO4}</td>
+                    <td id="field_lo5">{$fieldLO5}</td>
+                    <td id="field_lo6">{$fieldLO6}</td>
+                    <td id="field_lo7">{$fieldLO7}</td>
+                </tr>
+                <tr>
+                    <td>Quiz/Studio Critique</td>
+                    <td id="quiz_no">{$quizNo}</td>
+                    <td id="quiz_weighting">{$quizWeighting}</td>
+                    <td id="quiz_lo1">{$quizLO1}</td>
+                    <td id="quiz_lo2">{$quizLO2}</td>
+                    <td id="quiz_lo3">{$quizLO3}</td>
+                    <td id="quiz_lo4">{$quizLO4}</td>
+                    <td id="quiz_lo5">{$quizLO5}</td>
+                    <td id="quiz_lo6">{$quizLO6}</td>
+                    <td id="quiz_lo7">{$quizLO7}</td>
+                </tr>
+                <tr>
+                    <td>Homework/Assignment</td>
+                    <td id="hw_no"></td>
+                    <td id="hw_weighting"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo2"></td>
+                    <td id="hw_lo3"></td>
+                    <td id="hw_lo4"></td>
+                    <td id="hw_lo5"></td>
+                    <td id="hw_lo6"></td>
+                    <td id="hw_lo7"></td>
+                </tr>
+                <tr>
+                    <td>Presentation/Jury</td>
+                    <td id="presentation_no"></td>
+                    <td id="presentation_weighting"></td>
+                    <td id="presentation_lo1"></td>
+                    <td id="presentation_lo2"></td>
+                    <td id="presentation_lo3"></td>
+                    <td id="presentation_lo4"></td>
+                    <td id="presentation_lo5"></td>
+                    <td id="presentation_lo6"></td>
+                    <td id="presentation_lo7"></td>
+                </tr>
+                <tr>
+                    <td>Project</td>
+                    <td id="project_no">1</td>
+                    <td id="project_weighting">40</td>
+                    <td id="project_lo1">1</td>
+                    <td id="project_lo2">1</td>
+                    <td id="project_lo3">1</td>
+                    <td id="project_lo4">1</td>
+                    <td id="project_lo5"></td>
+                    <td id="project_lo6"></td>
+                    <td id="project_lo7">1</td>
+                </tr>
+                <tr>
+                    <td>Seminar/Workshop</td>
+                    <td id="seminar_no"></td>
+                    <td id="seminar_weighting"></td>
+                    <td id="seminar_lo1"></td>
+                    <td id="seminar_lo2"></td>
+                    <td id="seminar_lo3"></td>
+                    <td id="seminar_lo4"></td>
+                    <td id="seminar_lo5"></td>
+                    <td id="seminar_lo6"></td>
+                    <td id="seminar_lo7"></td>
+                </tr>
+                <tr>
+                    <td>Oral Exam</td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                </tr>
+                <tr>
+                    <td>Midterm</td>
+                    <td id="hw_lo1">1</td>
+                    <td id="hw_lo1">30</td>
+                    <td id="hw_lo1">1</td>
+                    <td id="hw_lo1">1</td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                    <td id="hw_lo1"></td>
+                </tr>
+                <tr>
+                    <td>Final Exam</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr style="background-color: #cccccc;">
+                    <th class="no-border">Total</th>
+                    <td>3</td>
+                    <td>100</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc;">Weighting of Semester Activities on the Final
+                        Grade</th>
+                    <td>&nbsp 3</td>
+                    <td>&nbsp 100</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #cccccc;">Weighting of End-of-Semester Activities on the Final Grade
+                    </th>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                </tr>
+                <tr>
+                    <th style="background-color: #cccccc;text-align: right;">Total
+                    </th>
+                    <td>
+                        &nbsp 3
+                    </td>
+                    <td>
+                        &nbsp 100
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br /><br />
+        <div>
+            <table class="a-table" style="background-color: #ff9900;">
+                <tr>
+                    <th style="text-align: left;">4. ECTS/WORKLOAD TABLE</th>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr>
+                    <th style="background-color: #cccccc;">Semester Activities</th>
+                    <th style="background-color: #cccccc;">Number</th>
+                    <th style="background-color: #cccccc;">Duration<br />(hours)</th>
+                    <th style="background-color: #cccccc;">Workload</th>
+                </tr>
+                <tr style="text-align: right; background-color: #efefef;">
+                    <td>
+                        &nbsp Course Hours <br /> (Including exam week: 16 x total hours)
+                    </td>
+                    <td>
+                        &nbsp 16
+                    </td>
+                    <td>
+                        &nbsp 2
+                    </td>
+                    <td>
+                        &nbsp 32
+                    </td>
+                <tr style="text-align: right; background-color: #efefef;">
+                    <td>
+                        &nbsp Laboratory/Application Hours <br /> (Including exam week: 16 x total hours)
+                    </td>
+                    <td>
+                        &nbsp 16
+                    </td>
+                    <td>
+                        &nbsp 2
+                    </td>
+                    <td>
+                        &nbsp 32
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Study Hours out of Class
+                    </td>
+                    <td>
+                        &nbsp 14
+                    </td>
+                    <td>
+                        &nbsp 2
+                    </td>
+                    <td>
+                        &nbsp 28
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Field Work
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Quiz/Studio Critique
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Homework/Assignments
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Presentation/Jury
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Project
+                    </td>
+                    <td>
+                        &nbsp 1
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp 64
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Seminar/Workshop
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Oral Exam
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Midterm
+                    </td>
+                    <td>
+                        &nbsp 1
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp 24
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <td>
+                        &nbsp Final Exam
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                    <td>
+                        &nbsp
+                    </td>
+                </tr>
+                <tr style="text-align: right;">
+                    <th colspan="3" style="border-left: none; border-bottom: none;">
+                        &nbsp Total
+                    </th>
+                    <td>
+                        &nbsp 180
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br /><br />
+        <div>
+            <table class="a-table" style="background-color: #ff9900;">
+                <tr>
+                    <th style="text-align: left;">5. COURSE/PROGRAM OUTCOME MATRIX</th>
+                </tr>
+            </table>
+            <br /><br />
+            <table class="a-table">
+                <tr style="background-color: #ccc;">
+                    <th rowspan="2">#</th>
+                    <th colspan="5" rowspan="2">Program Competencies/Outcomes</th>
+                    <th colspan="7">Contribution Level</th>
+                </tr>
+                <tr style="background-color:#efefef">
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td colspan="2">LO#</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">1</td>
+                    <td colspan="5" rowspan="2">To have adequate knowledge in Mathematics, Science and
+                        Computer Engineering; to be able to use theoretical and
+                        applied information in these areas on complex engineering
+                        problems.</td>
+                    <td rowspan="2">X</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">1,2</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">2</td>
+                    <td colspan="5" rowspan="2">To be able to identify, define, formulate, and solve complex
+                        Computer Engineering problems; to be able to select and apply
+                        proper analysis and modeling methods for this purpose.</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">X</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">1,4,5,6</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">3</td>
+                    <td colspan="5" rowspan="2">To be able to design a complex system, process, device or
+                        product under realistic constraints and conditions, in such a
+                        way as to meet the requirements; to be able to apply modern
+                        design methods for this purpose.</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">X</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">2,7</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">4</td>
+                    <td colspan="5" rowspan="2">To be able to devise, select, and use modern techniques and
+                        tools needed for analysis and solution of complex problems in
+                        Computer Engineering applications; to be able to use
+                        information technologies effectively.</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">X</td>
+                    <td rowspan="2">2,3,4,7</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">5</td>
+                    <td colspan="5" rowspan="2">To be able to design and conduct experiments, gather data,
+                        analyze, and interpret results for investigating complex
+                        engineering problems or Computer Engineering research
+                        topics.</td>
+                    <td rowspan="2">X</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">6</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">6</td>
+                    <td colspan="5" rowspan="2">To be able to work efficiently in Computer Engineering
+                        disciplinary and multi-disciplinary teams; to be able to work
+                        individually.</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">X</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2">7</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">7</td>
+                    <td colspan="5" rowspan="2">To be able to communicate effectively in Turkish, both orally
+                        and in writing; to be able to author and comprehend written
+                        reports, to be able to prepare design and implementation
+                        reports, to present effectively, to be able to give and receive
+                        clear and comprehensible instructions.</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">8</td>
+                    <td colspan="5" rowspan="2">To have knowledge about global and social impact of Computer
+                        Engineering practices on health, environment, and safety; to
+                        have knowledge about contemporary issues as they pertain to
+                        engineering; to be aware of the legal ramifications of Computer
+                        Engineering solutions.</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">9</td>
+                    <td colspan="5" rowspan="2">To be aware of ethical behavior, professional and ethical
+                        responsibility; to have knowledge about standards utilized in
+                        engineering applications</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">10</td>
+                    <td colspan="5" rowspan="2">To have knowledge about industrial practices such as project
+                        management, risk management, and change management; to
+                        have awareness of entrepreneurship and innovation; to have
+                        knowledge about sustainable development.</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">11</td>
+                    <td colspan="5" rowspan="2">To be able to collect data in the area of Computer Engineering,
+                        and to be able to communicate with colleagues in a foreign
+                        language. ("European Language Portfolio Global Scale", Level
+                        B1)</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">12</td>
+                    <td colspan="5" rowspan="2">To be able to speak a second foreign language at a medium
+                        level of fluency efficiently.</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td rowspan="2">13</td>
+                    <td colspan="5" rowspan="2">To recognize the need for lifelong learning; to be able to access
+                        information, to be able to stay current with developments in
+                        science and technology; to be able to relate the knowledge
+                        accumulated throughout the human history to Computer
+                        Engineering.</td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+                </tr>
+            </table>
+        </div>
+    </center>
+
+</body>
+
+</html>
