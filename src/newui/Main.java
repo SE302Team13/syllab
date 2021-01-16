@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 
+import initializer.Initializer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,6 +33,20 @@ public class Main extends Application {
 		generalStage.setScene(new Scene(generalLayout));
 		generalStage.show();
 		
+	}
+	
+	
+	@Override
+	public void init() throws Exception {
+		Initializer.readLocations();
+		Initializer.loadAll();
+	}
+	
+	
+	@Override
+	public void stop() throws Exception {
+		Initializer.totalSave();
+		Initializer.commitLocations();
 	}
 
 	public static void main(String[] args) {

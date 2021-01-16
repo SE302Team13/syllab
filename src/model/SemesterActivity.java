@@ -1,6 +1,14 @@
 package model;
 
-public class SemesterActivity {
+import java.io.Serializable;
+
+public class SemesterActivity implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4684404325720795798L;
+	
 	
 	/**
 	 * Name of the Semester Activity.

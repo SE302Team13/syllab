@@ -1,10 +1,16 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class WeeklySubject {
+public class WeeklySubject implements Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3741171606080277065L;
+
 	//Field(s)
 	
 	/**

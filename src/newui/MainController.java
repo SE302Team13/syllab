@@ -9,9 +9,11 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.concurrent.Future;
 
 import org.controlsfx.control.textfield.CustomTextField;
 
+import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListCell;
@@ -314,6 +316,8 @@ public class MainController {
 
 			@Override
 			public void handle(ActionEvent event) {
+				
+
 
 				// Required Commits
 				courseNameField.commitValue();
@@ -334,6 +338,9 @@ public class MainController {
 
 				// Selected Course
 				Course selectedCourse = courseList.getSelectionModel().getSelectedItem();
+				
+				//added to the updateList
+				Initializer.update(courseList.getSelectionModel().getSelectedIndex());
 
 				// Actions to take
 				selectedCourse.setCourseName(courseNameField.getText());
@@ -345,10 +352,14 @@ public class MainController {
 				selectedCourse.setLabHour(Integer.parseInt(applicationHoursField.getText()));
 				selectedCourse.setType(courseTypeChoice.getValue());
 				selectedCourse.setLevel(courseLevelChoice.getValue());
-
-				String coordinatorFullName = coordinatorTitleChoice.getValue().toString() + " "
-						+ coordinatorNameField.getText() + " " + coordinatorSurnameField.getText();
-				selectedCourse.setCourseCoordinator(coordinatorFullName);
+				AcademicTitle title = coordinatorTitleChoice.getValue();
+				String name = coordinatorNameField.getText();
+				String surname = coordinatorSurnameField.getText();
+				if ((title != null) && (name != null) && (surname != null)) {
+					String coordinatorFullName = coordinatorTitleChoice.getValue().toString() + " "
+							+ coordinatorNameField.getText() + " " + coordinatorSurnameField.getText();
+					selectedCourse.setCourseCoordinator(coordinatorFullName);
+				}
 				selectedCourse.setCourseLecturers(new LinkedHashSet<>(lecturerTable.getItems()));
 				selectedCourse.setAssistants(new LinkedHashSet<>(assistantTable.getItems()));
 				selectedCourse.setCourseObjective(courseObjectiveArea.getText());
@@ -381,7 +392,17 @@ public class MainController {
 				chooser.setTitle("Choose a syllabus file");
 				File chosenFile = chooser.showOpenDialog(Main.generalStage);
 				if ((chosenFile != null) && (chosenFile.exists())) {
-					Initializer.importCourse(chosenFile);
+					try {
+						Initializer.load(chosenFile);
+					} catch (ClassNotFoundException | IOException e) {
+						JFXAlert<String> alert = new JFXAlert<>(Main.generalStage);
+						alert.setTitle("Local Import Error");
+						alert.setHeaderText("Error");
+						alert.setContentText("A crucial error has been occured on the local import function."
+								+ "Please notify the developers.");
+						alert.initModality(Modality.APPLICATION_MODAL);
+						alert.showAndWait();
+					}
 				}
 			}
 		});
@@ -397,8 +418,9 @@ public class MainController {
 					loader.setLocation(Path.of("src", "newui", "fxml", "import.fxml").toUri().toURL());
 				} catch (MalformedURLException e) {
 					Alert alertbox = new Alert(AlertType.ERROR);
+					alertbox.setTitle("Online Import Error");
 					alertbox.setHeaderText("Error");
-					alertbox.setContentText("Crucial error has been occured about the import section."
+					alertbox.setContentText("A crucial error has been occured on the online import function."
 							+ "Please notify the developers.");
 					alertbox.initModality(Modality.APPLICATION_MODAL);
 					alertbox.initOwner(Main.generalStage);
@@ -626,18 +648,6 @@ public class MainController {
 			}
 		});  
 		
-		
-		//TEST COURSE WILL BE DELETED AT THE END
-		Course test = new Course();
-		test.addLearningOutcome("Testing Outcome");
-		test.addLearningOutcome("Testing Outcome222");
-		test.addLearningOutcome("Testing Outcome333");
-		ArrayList<Integer> contributions = new ArrayList<>();
-		contributions.add(1);
-		contributions.add(0);
-		contributions.add(0);
-		test.addCriteria("Exam", 3, 24, contributions);
-		Initializer.getCourses().add(test);
 	}
 
 }
