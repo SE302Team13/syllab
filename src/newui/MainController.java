@@ -81,7 +81,7 @@ import model.Lecturer;
 import model.SemesterActivity;
 import model.SemesterOptions;
 import model.WeeklySubject;
-
+import model.Export;
 public class MainController {
 
 	@FXML
@@ -429,13 +429,16 @@ public class MainController {
 
 			@Override
 			public void handle(ActionEvent event) {
-
+				Course selected = courseList.getSelectionModel().getSelectedItem();
+				Export export = new Export();
 				FileChooser chooser = new FileChooser();
 				chooser.getExtensionFilters().add(new ExtensionFilter("Syllabus File", "*.syb"));
+				chooser.getExtensionFilters().add(new ExtensionFilter("HTML File", "*.html"));
 				chooser.setTitle("Choose a save location");
 				File chosenFile = chooser.showSaveDialog(Main.generalStage);
-				if ((chosenFile != null) && !(chosenFile.exists())) {
+				if ((chosenFile != null) && chosenFile.exists()) {
 					// Exporter method will be called from here
+					export.export(selected, chosenFile.toString());
 				}
 			}
 		});

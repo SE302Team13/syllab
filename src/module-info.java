@@ -10,8 +10,10 @@ module TermProject {
 	requires org.controlsfx.controls;
 	requires javafx.web;
 	requires java.desktop;
+	requires chunk.templates;
 	
-	
+	exports model
+	      to chunk.templates;
 	opens newui;
 
 	
