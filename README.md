@@ -1,3 +1,5 @@
+<img align="center" src="https://user-images.githubusercontent.com/52011799/104850865-a819c580-5902-11eb-888f-be05dea947c7.jpeg" width="450" height="300" />  
+
  # Syllab
 ![](https://img.shields.io/badge/made%20by-group%2013-blue)
 ![](https://img.shields.io/badge/platform-windows-lightgrey)
