@@ -14,6 +14,13 @@ module TermProject {
 	
 	exports model
 	      to chunk.templates;
+	
+	exports jsonModel 
+		  to com.google.gson;
+	
+	opens jsonModel 
+	  to com.google.gson;
+	
 	opens newui;
 
 	

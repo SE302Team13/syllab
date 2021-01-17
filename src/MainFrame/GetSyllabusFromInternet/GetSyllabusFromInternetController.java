@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import jsonModel.JSONParser;
 import model.*;
 
 import java.io.IOException;
@@ -64,20 +65,9 @@ public class GetSyllabusFromInternetController {
 			URL url = new URL(syllabUrl);
 			InputStreamReader reader = new InputStreamReader(url.openStream());
 
-			AcademicTitle academicTitleObj = new Gson().fromJson(reader, AcademicTitle.class);
-			System.out.println(academicTitleObj.name());
-			Course courseObj = new Gson().fromJson(reader, Course.class);
-			CourseBook courseBookObj = new Gson().fromJson(reader, CourseBook.class);
-			CourseCategory courseCategoryObj = new Gson().fromJson(reader, CourseCategory.class);
-			CourseCompetency courseCompetencyObj = new Gson().fromJson(reader, CourseCompetency.class);
-			CourseType courseTypeObj = new Gson().fromJson(reader, CourseType.class);
-			EvaluationCriteria evaluationCriteriaObj = new Gson().fromJson(reader, EvaluationCriteria.class);
-			Language languageObj = new Gson().fromJson(reader, Language.class);
-			Lecturer lecturerObj = new Gson().fromJson(reader, Lecturer.class);
-			SemesterActivity semesterActivityObj = new Gson().fromJson(reader, SemesterActivity.class);
-			SemesterOptions semesterOptionsObj = new Gson().fromJson(reader, SemesterOptions.class);
-			WeeklySubject weeklySubjectObj = new Gson().fromJson(reader, WeeklySubject.class);
-
+			JSONParser parsedObj = new Gson().fromJson(reader, JSONParser.class);
+			
+			System.out.println(parsedObj.getCode());
 		}
 	}
 	

@@ -297,9 +297,35 @@ public class Course implements Serializable {
 		this.courseSchedule = WeeklySubject.createDefaultSemester();
 		this.courseTextBook = "Not given";
 		this.suggestedReading = new ArrayList<>();
-		this.evaluationCriterias = new ArrayList<>();
-		
-		
+		this.evaluationCriterias = new ArrayList<>();	
+	}
+	
+	// A constructor for imported courses.
+	public Course(String courseName, String courseCode, ArrayList<String> prerequisites, Language courseLang, SemesterOptions semester, int labHour, int theoreticalHour, ArrayList<SemesterActivity> workloadTable, CourseType type, String courseCoordinator, ArrayList<String> courseLecturers,ArrayList<String> assistants, CourseCategory courseCategory, ArrayList<WeeklySubject> courseSchedule, ArrayList<EvaluationCriteria> evaluationCriterias) {
+		this.courseName = courseName;
+		this.code = courseCode;
+		this.creationDate = LocalDateTime.now();
+		this.courseDescription = new String();
+		this.prerequisites = prerequisites;
+		this.courseLang = courseLang;
+		this.semester = semester;
+		this.labHour = labHour;
+		this.theoreticalHour = theoreticalHour;
+		this.learningOutcomes = new ArrayList<>();
+		this.workloadTable = workloadTable;
+		this.localCredit = calculateLocalCredit();
+		this.ects = calculateECTS();
+		this.type = type;
+		this.courseCoordinator = courseCoordinator;
+		this.courseCompetencies = new ArrayList<>();
+		this.courseLecturers = courseLecturers;
+		this.assistants = assistants;
+		this.courseObjective = new String();
+		this.courseCategory = courseCategory;
+		this.courseSchedule = courseSchedule;
+		this.courseTextBook = "Not given";
+		this.suggestedReading = new ArrayList<>();
+		this.evaluationCriterias = evaluationCriterias;	
 	}
 
 	// Method(s)
