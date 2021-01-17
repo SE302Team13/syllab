@@ -2,7 +2,6 @@ package newui;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Path;
 
 import initializer.Initializer;
@@ -13,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Export;
 public class Main extends Application {
 
 	public static Stage generalStage = null;
@@ -28,7 +26,7 @@ public class Main extends Application {
 		loader.setLocation(Main.class.getResource("fxml/main.fxml"));
 		BorderPane generalLayout = loader.load();
 		generalStage.setTitle("IEU Syllabus Control/Edit System");
-		generalStage.getIcons().add(new Image(new FileInputStream(Path.of("src", "newui", "assets", "ieu.png").toFile())));
+		generalStage.getIcons().add(new Image(new FileInputStream(Path.of("src", "newui", "assets", "app-icon.png").toFile())));
 		generalStage.initStyle(StageStyle.UNDECORATED);
 		generalStage.setScene(new Scene(generalLayout));
 		generalStage.show();

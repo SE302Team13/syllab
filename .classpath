@@ -25,7 +25,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Javafx11">
 		<attributes>
 			<attribute name="module" value="true"/>
-			<attribute name="add-exports" value="javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix:javafx.controls/com.sun.javafx.scene.control=com.jfoenix"/>
+			<attribute name="add-exports" value="javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix:javafx.controls/com.sun.javafx.scene.control=com.jfoenix:javafx.base/com.sun.javafx.event=com.jfoenix"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/chunktemplate">
+		<attributes>
+			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>

@@ -12,9 +12,8 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,8 +24,6 @@ public class Initializer {
 	private final static ObservableList<Course> allCourseList = FXCollections.observableArrayList();
 	private final static Path coursePath = Path.of("data", "courses");
 	private final static Path locationsFile = Path.of("data", ".locate");
-	private static int positionKeeper = 0;
-	private final static ArrayList<Integer> updatedIndexes = new ArrayList<>();
 	private final static ArrayList<String> locations = new ArrayList<>();
 
 	// This class can not be constructed
@@ -34,18 +31,29 @@ public class Initializer {
 	}
 
 	public static void totalSave() throws IOException {
-		for (int index = positionKeeper; index < allCourseList.size(); index++) {
+		clearDocument();
+		for (int index = 0; index < allCourseList.size(); index++) {
 			save(index);
 		}
-		for (int index : updatedIndexes) {
-			save(index);
+	}
+	
+	
+	public static void clearDocument() {
+		File[] lastSaves = coursePath.toFile().listFiles();
+		for (File deleted : lastSaves) {
+			if (deleted.exists() && deleted.isFile() && deleted.getName().endsWith(".syb")) {
+				deleted.delete();
+			}
 		}
 	}
 
 	public static void save(int index) throws IOException {
 		if (index < allCourseList.size()) {
 			Course course = allCourseList.get(index);
-			String fileName = course.getCode() + "-" + course.getCreationDate().toLocalDate().toString() + ".syb";
+			String fileName = course.getCode() + "-" 
+					+ course.getCreationDate()
+					.toEpochSecond(ZoneOffset.UTC)
+					+ ".syb";
 			Path savePath = coursePath.resolve(fileName);
 			File saveFile = savePath.toFile();
 			if (!saveFile.getParentFile().exists()) {
@@ -57,19 +65,21 @@ public class Initializer {
 			ObjectOutputStream stream = null;
 			stream = new ObjectOutputStream(new FileOutputStream(saveFile.getAbsoluteFile(), false));
 			stream.writeObject(course);
-			locations.add(savePath.toAbsolutePath().toString());
+			stream.flush();
+			locations.add(saveFile.getAbsolutePath());
 			stream.close();
 		}
 	}
 
 	public static void commitLocations() throws IOException {
-		BufferedWriter writer = Files.newBufferedWriter(locationsFile, StandardOpenOption.TRUNCATE_EXISTING);
+		BufferedWriter writer = Files.newBufferedWriter(locationsFile, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
 		writer.write("" + locations.size());
 		writer.newLine();
 		for (String location : locations) {
 			writer.write(location);
 			writer.newLine();
 		}
+		writer.flush();
 		writer.close();
 	}
 
@@ -93,12 +103,12 @@ public class Initializer {
 		if (locString.size() > 0) {
 			String data = locString.get(0);
 			int locationCount = Integer.parseInt(data);
-			for (int counter = 1; counter < locationCount; counter++) {
+			for (int counter = 1; counter <= locationCount; counter++) {
 				locations.add(locString.get(counter));
 			}
 		}
 	}
-
+	
 	public static boolean load(File file) throws FileNotFoundException, IOException, ClassNotFoundException {
 		if (file != null && file.exists()) {
 			ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file));
@@ -106,7 +116,6 @@ public class Initializer {
 			if (obj instanceof Course) {
 				Course course = (Course) obj;
 				allCourseList.add(course);
-				positionKeeper++;
 				stream.close();
 				return true;
 			}
@@ -120,12 +129,7 @@ public class Initializer {
 			File file = new File(location);
 			load(file);
 		}
-	}
-
-	public static void update(int index) {
-		if (index < allCourseList.size()) {
-			updatedIndexes.add(index);
-		}
+		locations.clear();
 	}
 
 	public static ObservableList<Course> getCourses() {
