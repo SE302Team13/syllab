@@ -45,7 +45,7 @@ public class JSONParser implements Serializable {
 	private List<String> lecturers = null;
 	@SerializedName("assistants")
 	@Expose
-	private List<Object> assistants = null;
+	private List<String> assistants = null;
 	@SerializedName("coordinators")
 	@Expose
 	private List<String> coordinators = null;
@@ -159,11 +159,11 @@ public class JSONParser implements Serializable {
 		this.lecturers = lecturers;
 	}
 
-	public List<Object> getAssistants() {
+	public List<String> getAssistants() {
 		return assistants;
 	}
 
-	public void setAssistants(List<Object> assistants) {
+	public void setAssistants(List<String> assistants) {
 		this.assistants = assistants;
 	}
 
