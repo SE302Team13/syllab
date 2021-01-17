@@ -236,13 +236,13 @@
 												<VBox layoutX="31.0" layoutY="344.0" prefHeight="92.0" prefWidth="495.0">
 													<children>
 														<Label text="Course Description" />
-														<TextArea fx:id="courseDescriptionArea" prefHeight="200.0" prefWidth="200.0" />
+														<TextArea fx:id="courseDescriptionArea" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
 													</children>
 												</VBox>
 												<VBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="467.0" prefHeight="92.0" prefWidth="495.0">
 													<children>
 														<Label text="Course Objective" />
-														<TextArea fx:id="courseObjectiveArea" prefHeight="200.0" prefWidth="200.0" />
+														<TextArea fx:id="courseObjectiveArea" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
 													</children>
 												</VBox>
                                     <VBox fx:id="booksSection" layoutX="31.0" layoutY="580.0" prefHeight="100.0" prefWidth="495.0" spacing="20.0">
@@ -302,15 +302,15 @@
 							<children>
 								<VBox layoutX="22.0" layoutY="35.0" prefHeight="390.0" prefWidth="505.0">
 									<children>
-										<TableView fx:id="learningOutcomesTable" fixedCellSize="2.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-											<columns>
-												<TableColumn fx:id="learningOutcomesTableNumberColumn" editable="false" prefWidth="75.0" resizable="false" text="Number #" />
-												<TableColumn fx:id="learningOutcomesTableLOColumn" prefWidth="429.6" resizable="false" sortable="false" text="Learning Outcomes" />
-											</columns>
-											<columnResizePolicy>
-												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-											</columnResizePolicy>
-										</TableView>
+                              <TableView fx:id="learningOutcomesTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                <columns>
+                                  <TableColumn fx:id="learningOutcomesTableNumberColumn" editable="false" prefWidth="71.20001602172852" resizable="false" sortable="false" text="Number" />
+                                  <TableColumn fx:id="learningOutcomesTableLOColumn" editable="false" prefWidth="432.7999725341797" resizable="false" sortable="false" text="Learning Outcomes" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
 										<HBox fx:id="learninOutcomesToolbar">
 											<children>
 												<HBox HBox.hgrow="ALWAYS">
@@ -428,7 +428,7 @@
 														</HBox>
 														<HBox>
 															<children>
-																<JFXButton fx:id="removeButton" text="Remove from Course" />
+																<JFXButton fx:id="removeLecturerButton" text="Remove from Course" />
 															</children>
 														</HBox>
 													</children>
@@ -519,12 +519,12 @@
 											<children>
 												<HBox HBox.hgrow="ALWAYS">
 													<children>
-														<JFXButton fx:id="addWorkloadButton" buttonType="RAISED" text="Add Evaluation Criteria" />
+														<JFXButton fx:id="addWorkloadButton" buttonType="RAISED" text="Add Workload" />
 													</children>
 												</HBox>
 												<HBox alignment="CENTER">
 													<children>
-														<JFXButton fx:id="removeWorkloadButton" buttonType="RAISED" text="Remove Evaluation Criteria" />
+														<JFXButton fx:id="removeWorkloadButton" buttonType="RAISED" text="Remove Workload" />
 													</children>
 												</HBox>
 											</children>

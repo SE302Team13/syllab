@@ -27,4 +27,22 @@ public enum AcademicTitle {
 		return builder.toString();
 	}
 	
+	
+	public static String[] getTitles() {
+		AcademicTitle[] titles = values();
+		String[] stringTitles = new String[titles.length];
+		for (int i = 0; i < titles.length; i++) {
+			stringTitles[i] = titles[i].toString();
+		}
+		return stringTitles;
+	}
+	
+	public static String tryParse(String academicTitle) {
+		for (String validTitle : getTitles()) {
+			if (validTitle.equalsIgnoreCase(academicTitle)) {
+				return academicTitle;
+			}
+		}
+		return null;
+	}
 }

@@ -49,8 +49,14 @@ public class Course implements Serializable {
 	 * Creation date of the course syllabus to differentiate this syllabus from
 	 * others for the same course
 	 */
-	private LocalDateTime creationDate;
+	private transient LocalDateTime creationDate;
+	
+	/**
+	 * 
+	 */
+	private String timeString = null;
 
+	
 	/**
 	 * The courses that should be completed before taking this course or
 	 * requirements of this course which should be satisfied before taking the
@@ -277,10 +283,12 @@ public class Course implements Serializable {
 	public Course() {
 		this.courseName = "Not specified";
 		this.code = "Not Specified";
-		this.creationDate = LocalDateTime.now();
+		this.timeString = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+		this.creationDate = LocalDateTime.parse(timeString);
 		this.prerequisites = new ArrayList<>();
 		this.courseLang = Language.ENGLISH;
 		this.semester = SemesterOptions.FALL;
+		this.level = CourseLevel.FIRST_CYCLE;
 		this.labHour = 0;
 		this.theoreticalHour = 0;
 		this.learningOutcomes = new ArrayList<>();
@@ -288,7 +296,7 @@ public class Course implements Serializable {
 		this.localCredit = calculateLocalCredit();
 		this.ects = calculateECTS();
 		this.type = CourseType.REQUIRED;
-		this.courseCoordinator = "Not Added";
+		this.courseCoordinator = "//Not//Added";
 		this.courseCompetencies = new ArrayList<>();
 		this.courseLecturers = new ArrayList<>();
 		this.assistants = new ArrayList<>();
@@ -1222,6 +1230,7 @@ public class Course implements Serializable {
 	
 	@Override
 	public String toString() {
+		this.creationDate = LocalDateTime.parse(timeString);
 		return code + "\n" + creationDate.toLocalTime();
 	}
 }
