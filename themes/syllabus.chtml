@@ -277,34 +277,6 @@
     				{%endif%}
             </table>
             <br /><br />
-            <table class="a-table">
-                <tr>
-                    <th style="background-color: #cccccc;">Weighting of Semester Activities on the Final
-                        Grade</th>
-                    <td>&nbsp {$semesterNo}</td>
-                    <td>&nbsp {$semesterWeighting}</td>
-                </tr>
-                <tr>
-                    <th style="background-color: #cccccc;">Weighting of End-of-Semester Activities on the Final Grade
-                    </th>
-                    <td>
-                        &nbsp {$endOfSemesterNo}
-                    </td>
-                    <td>
-                        &nbsp {$endOfSemesterWeighting}
-                    </td>
-                </tr>
-                <tr>
-                    <th style="background-color: #cccccc;text-align: right;">Total
-                    </th>
-                    <td>
-                        &nbsp {$semesterTotalNo}
-                    </td>
-                    <td>
-                        &nbsp {$semesterTotalWeighting}
-                    </td>
-                </tr>
-            </table>
         </div>
         <br /><br />
         <div>
@@ -386,8 +358,10 @@
                     <td rowspan="2">{$competency.related_learning_outcomes_string}</td>
                 </tr>
                 <tr></tr>
-  							{% onEmpty %}
-    						{% endloop %}
+  				{% onEmpty %}
+  				<tr></tr>
+  				<tr></tr>
+    			{% endloop %}
 
     			{%endif%}
             </table>

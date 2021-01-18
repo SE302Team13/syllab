@@ -8,6 +8,8 @@ import com.x5.template.Chunk;
 import com.x5.template.Theme;
 import com.x5.util.AccessAsBean;
 
+import initializer.Initializer;
+
 public class Export {
 	
 	public void export(Course course, String path) {
@@ -53,13 +55,14 @@ public class Export {
 		c.set("courseTextbook", course.getCourseTextBook());
 		c.set("suggestedReadings", course.getSuggestedReading());
 		c.setToBean("evaluationCriterias", course.getEvaluationCriterias());
-		
+		c.set("totalWorkload", course.getTotalWorkload());
+
 		ArrayList<SemesterActivity> sm = course.getWorkloadTable();
 		c.setToBean("semesterActivities", sm);
-
-		ArrayList<CourseCompetency> comp = course.getCourseCompetencies();
-		c.setToBean("competencies", comp);
 		
+		ArrayList<CourseCompetency> comp = course.getCourseCompetencies();		
+		c.setToBean("competencies", comp);
+
 		File file = new File(path);
 		FileWriter out;
 		try {
