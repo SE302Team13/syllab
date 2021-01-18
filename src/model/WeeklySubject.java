@@ -128,4 +128,18 @@ public class WeeklySubject implements Serializable {
 	}
 	
 	
+	//Setter(s)
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public void setRelatedMaterial(String relatedMaterial) {
+		this.relatedMaterial = relatedMaterial;
+	}
+	
+
+	
+	
+	
 }

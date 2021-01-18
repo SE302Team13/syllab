@@ -1,5 +1,6 @@
 package newui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -168,9 +169,15 @@ public class ImportController {
 									courseLecturers, assistants, category, weeklySubjects, evaluationCriterias);
 
 							System.out.println(course.logCourse());
+							Platform.runLater(new Runnable() {
+								
+								@Override
+								public void run() {
+									Initializer.getCourses().add(course);
+								}
+							});
 						}
 					}).start();
-					Initializer.getCourses().add(course);
 
 				}
 				closeButton.getScene().getWindow().hide();

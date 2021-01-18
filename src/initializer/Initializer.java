@@ -72,6 +72,23 @@ public class Initializer {
 			stream.close();
 		}
 	}
+	
+	public static void save(int index, File saveLocation) throws IOException {
+		if ((index < allCourseList.size()) && (index >= 0)) {
+			Course course = allCourseList.get(index);
+			if (!saveLocation.getParentFile().exists()) {
+				saveLocation.getParentFile().mkdirs();
+			}
+			if (!saveLocation.exists()) {
+				saveLocation.createNewFile();
+			}
+			ObjectOutputStream stream = null;
+			stream = new ObjectOutputStream(new FileOutputStream(saveLocation.getAbsoluteFile(), false));
+			stream.writeObject(course);
+			stream.flush();
+			stream.close();
+		}
+	}
 
 	public static void commitLocations() throws IOException {
 		BufferedWriter writer = Files.newBufferedWriter(locationsFile, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);

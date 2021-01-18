@@ -470,9 +470,9 @@
 									<children>
 										<TableView fx:id="evaluationCriteriaTable" editable="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
 											<columns>
-												<TableColumn fx:id="evaluationCriteriaTableNameColumn" prefWidth="92.0" resizable="false" text="Name" />
-												<TableColumn fx:id="evaluationCriteriaTableCountColumn" prefWidth="55.999755859375" resizable="false" text="Count" />
-												<TableColumn fx:id="evaluationCriteriaTableContributionColumn" prefWidth="100.000244140625" resizable="false" text="Contribution" />
+												<TableColumn fx:id="evaluationCriteriaTableNameColumn" prefWidth="92.0" text="Name" />
+												<TableColumn fx:id="evaluationCriteriaTableCountColumn" prefWidth="55.999755859375" text="Count" />
+												<TableColumn fx:id="evaluationCriteriaTableContributionColumn" prefWidth="100.000244140625" text="Contribution" />
 											</columns>
 											<columnResizePolicy>
 												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -543,8 +543,9 @@
 									<children>
 										<TableView fx:id="competencyTable" editable="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
 											<columns>
-												<TableColumn fx:id="competencyTableDescriptionColumn" prefWidth="230.39990234375" resizable="false" sortable="false" text="Description" />
-												<TableColumn fx:id="competencyTableContributionColumn" prefWidth="78.400146484375" resizable="false" text="Contribution" />
+												<TableColumn fx:id="competencyTableDescriptionColumn" prefWidth="442.4001340866089" sortable="false" text="Description" />
+												<TableColumn fx:id="competencyTableContributionColumn" prefWidth="220.79978942871094" text="Contribution" />
+                                    <TableColumn fx:id="competencyTableRelatedLearningOutcomes" prefWidth="131.2001953125" text="Related Learning Outcomes" />
 											</columns>
 											<columnResizePolicy>
 												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

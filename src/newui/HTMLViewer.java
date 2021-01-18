@@ -2,6 +2,7 @@ package newui;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Path;
 
 import javafx.fxml.FXMLLoader;
@@ -14,8 +15,11 @@ public class HTMLViewer {
 	
 	
 	
-	public HTMLViewer(File HTMLFile) throws IOException {
-
+	private HTMLViewer() {
+		
+	}
+	
+	public static void viewHTML(File HTMLFile) throws IOException {
 		Stage minorStage = new Stage(StageStyle.UNDECORATED);
 		FXMLLoader loader = new FXMLLoader(Path.of("src", "newui", "fxml", "htmlviewer.fxml").toUri().toURL());
 		AnchorPane generalPane = loader.load();

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import newui.MainController;
+
 /**
  * 
  * @author Hakan Ayaz
@@ -326,10 +328,28 @@ public class Course implements Serializable {
 		this.localCredit = calculateLocalCredit();
 		this.ects = calculateECTS();
 		this.type = type;
-		this.courseCoordinator = courseCoordinator;
-		this.courseCompetencies = new ArrayList<>();
+		courseCoordinator = courseCoordinator.replaceFirst(" ", "//");
+		courseCoordinator = new StringBuilder(courseCoordinator).reverse().toString().replaceFirst(" ", "//");
+		courseCoordinator = new StringBuilder(courseCoordinator).reverse().toString();
+		String[] coordinator = MainController.parseLecturer(courseCoordinator);
+		this.courseCoordinator = coordinator[0] + "//" + coordinator[1] + "//" + coordinator[2];
+		for (int i = 0; i < courseLecturers.size(); i++) {
+			String lecString = courseLecturers.get(i).replaceFirst(" ", "//");
+			lecString = new StringBuilder(lecString).reverse().toString().replaceFirst(" ", "//");
+			lecString = new StringBuilder(lecString).reverse().toString();
+			String[] lecturer = MainController.parseLecturer(lecString);
+			courseLecturers.set(i, lecturer[0] + "//" + lecturer[1] + "//" + lecturer[2]);
+		}
 		this.courseLecturers = courseLecturers;
+		for (int i = 0; i < assistants.size(); i++) {
+			String lecString = assistants.get(i).replaceFirst(" ", "//");
+			lecString = new StringBuilder(lecString).reverse().toString().replaceFirst(" ", "//");
+			lecString = new StringBuilder(lecString).reverse().toString();
+			String[] lecturer = MainController.parseLecturer(lecString);
+			assistants.set(i, lecturer[0] + "//" + lecturer[1] + "//" + lecturer[2]);
+		}
 		this.assistants = assistants;
+		this.courseCompetencies = new ArrayList<>();
 		this.courseObjective = new String();
 		this.courseCategory = courseCategory;
 		this.courseSchedule = courseSchedule;

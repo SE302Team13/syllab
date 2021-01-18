@@ -83,10 +83,6 @@ public class HTMLViewerController {
 				;
 			}
 		});
-		
-		//Set Window Size
-		((BorderPane) topPane.getParent()).setPrefWidth(1200);
-		((BorderPane) topPane.getParent()).setPrefHeight(800);
 	}
 	
 	

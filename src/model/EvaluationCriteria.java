@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EvaluationCriteria implements Serializable {
 
@@ -48,7 +49,12 @@ public class EvaluationCriteria implements Serializable {
         this.name = name;
         this.count = count;
         this.contribution = contr;
-        this.contributionLevels = values;
+        if (values != null) {
+        	this.contributionLevels = values;
+        } else {
+        	this.contributionLevels = new ArrayList<>();
+        }
+        
     }
 
     // Getter(s) and Setter(s)

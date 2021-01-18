@@ -45,7 +45,12 @@ public class CourseCompetency implements Serializable {
 	public CourseCompetency(String description, int contLevel, LinkedHashSet<Integer> relatedLearningOutcomes) {
 		this.description = description;
 		this.contributionLevel = contLevel;
-		this.relatedLearningOutcomes = new ArrayList<>(relatedLearningOutcomes);
+		if (relatedLearningOutcomes != null) {
+			this.relatedLearningOutcomes = new ArrayList<>(relatedLearningOutcomes);
+		} else {
+			this.relatedLearningOutcomes = new ArrayList<>();
+		}
+		
 	}
 
 	public String getDescription() {
@@ -67,7 +72,30 @@ public class CourseCompetency implements Serializable {
 		for(Integer lo : getRelatedLearningOutcomes()) {
 			base += lo + ",";
 		}
-		return base;
+		return base.substring(0,base.length()-1);
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setContributionLevel(int contributionLevel) {
+		this.contributionLevel = contributionLevel;
+	}
+
+	public void setRelatedLearningOutcomes(LinkedHashSet<Integer> relatedLearningOutcomes) {
+		if (relatedLearningOutcomes != null) {
+			this.relatedLearningOutcomes = new ArrayList<>(relatedLearningOutcomes);
+		}
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof CourseCompetency) {
+			CourseCompetency competency = (CourseCompetency) obj;
+			return this.description.equalsIgnoreCase(competency.description);
+		}
+		return false;
 	}
 
 	
@@ -103,14 +131,5 @@ public class CourseCompetency implements Serializable {
 		}
 	}
 	*/
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof CourseCompetency) {
-			CourseCompetency competency = (CourseCompetency) obj;
-			return this.description.equalsIgnoreCase(competency.description);
-		}
-		return false;
-	}
 
 }

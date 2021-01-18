@@ -1,7 +1,6 @@
 package newui;
 
 import java.awt.Desktop;
-import java.awt.Desktop.Action;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -13,67 +12,41 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
 import org.controlsfx.control.textfield.CustomTextField;
-import org.controlsfx.validation.ValidateEvent;
-
-import com.jfoenix.animation.alert.JFXAlertAnimation;
-import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXListCell;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTabPane;
 
 import initializer.Initializer;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -88,7 +61,6 @@ import model.CourseLevel;
 import model.CourseType;
 import model.EvaluationCriteria;
 import model.Language;
-import model.Lecturer;
 import model.SemesterActivity;
 import model.SemesterOptions;
 import model.WeeklySubject;
@@ -259,6 +231,8 @@ public class MainController {
 	@FXML
 	private TableColumn<CourseCompetency, String> competencyTableContributionColumn;
 	@FXML
+	private TableColumn<CourseCompetency, String> competencyTableRelatedLearningOutcomes;
+	@FXML
 	private HBox competencyToolbar;
 	@FXML
 	private JFXButton addCompetencyButton;
@@ -415,6 +389,7 @@ public class MainController {
 		// Import Syllabus from Internet Button
 		importSyllabus.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
 
+			@Override
 			public void handle(ActionEvent event) {
 
 				Stage minorStage = new Stage();
@@ -464,45 +439,54 @@ public class MainController {
 				chooser.setTitle("Choose a save location");
 				File chosenFile = chooser.showSaveDialog(Main.generalStage);
 				if ((chosenFile != null)) {
-					export.export(selected, chosenFile.toString());
-					/*
-					 * TODO INSPECT HERE
-					 */
-					/*
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					try {
-						new HTMLViewer(chosenFile);
-					} catch (IOException e) {
-						JFXAlert<Boolean> alert = new JFXAlert<>(Main.generalStage);
-						alert.setAnimation(JFXAlertAnimation.CENTER_ANIMATION);
-						alert.setContentText("Unexpected problem occured during visualization of the current HTML document. Please notify the developers about the problem.");
-						alert.setResizable(false);
-						alert.initModality(Modality.APPLICATION_MODAL);
-						alert.showAndWait();
-					}
-					*/
-					/*
-					Timer timer = new Timer("HTMLViewer");
-					timer.schedule(new TimerTask() {
-						
-						@Override
-						public void run() {
-							Platform.runLater(new Runnable() {
-								
-								@Override
-								public void run() {
+					if (chosenFile.getAbsolutePath().endsWith(".html")) {
+						export.export(selected, chosenFile.toString());
+						Timer timer = new Timer();
+						timer.schedule(new TimerTask() {
 
-								}
-							});
+							@Override
+							public void run() {
+								Platform.runLater(new Runnable() {
+
+									@Override
+									public void run() {
+										try {
+											HTMLViewer.viewHTML(chosenFile);
+										} catch (IOException e) {
+											Alert alertbox = new Alert(AlertType.ERROR);
+											alertbox.setHeaderText("Error");
+											alertbox.setContentText("HTML Viewer is not working properly."
+													+ "Please notify the developers about the problem.");
+											alertbox.initModality(Modality.APPLICATION_MODAL);
+											alertbox.initOwner(Main.generalStage);
+											alertbox.getButtonTypes().clear();
+											alertbox.getButtonTypes().add(ButtonType.CLOSE);
+											alertbox.showAndWait();
+											return;
+										}
+									}
+								});
+							}
+
+						}, Duration.ofSeconds(8).toMillis());
+					}
+					else if (chosenFile.getAbsolutePath().endsWith(".syb")) {
+						int index = courseList.getSelectionModel().getSelectedIndex();
+						try {
+							Initializer.save(index, chosenFile);
+						} catch (IOException e) {
+							Alert alertbox = new Alert(AlertType.ERROR);
+							alertbox.setHeaderText("Error");
+							alertbox.setContentText("File could not be saved to the location you directed."
+									+ "Please notify the developers about the problem.");
+							alertbox.initModality(Modality.APPLICATION_MODAL);
+							alertbox.initOwner(Main.generalStage);
+							alertbox.getButtonTypes().clear();
+							alertbox.getButtonTypes().add(ButtonType.CLOSE);
+							alertbox.showAndWait();
+							return;
 						}
-						
-					}, Duration.ofSeconds(8).toMillis());
-					*/
+					}
 				}
 			}
 		});
@@ -532,6 +516,7 @@ public class MainController {
 					alertbox.setContentText("Github page is not accessible." + "Please notify the developers.");
 					alertbox.initModality(Modality.APPLICATION_MODAL);
 					alertbox.initOwner(Main.generalStage);
+					alertbox.showAndWait();
 					return;
 				}
 			}
@@ -591,6 +576,7 @@ public class MainController {
 					}
 				});
 
+		// ScheduleTable Columns Cell Factory
 		scheduleTableDescriptionColumn.setCellValueFactory(
 				new Callback<TableColumn.CellDataFeatures<WeeklySubject, String>, ObservableValue<String>>() {
 
@@ -607,6 +593,16 @@ public class MainController {
 						return new SimpleStringProperty(String.valueOf(param.getValue().getWeek()));
 					}
 				});
+		scheduleTableRMColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<WeeklySubject, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<WeeklySubject, String> param) {
+						return new SimpleStringProperty(param.getValue().getRelatedMaterial());
+					}
+				});
+
+		// Evaluation Criteria Table Column Cell Factories
 		evaluationCriteriaTableNameColumn.setCellValueFactory(
 				new Callback<TableColumn.CellDataFeatures<EvaluationCriteria, String>, ObservableValue<String>>() {
 
@@ -654,8 +650,8 @@ public class MainController {
 					courseDescriptionArea.setText(currentCourse.getCourseDescription());
 					courseObjectiveArea.setText(currentCourse.getCourseObjective());
 					mainCourseBookField.setText(currentCourse.getCourseTextBook());
-					
-					//Added coded for the handle problems related with "simplification"
+
+					// Added coded for the handle problems related with "simplification"
 					String[] coordinator = parseLecturer(currentCourse.getCourseCoordinator());
 					if (coordinator != null) {
 						if (coordinator[0] != null) {
@@ -698,6 +694,41 @@ public class MainController {
 			@Override
 			public void handle(ActionEvent event) {
 				learningOutcomesTable.getItems().add("EMPTY");
+				TableColumn<EvaluationCriteria, String> lo1 = new TableColumn<>();
+				lo1.setText("LO" + learningOutcomesTable.getItems().size());
+				lo1.setEditable(true);
+				lo1.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria,String>>() {
+					
+					@Override
+					public void handle(CellEditEvent<EvaluationCriteria, String> event) {
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							int value = 0;
+							try {
+								value = Integer.parseInt(event.getNewValue());
+								int outcomeIndex = event.getTableView().getVisibleLeafIndex(event.getTableColumn()) - 3; 
+								event.getTableView().getItems().get(index).getContributionLevels().set(outcomeIndex, value);
+								event.getTableView().refresh();
+							} catch (NumberFormatException e) {
+								// do nothing xd
+								return;
+							}
+						}
+					}
+				});
+				lo1.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EvaluationCriteria,String>, ObservableValue<String>>() {
+					
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<EvaluationCriteria, String> param) {
+						int columnNumber = param.getTableView().getVisibleLeafIndex(lo1);
+						int index = columnNumber -3;
+						param.getValue().getContributionLevels().add(index,0);
+						int value = param.getValue().getContributionLevels().get(index);
+						return new SimpleStringProperty(String.valueOf(value));
+					}
+				});
+				evaluationCriteriaTable.getColumns().add(lo1);
+				evaluationCriteriaTable.refresh();
 			}
 		});
 		removeOutcomeButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
@@ -707,15 +738,20 @@ public class MainController {
 				int index = learningOutcomesTable.getSelectionModel().getSelectedIndex();
 				if (index != -1) {
 					learningOutcomesTable.getItems().remove(index);
+					ObservableList<TableColumn<EvaluationCriteria, ?>> list = evaluationCriteriaTable.getColumns();
+					int removeLocation = index+3;
+					list.remove(removeLocation);
+					for (int i = removeLocation; i < list.size(); i++) {
+						list.get(i).setText("LO" + (index + 1));
+					}
+					evaluationCriteriaTable.refresh();
 				}
 			}
 		});
-		
-		
-		//Defining callback functions for tables in Lecturers tab
-		Callback<TableColumn.CellDataFeatures<String,String>, ObservableValue<String>> titleColumnCallback =
-				new Callback<TableColumn.CellDataFeatures<String,String>, ObservableValue<String>>() {
-			
+
+		// Defining callback functions for tables in Lecturers tab
+		Callback<TableColumn.CellDataFeatures<String, String>, ObservableValue<String>> titleColumnCallback = new Callback<TableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
+
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<String, String> param) {
 				String[] lecturer = parseLecturer(param.getValue());
@@ -725,11 +761,9 @@ public class MainController {
 				return new SimpleStringProperty("Not Given");
 			}
 		};
-		
-		
-		Callback<TableColumn.CellDataFeatures<String,String>, ObservableValue<String>> surnameColumnCallback =
-				new Callback<TableColumn.CellDataFeatures<String,String>, ObservableValue<String>>() {
-			
+
+		Callback<TableColumn.CellDataFeatures<String, String>, ObservableValue<String>> surnameColumnCallback = new Callback<TableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
+
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<String, String> param) {
 				String[] lecturer = parseLecturer(param.getValue());
@@ -739,9 +773,9 @@ public class MainController {
 				return new SimpleStringProperty("Not Given");
 			}
 		};
-		
-		Callback<TableColumn.CellDataFeatures<String,String>, ObservableValue<String>> nameColumnCallback = new Callback<TableColumn.CellDataFeatures<String,String>, ObservableValue<String>>() {
-			
+
+		Callback<TableColumn.CellDataFeatures<String, String>, ObservableValue<String>> nameColumnCallback = new Callback<TableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
+
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<String, String> param) {
 				String[] lecturer = parseLecturer(param.getValue());
@@ -751,32 +785,29 @@ public class MainController {
 				return new SimpleStringProperty("Not Given");
 			}
 		};
-		
 
-		
-		//Lecturers tab Table cell factory assignment
+		// Lecturers tab Table cell factory assignment
 		lecturerTableTitleColumn.setCellValueFactory(titleColumnCallback);
 		lecturerTableNameColumn.setCellValueFactory(nameColumnCallback);
 		lecturerTableSurnameColumn.setCellValueFactory(surnameColumnCallback);
 		assistantTableTitleColumn.setCellValueFactory(titleColumnCallback);
 		assistantTableNameColumn.setCellValueFactory(nameColumnCallback);
 		assistantTableSurnameColumn.setCellValueFactory(surnameColumnCallback);
-		
-		
-		//Lecturers tab toolbar functionalities
+
+		// Lecturers tab toolbar functionalities
 		addLecturerButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
-				//Required commits
+				// Required commits
 				lecturerNameField.commitValue();
 				lecturerSurnameField.commitValue();
 				lecturerTitleChoice.commitValue();
-				
+
 				String title = lecturerTitleChoice.getValue();
 				String name = lecturerNameField.getText();
 				String surname = lecturerSurnameField.getText();
-				if((title != null) && (name != null) && (surname !=null)) {
+				if ((title != null) && (name != null) && (surname != null)) {
 					if (title.isBlank() || (name.isBlank()) || (surname.isBlank())) {
 						return;
 					}
@@ -786,18 +817,18 @@ public class MainController {
 			}
 		});
 		addAssistantButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
-				//Required commits
+				// Required commits
 				lecturerNameField.commitValue();
 				lecturerSurnameField.commitValue();
 				lecturerTitleChoice.commitValue();
-				
+
 				String title = lecturerTitleChoice.getValue();
 				String name = lecturerNameField.getText();
 				String surname = lecturerSurnameField.getText();
-				if((title != null) && (name != null) && (surname !=null)) {
+				if ((title != null) && (name != null) && (surname != null)) {
 					if (title.isBlank() || (name.isBlank()) || (surname.isBlank())) {
 						return;
 					}
@@ -806,12 +837,13 @@ public class MainController {
 				}
 			}
 		});
-		
+
 		/*
-		 * Lecturer/Assistant table data removal problem solved by synchronizing focuses among tables
+		 * Lecturer/Assistant table data removal problem solved by synchronizing focuses
+		 * among tables
 		 */
 		lecturerTable.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			
+
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if ((oldValue == true) && (newValue == false)) {
@@ -820,7 +852,7 @@ public class MainController {
 			}
 		});
 		assistantTable.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			
+
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if ((oldValue == true) && (newValue == false)) {
@@ -828,12 +860,12 @@ public class MainController {
 				}
 			}
 		});
-		
+
 		removeLecturerButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
-				int index = lecturerTable.getSelectionModel().getFocusedIndex();
+				int index = lecturerTable.getSelectionModel().getSelectedIndex();
 				if (index != -1) {
 					lecturerTable.getItems().remove(index);
 				} else {
@@ -844,45 +876,46 @@ public class MainController {
 				}
 			}
 		});
-		
-		
-		//Evaluation Criteria Table Columns Cell Value Factory
-		evaluationCriteriaTableNameColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EvaluationCriteria,String>, ObservableValue<String>>() {
-			
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<EvaluationCriteria, String> param) {
-				String value = param.getValue().getName();
-				return new SimpleStringProperty(value);
-			}
-		});
-		evaluationCriteriaTableCountColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EvaluationCriteria,String>, ObservableValue<String>>() {
-			
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<EvaluationCriteria, String> param) {
-				int value = param.getValue().getCount();
-				return new SimpleStringProperty(String.valueOf(value));
-			}
-		});
-		evaluationCriteriaTableContributionColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EvaluationCriteria,String>, ObservableValue<String>>() {
-			
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<EvaluationCriteria, String> param) {
-				int value = param.getValue().getContribution();
-				return new SimpleStringProperty(String.valueOf(value));
-			}
-		});
-		
-		
-		//Evaluation Criteria Toolbar Functions
+
+		// Evaluation Criteria Table Columns Cell Value Factory
+		evaluationCriteriaTableNameColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<EvaluationCriteria, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<EvaluationCriteria, String> param) {
+						String value = param.getValue().getName();
+						return new SimpleStringProperty(value);
+					}
+				});
+		evaluationCriteriaTableCountColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<EvaluationCriteria, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<EvaluationCriteria, String> param) {
+						int value = param.getValue().getCount();
+						return new SimpleStringProperty(String.valueOf(value));
+					}
+				});
+		evaluationCriteriaTableContributionColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<EvaluationCriteria, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<EvaluationCriteria, String> param) {
+						int value = param.getValue().getContribution();
+						return new SimpleStringProperty(String.valueOf(value));
+					}
+				});
+
+		// Evaluation Criteria Toolbar Functions
 		addEvaluationCriteriaButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
-				
+				evaluationCriteriaTable.getItems().add(new EvaluationCriteria("-", 0, 0, new ArrayList<>()));
 			}
 		});
 		removeEvaluationCriteriaButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				int index = evaluationCriteriaTable.getSelectionModel().getSelectedIndex();
@@ -891,86 +924,374 @@ public class MainController {
 				}
 			}
 		});
-		
-		
-		//WorkloadTable Column Cell Value Factory
-		workloadTableNameColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SemesterActivity,String>, ObservableValue<String>>() {
-			
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<SemesterActivity, String> param) {
-				
-				return new SimpleStringProperty(param.getValue().getActivityName());
-			}
-		});
-		workloadTableNumberColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SemesterActivity,String>, ObservableValue<String>>() {
-			
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<SemesterActivity, String> param) {
-				int value = param.getValue().getNumber();
-				return new SimpleStringProperty(String.valueOf(value));
-			}
-		});
-		workloadTableHoursColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SemesterActivity,String>, ObservableValue<String>>() {
-			
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<SemesterActivity, String> param) {
-				int value = param.getValue().getDuration();
-				return new SimpleStringProperty(String.valueOf(value));
-			}
-		});
-		workloadTableWorkloadColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SemesterActivity,String>, ObservableValue<String>>() {
-			
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<SemesterActivity, String> param) {
-				int value = param.getValue().getWorkload();
-				return new SimpleStringProperty(String.valueOf(value));
-			}
-		});
-		
-		//Workload Table toolbar functions
+
+		// WorkloadTable Column Cell Value Factory
+		workloadTableNameColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<SemesterActivity, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<SemesterActivity, String> param) {
+						return new SimpleStringProperty(param.getValue().getActivityName());
+					}
+				});
+		workloadTableNumberColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<SemesterActivity, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<SemesterActivity, String> param) {
+						int value = param.getValue().getNumber();
+						return new SimpleStringProperty(String.valueOf(value));
+					}
+				});
+		workloadTableHoursColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<SemesterActivity, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<SemesterActivity, String> param) {
+						int value = param.getValue().getDuration();
+						return new SimpleStringProperty(String.valueOf(value));
+					}
+				});
+		workloadTableWorkloadColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<SemesterActivity, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<SemesterActivity, String> param) {
+						int value = param.getValue().getWorkload();
+						return new SimpleStringProperty(String.valueOf(value));
+					}
+				});
+
+		// Workload Table toolbar functions
 		addWorkloadButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				workloadTable.getItems().add(new SemesterActivity("-", 0, 0));
 			}
 		});
 		removeWorkloadButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
-				int index = courseList.getSelectionModel().getSelectedIndex();
+				int index = workloadTable.getSelectionModel().getSelectedIndex();
 				if (index != -1) {
 					workloadTable.getItems().remove(index);
 				}
 			}
 		});
+
+		// Course Competency Table Columns Cell Value Factory
+		competencyTableDescriptionColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<CourseCompetency, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<CourseCompetency, String> param) {
+
+						return new SimpleStringProperty(param.getValue().getDescription());
+					}
+				});
+		competencyTableContributionColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<CourseCompetency, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<CourseCompetency, String> param) {
+						int value = param.getValue().getContributionLevel();
+						return new SimpleStringProperty(String.valueOf(value));
+					}
+				});
+		competencyTableRelatedLearningOutcomes.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<CourseCompetency, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<CourseCompetency, String> param) {
+						return new SimpleStringProperty(param.getValue().getRelatedLearningOutcomesString());
+					}
+				});
 		
-		
-		//Course Competency Table Columns Cell Value Factory
-		competencyTableDescriptionColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CourseCompetency,String>, ObservableValue<String>>() {
+		//CompetencyTable Toolbar functionalities
+		addCompetencyButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
 			
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<CourseCompetency, String> param) {
+			public void handle(ActionEvent event) {
+				competencyTable.getItems().add(new CourseCompetency("", 0, new LinkedHashSet<>()));
+			}
+		});
+		removeCompetencyButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				int index = competencyTable.getSelectionModel().getSelectedIndex();
+				if (index != -1) {
+					competencyTable.getItems().remove(index);
+				}
+			}
+		});
+		
+		
+		//courseList NullPointer Exception Solution
+		generalTabPane.setVisible(false);
+		saveButton.setDisable(true);
+		courseList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+			
+			
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				if (newValue.intValue() != -1) {
+					generalTabPane.setVisible(true);
+					saveButton.setDisable(false);
+				}
+				else {
+					generalTabPane.setVisible(false);
+					saveButton.setDisable(true);
+				}
+			}
+		});
+		
+		
+		
+		
+		
+		//Learning Outcomes Table Edit
+		learningOutcomesTable.setEditable(true);
+		learningOutcomesTableLOColumn.setEditable(true);
+		learningOutcomesTableLOColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		learningOutcomesTableLOColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<String,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<String, String> event) {
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					event.getTableView().getItems().remove(index);
+					event.getTableView().getItems().add(index, event.getNewValue());
+					event.getTableView().getSelectionModel().select(index);
+				}
+			}
+		});
+		
+		
+		//Lecturer Table Edit
+		lecturerTable.setEditable(false);
+		lecturerTableNameColumn.setEditable(false);
+		lecturerTableTitleColumn.setEditable(false);
+		lecturerTableSurnameColumn.setEditable(false);
+		
+		//Assistant Table Edit
+		assistantTable.setEditable(false);
+		assistantTableNameColumn.setEditable(false);
+		assistantTableSurnameColumn.setEditable(false);
+		assistantTableTitleColumn.setEditable(false);
+		
+		
+		// Schedule Table Edit
+		scheduleTable.setEditable(true);
+		scheduleTableDescriptionColumn.setEditable(true);
+		scheduleTableDescriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		scheduleTableRMColumn.setEditable(true);
+		scheduleTableRMColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		scheduleTableDescriptionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<WeeklySubject,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<WeeklySubject, String> event) {
 				
-				return new SimpleStringProperty(param.getValue().getDescription());
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					event.getTableView().getItems().get(index).setDescription(event.getNewValue());
+				}
 			}
 		});
-		competencyTableContributionColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CourseCompetency,String>, ObservableValue<String>>() {
+		scheduleTableRMColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<WeeklySubject,String>>() {
 			
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<CourseCompetency, String> param) {
-				int value = param.getValue().getContributionLevel();
-				return new SimpleStringProperty(String.valueOf(value));
+			public void handle(CellEditEvent<WeeklySubject, String> event) {
+				
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					event.getTableView().getItems().get(index).setRelatedMaterial(event.getNewValue());
+				}
 			}
 		});
 		
 		
+		//Evaluation Criteria Edit
+		evaluationCriteriaTable.setEditable(true);
+		evaluationCriteriaTableNameColumn.setEditable(true);
+		evaluationCriteriaTableNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		evaluationCriteriaTableCountColumn.setEditable(true);
+		evaluationCriteriaTableCountColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		evaluationCriteriaTableContributionColumn.setEditable(true);
+		evaluationCriteriaTableContributionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		evaluationCriteriaTableNameColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<EvaluationCriteria, String> event) {
+				
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					event.getTableView().getItems().get(index).setName(event.getNewValue());
+				}
+			}
+		});
+		evaluationCriteriaTableCountColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<EvaluationCriteria, String> event) {
+				
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					int value = 0;
+					try {
+						value = Integer.parseInt(event.getNewValue());
+						event.getTableView().getItems().get(index).setCount(value);
+					} catch (NumberFormatException e) {
+						// do nothing xd
+						return;
+					}
+				}
+			}
+		});
+		evaluationCriteriaTableContributionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<EvaluationCriteria, String> event) {
+				
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					int value = 0;
+					try {
+						value = Integer.parseInt(event.getNewValue());
+						event.getTableView().getItems().get(index).setContribution(value);
+					} catch (NumberFormatException e) {
+						// do nothing xd
+						return;
+					}
+				}
+			}
+		});
 		
 		
+		//Workload Table Edit
+		workloadTable.setEditable(true);
+		workloadTableNameColumn.setEditable(true);
+		workloadTableNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		workloadTableNumberColumn.setEditable(true);
+		workloadTableNumberColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		workloadTableHoursColumn.setEditable(true);
+		workloadTableHoursColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		workloadTableWorkloadColumn.setEditable(true);
+		workloadTableWorkloadColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		workloadTableNameColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SemesterActivity,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<SemesterActivity, String> event) {
+				
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					event.getTableView().getItems().get(index).setActivityName(event.getNewValue());
+				}
+			}
+		});
+		workloadTableNumberColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SemesterActivity,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<SemesterActivity, String> event) {
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					int value = 0;
+					try {
+						value = Integer.parseInt(event.getNewValue());
+						event.getTableView().getItems().get(index).setNumber(value);
+					} catch (NumberFormatException e) {
+						// do nothing xd
+						return;
+					}
+				}
+			}
+		});
+		workloadTableHoursColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SemesterActivity,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<SemesterActivity, String> event) {
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					int value = 0;
+					try {
+						value = Integer.parseInt(event.getNewValue());
+						event.getTableView().getItems().get(index).setDuration(value);
+					} catch (NumberFormatException e) {
+						// do nothing xd
+						return;
+					}
+				}
+			}
+		});
 		
 		
-		//TEST ITEM - DO NOT REMOVE UNTIL THE END OF THE DEVELOPMENT PROCESS
+		//Course Competency Edit
+		competencyTable.setEditable(true);
+		competencyTableDescriptionColumn.setEditable(true);
+		competencyTableDescriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		competencyTableContributionColumn.setEditable(true);
+		competencyTableContributionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		competencyTableRelatedLearningOutcomes.setEditable(true);
+		competencyTableRelatedLearningOutcomes.setCellFactory(TextFieldTableCell.forTableColumn());
+		competencyTableDescriptionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CourseCompetency,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<CourseCompetency, String> event) {
+				
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					event.getTableView().getItems().get(index).setDescription(event.getNewValue());
+				}
+			}
+		});
+		competencyTableContributionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CourseCompetency,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<CourseCompetency, String> event) {
+				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+					int index = event.getTablePosition().getRow();
+					int value = 0;
+					try {
+						value = Integer.parseInt(event.getNewValue());
+						event.getTableView().getItems().get(index).setContributionLevel(value);
+					} catch (NumberFormatException e) {
+						// do nothing xd
+						return;
+					}
+				}
+			}
+		});
+		competencyTableRelatedLearningOutcomes.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CourseCompetency,String>>() {
+			
+			@Override
+			public void handle(CellEditEvent<CourseCompetency, String> event) {
+				
+				String newValue = event.getNewValue();
+				if ((newValue != null) && !(newValue.isBlank())) {
+					int index = event.getTablePosition().getRow();
+					int limitValue = learningOutcomesTable.getItems().size();
+					String[] sections = newValue.split(",", limitValue);
+					LinkedHashSet<Integer> tempSet = new LinkedHashSet<Integer>();
+					for (String lo : sections) {
+						try {
+							int intValue = Integer.parseInt(lo);
+							tempSet.add(intValue);
+						} catch (NumberFormatException e) {
+							//do nothing xd
+							return;
+						}
+					}
+					competencyTable.getItems().get(index).setRelatedLearningOutcomes(tempSet);
+					competencyTable.refresh();
+				}
+			}
+		});
+
+		
+
+		// TEST ITEM - DO NOT REMOVE UNTIL THE END OF THE DEVELOPMENT PROCESS
 		Course course = new Course();
 		course.setCourseName("Principles of Software Engineering");
 		course.setCode("SE 302");
@@ -987,21 +1308,21 @@ public class MainController {
 		course.addCriteria("Midterms", 1, 30, testArray);
 		course.addCriteria("Final", 1, 40, testArray);
 		course.addCriteria("Project", 1, 30, testArray);
-		course.setCourseObjective("In this course, students learn the theoretical and practical aspects of specification and design, development, verification and validation and testing stages of SE. More, this course enables students to realize software specification and design phases of sample projects with real clients.");
+		course.setCourseObjective(
+				"In this course, students learn the theoretical and practical aspects of specification and design, development, verification and validation and testing stages of SE. More, this course enables students to realize software specification and design phases of sample projects with real clients.");
 		course.addPrerequisite("SE 116 To succeed (To get a grade of at least DD)");
-		course.setCourseDescription("In this course, students learn the theoretical and practical aspects of specification and design, development, verification and validation and testing stages of SE. More, this course enables students to realize software specification and design phases of sample projects with real clients.");
+		course.setCourseDescription(
+				"In this course, students learn the theoretical and practical aspects of specification and design, development, verification and validation and testing stages of SE. More, this course enables students to realize software specification and design phases of sample projects with real clients.");
 		course.changeSchedule(1, "Introduction to Software Engineering", "Sommerville, Chapter 01");
 		course.changeSchedule(2, "Software Processes", "Sommerville, Chapter 02, Pressman Chapter 02");
 		course.addCompetency("	\r\n"
-				+ "To have adequate knowledge in Mathematics, Science and Computer Engineering; to be able to use theoretical and applied information in these areas on complex engineering problems.", 0, new LinkedHashSet<>());
-		
-		
+				+ "To have adequate knowledge in Mathematics, Science and Computer Engineering; to be able to use theoretical and applied information in these areas on complex engineering problems.",
+				0, new LinkedHashSet<>());
+
 	}
 
-	
-	
-	//Method is used because of the "Simplification" Process
-	private String[] parseLecturer(String lecturer) {
+	// Method is used because of the "Simplification" Process
+	public static String[] parseLecturer(String lecturer) {
 		String[] lecturerSections = lecturer.split("//");
 		String[] result = new String[3];
 		if (lecturerSections.length > 1) {
@@ -1011,7 +1332,7 @@ public class MainController {
 				result[0] = title;
 				lecturerSections[0] = null;
 			} else {
-				result[0] = null;
+				result[0] = "";
 			}
 			String surname = lecturerSections[lecturerSections.length - 1];
 			result[2] = surname;
