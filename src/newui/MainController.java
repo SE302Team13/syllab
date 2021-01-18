@@ -395,8 +395,8 @@ public class MainController {
 				Stage minorStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
 				try {
-					loader.setLocation(Path.of("src", "newui", "fxml", "import.fxml").toUri().toURL());
-				} catch (MalformedURLException e) {
+					loader.setLocation(Javafxmain.class.getResource("fxml/import.fxml"));
+				} catch (Exception e) {
 					Alert alertbox = new Alert(AlertType.ERROR);
 					alertbox.setTitle("Online Import Error");
 					alertbox.setHeaderText("Error");

@@ -20,7 +20,7 @@ public class HTMLViewer {
 	
 	public static void viewHTML(File HTMLFile) throws IOException {
 		Stage minorStage = new Stage(StageStyle.UNDECORATED);
-		FXMLLoader loader = new FXMLLoader(Path.of("src", "newui", "fxml", "htmlviewer.fxml").toUri().toURL());
+		FXMLLoader loader = new FXMLLoader(Javafxmain.class.getResource("fxml/htmlviewer.fxml"));
 		AnchorPane generalPane = loader.load();
 		HTMLViewerController controller = loader.getController();
 		controller.setHTMLFile(HTMLFile);

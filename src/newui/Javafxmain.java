@@ -23,7 +23,7 @@ public class Javafxmain extends javafx.application.Application {
 	public void start(Stage primaryStage) throws IOException {
 		generalStage = primaryStage;
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("fxml/main.fxml"));
+		loader.setLocation(Javafxmain.class.getResource("fxml/main.fxml"));
 		BorderPane generalLayout = loader.load();
 		generalStage.setTitle("IEU Syllabus Control/Edit System");
 		generalStage.initStyle(StageStyle.UNDECORATED);
