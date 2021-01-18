@@ -20,7 +20,6 @@ import javafx.stage.Modality;
 import jsonModel.*;
 import model.Course;
 import model.CourseCategory;
-import model.CourseLevel;
 import model.CourseType;
 import model.EvaluationCriteria;
 import model.Language;
@@ -30,7 +29,6 @@ import model.WeeklySubject;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +106,6 @@ public class ImportController {
 
 				String syllabUrl = "https://syllab.azurewebsites.net/api/syllab?lang=" + langCode + "&code=" + newCode;
 				if (validate()) {
-					Course course = null;
 					new Thread(new Runnable() {
 
 						@Override
@@ -125,7 +122,7 @@ public class ImportController {
 								alertbox.setContentText("There is no course with this course code in the system."
 										+ "If you are certain that this course is valid then contact with developer team.");
 								alertbox.initModality(Modality.APPLICATION_MODAL);
-								alertbox.initOwner(Main.generalStage);
+								alertbox.initOwner(Javafxmain.generalStage);
 								alertbox.showAndWait();
 							}
 							JSONParser parsedObj = new Gson().fromJson(reader, JSONParser.class);

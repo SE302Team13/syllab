@@ -260,7 +260,7 @@ public class MainController {
 
 			@Override
 			public void handle(MouseEvent event) {
-				Main.generalStage.setIconified(true);
+				Javafxmain.generalStage.setIconified(true);
 			}
 		});
 
@@ -281,9 +281,9 @@ public class MainController {
 
 			@Override
 			public void handle(MouseEvent event) {
-				Main.generalStage.setX(event.getScreenX() - mouseXPosition);
-				Main.generalStage.setY(event.getScreenY() - mouseYPosition);
-				;
+				Javafxmain.generalStage.setX(event.getScreenX() - mouseXPosition);
+				Javafxmain.generalStage.setY(event.getScreenY() - mouseYPosition);
+
 			}
 		});
 
@@ -368,7 +368,7 @@ public class MainController {
 				FileChooser chooser = new FileChooser();
 				chooser.getExtensionFilters().add(new ExtensionFilter("Syllabus File", "*.syb"));
 				chooser.setTitle("Choose a syllabus file");
-				File chosenFile = chooser.showOpenDialog(Main.generalStage);
+				File chosenFile = chooser.showOpenDialog(Javafxmain.generalStage);
 				if ((chosenFile != null) && (chosenFile.exists())) {
 					try {
 						Initializer.load(chosenFile);
@@ -379,7 +379,7 @@ public class MainController {
 						alertbox.setContentText("A crucial error has been occured on the local import function."
 								+ "Please notify the developers.");
 						alertbox.initModality(Modality.APPLICATION_MODAL);
-						alertbox.initOwner(Main.generalStage);
+						alertbox.initOwner(Javafxmain.generalStage);
 						alertbox.showAndWait();
 					}
 				}
@@ -403,7 +403,7 @@ public class MainController {
 					alertbox.setContentText("A crucial error has been occured on the online import function."
 							+ "Please notify the developers.");
 					alertbox.initModality(Modality.APPLICATION_MODAL);
-					alertbox.initOwner(Main.generalStage);
+					alertbox.initOwner(Javafxmain.generalStage);
 					return;
 				}
 				BorderPane importScene;
@@ -415,11 +415,11 @@ public class MainController {
 					alertbox.setContentText("Crucial error has been occured about the import section."
 							+ "Please notify the developers.");
 					alertbox.initModality(Modality.APPLICATION_MODAL);
-					alertbox.initOwner(Main.generalStage);
+					alertbox.initOwner(Javafxmain.generalStage);
 					return;
 				}
 				minorStage.initModality(Modality.APPLICATION_MODAL);
-				minorStage.initOwner(Main.generalStage);
+				minorStage.initOwner(Javafxmain.generalStage);
 				minorStage.initStyle(StageStyle.UNDECORATED);
 				minorStage.setScene(new Scene(importScene));
 				minorStage.showAndWait();
@@ -437,7 +437,7 @@ public class MainController {
 				chooser.getExtensionFilters().add(new ExtensionFilter("Syllabus File", "*.syb"));
 				chooser.getExtensionFilters().add(new ExtensionFilter("HTML File", "*.html"));
 				chooser.setTitle("Choose a save location");
-				File chosenFile = chooser.showSaveDialog(Main.generalStage);
+				File chosenFile = chooser.showSaveDialog(Javafxmain.generalStage);
 				if ((chosenFile != null)) {
 					if (chosenFile.getAbsolutePath().endsWith(".html")) {
 						export.export(selected, chosenFile.toString());
@@ -458,7 +458,7 @@ public class MainController {
 											alertbox.setContentText("HTML Viewer is not working properly."
 													+ "Please notify the developers about the problem.");
 											alertbox.initModality(Modality.APPLICATION_MODAL);
-											alertbox.initOwner(Main.generalStage);
+											alertbox.initOwner(Javafxmain.generalStage);
 											alertbox.getButtonTypes().clear();
 											alertbox.getButtonTypes().add(ButtonType.CLOSE);
 											alertbox.showAndWait();
@@ -469,8 +469,7 @@ public class MainController {
 							}
 
 						}, Duration.ofSeconds(8).toMillis());
-					}
-					else if (chosenFile.getAbsolutePath().endsWith(".syb")) {
+					} else if (chosenFile.getAbsolutePath().endsWith(".syb")) {
 						int index = courseList.getSelectionModel().getSelectedIndex();
 						try {
 							Initializer.save(index, chosenFile);
@@ -480,7 +479,7 @@ public class MainController {
 							alertbox.setContentText("File could not be saved to the location you directed."
 									+ "Please notify the developers about the problem.");
 							alertbox.initModality(Modality.APPLICATION_MODAL);
-							alertbox.initOwner(Main.generalStage);
+							alertbox.initOwner(Javafxmain.generalStage);
 							alertbox.getButtonTypes().clear();
 							alertbox.getButtonTypes().add(ButtonType.CLOSE);
 							alertbox.showAndWait();
@@ -515,7 +514,7 @@ public class MainController {
 					alertbox.setHeaderText("Error");
 					alertbox.setContentText("Github page is not accessible." + "Please notify the developers.");
 					alertbox.initModality(Modality.APPLICATION_MODAL);
-					alertbox.initOwner(Main.generalStage);
+					alertbox.initOwner(Javafxmain.generalStage);
 					alertbox.showAndWait();
 					return;
 				}
@@ -697,8 +696,8 @@ public class MainController {
 				TableColumn<EvaluationCriteria, String> lo1 = new TableColumn<>();
 				lo1.setText("LO" + learningOutcomesTable.getItems().size());
 				lo1.setEditable(true);
-				lo1.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria,String>>() {
-					
+				lo1.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria, String>>() {
+
 					@Override
 					public void handle(CellEditEvent<EvaluationCriteria, String> event) {
 						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
@@ -706,8 +705,9 @@ public class MainController {
 							int value = 0;
 							try {
 								value = Integer.parseInt(event.getNewValue());
-								int outcomeIndex = event.getTableView().getVisibleLeafIndex(event.getTableColumn()) - 3; 
-								event.getTableView().getItems().get(index).getContributionLevels().set(outcomeIndex, value);
+								int outcomeIndex = event.getTableView().getVisibleLeafIndex(event.getTableColumn()) - 3;
+								event.getTableView().getItems().get(index).getContributionLevels().set(outcomeIndex,
+										value);
 								event.getTableView().refresh();
 							} catch (NumberFormatException e) {
 								// do nothing xd
@@ -716,17 +716,18 @@ public class MainController {
 						}
 					}
 				});
-				lo1.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<EvaluationCriteria,String>, ObservableValue<String>>() {
-					
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<EvaluationCriteria, String> param) {
-						int columnNumber = param.getTableView().getVisibleLeafIndex(lo1);
-						int index = columnNumber -3;
-						param.getValue().getContributionLevels().add(index,0);
-						int value = param.getValue().getContributionLevels().get(index);
-						return new SimpleStringProperty(String.valueOf(value));
-					}
-				});
+				lo1.setCellValueFactory(
+						new Callback<TableColumn.CellDataFeatures<EvaluationCriteria, String>, ObservableValue<String>>() {
+
+							@Override
+							public ObservableValue<String> call(CellDataFeatures<EvaluationCriteria, String> param) {
+								int columnNumber = param.getTableView().getVisibleLeafIndex(lo1);
+								int index = columnNumber - 3;
+								param.getValue().getContributionLevels().add(index, 0);
+								int value = param.getValue().getContributionLevels().get(index);
+								return new SimpleStringProperty(String.valueOf(value));
+							}
+						});
 				evaluationCriteriaTable.getColumns().add(lo1);
 				evaluationCriteriaTable.refresh();
 			}
@@ -739,7 +740,7 @@ public class MainController {
 				if (index != -1) {
 					learningOutcomesTable.getItems().remove(index);
 					ObservableList<TableColumn<EvaluationCriteria, ?>> list = evaluationCriteriaTable.getColumns();
-					int removeLocation = index+3;
+					int removeLocation = index + 3;
 					list.remove(removeLocation);
 					for (int i = removeLocation; i < list.size(); i++) {
 						list.get(i).setText("LO" + (index + 1));
@@ -1008,17 +1009,17 @@ public class MainController {
 						return new SimpleStringProperty(param.getValue().getRelatedLearningOutcomesString());
 					}
 				});
-		
-		//CompetencyTable Toolbar functionalities
+
+		// CompetencyTable Toolbar functionalities
 		addCompetencyButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				competencyTable.getItems().add(new CourseCompetency("", 0, new LinkedHashSet<>()));
 			}
 		});
 		removeCompetencyButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				int index = competencyTable.getSelectionModel().getSelectedIndex();
@@ -1027,37 +1028,30 @@ public class MainController {
 				}
 			}
 		});
-		
-		
-		//courseList NullPointer Exception Solution
+
+		// courseList NullPointer Exception Solution
 		generalTabPane.setVisible(false);
 		saveButton.setDisable(true);
 		courseList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-			
-			
+
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				if (newValue.intValue() != -1) {
 					generalTabPane.setVisible(true);
 					saveButton.setDisable(false);
-				}
-				else {
+				} else {
 					generalTabPane.setVisible(false);
 					saveButton.setDisable(true);
 				}
 			}
 		});
-		
-		
-		
-		
-		
-		//Learning Outcomes Table Edit
+
+		// Learning Outcomes Table Edit
 		learningOutcomesTable.setEditable(true);
 		learningOutcomesTableLOColumn.setEditable(true);
 		learningOutcomesTableLOColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		learningOutcomesTableLOColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<String,String>>() {
-			
+		learningOutcomesTableLOColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<String, String>>() {
+
 			@Override
 			public void handle(CellEditEvent<String, String> event) {
 				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
@@ -1068,52 +1062,50 @@ public class MainController {
 				}
 			}
 		});
-		
-		
-		//Lecturer Table Edit
+
+		// Lecturer Table Edit
 		lecturerTable.setEditable(false);
 		lecturerTableNameColumn.setEditable(false);
 		lecturerTableTitleColumn.setEditable(false);
 		lecturerTableSurnameColumn.setEditable(false);
-		
-		//Assistant Table Edit
+
+		// Assistant Table Edit
 		assistantTable.setEditable(false);
 		assistantTableNameColumn.setEditable(false);
 		assistantTableSurnameColumn.setEditable(false);
 		assistantTableTitleColumn.setEditable(false);
-		
-		
+
 		// Schedule Table Edit
 		scheduleTable.setEditable(true);
 		scheduleTableDescriptionColumn.setEditable(true);
 		scheduleTableDescriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		scheduleTableRMColumn.setEditable(true);
 		scheduleTableRMColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		scheduleTableDescriptionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<WeeklySubject,String>>() {
-			
+		scheduleTableDescriptionColumn
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<WeeklySubject, String>>() {
+
+					@Override
+					public void handle(CellEditEvent<WeeklySubject, String> event) {
+
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							event.getTableView().getItems().get(index).setDescription(event.getNewValue());
+						}
+					}
+				});
+		scheduleTableRMColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<WeeklySubject, String>>() {
+
 			@Override
 			public void handle(CellEditEvent<WeeklySubject, String> event) {
-				
-				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
-					int index = event.getTablePosition().getRow();
-					event.getTableView().getItems().get(index).setDescription(event.getNewValue());
-				}
-			}
-		});
-		scheduleTableRMColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<WeeklySubject,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<WeeklySubject, String> event) {
-				
+
 				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
 					int index = event.getTablePosition().getRow();
 					event.getTableView().getItems().get(index).setRelatedMaterial(event.getNewValue());
 				}
 			}
 		});
-		
-		
-		//Evaluation Criteria Edit
+
+		// Evaluation Criteria Edit
 		evaluationCriteriaTable.setEditable(true);
 		evaluationCriteriaTableNameColumn.setEditable(true);
 		evaluationCriteriaTableNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -1121,56 +1113,58 @@ public class MainController {
 		evaluationCriteriaTableCountColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		evaluationCriteriaTableContributionColumn.setEditable(true);
 		evaluationCriteriaTableContributionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		evaluationCriteriaTableNameColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<EvaluationCriteria, String> event) {
-				
-				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
-					int index = event.getTablePosition().getRow();
-					event.getTableView().getItems().get(index).setName(event.getNewValue());
-				}
-			}
-		});
-		evaluationCriteriaTableCountColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<EvaluationCriteria, String> event) {
-				
-				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
-					int index = event.getTablePosition().getRow();
-					int value = 0;
-					try {
-						value = Integer.parseInt(event.getNewValue());
-						event.getTableView().getItems().get(index).setCount(value);
-					} catch (NumberFormatException e) {
-						// do nothing xd
-						return;
+		evaluationCriteriaTableNameColumn
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria, String>>() {
+
+					@Override
+					public void handle(CellEditEvent<EvaluationCriteria, String> event) {
+
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							event.getTableView().getItems().get(index).setName(event.getNewValue());
+						}
 					}
-				}
-			}
-		});
-		evaluationCriteriaTableContributionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<EvaluationCriteria, String> event) {
-				
-				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
-					int index = event.getTablePosition().getRow();
-					int value = 0;
-					try {
-						value = Integer.parseInt(event.getNewValue());
-						event.getTableView().getItems().get(index).setContribution(value);
-					} catch (NumberFormatException e) {
-						// do nothing xd
-						return;
+				});
+		evaluationCriteriaTableCountColumn
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria, String>>() {
+
+					@Override
+					public void handle(CellEditEvent<EvaluationCriteria, String> event) {
+
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							int value = 0;
+							try {
+								value = Integer.parseInt(event.getNewValue());
+								event.getTableView().getItems().get(index).setCount(value);
+							} catch (NumberFormatException e) {
+								// do nothing xd
+								return;
+							}
+						}
 					}
-				}
-			}
-		});
-		
-		
-		//Workload Table Edit
+				});
+		evaluationCriteriaTableContributionColumn
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<EvaluationCriteria, String>>() {
+
+					@Override
+					public void handle(CellEditEvent<EvaluationCriteria, String> event) {
+
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							int value = 0;
+							try {
+								value = Integer.parseInt(event.getNewValue());
+								event.getTableView().getItems().get(index).setContribution(value);
+							} catch (NumberFormatException e) {
+								// do nothing xd
+								return;
+							}
+						}
+					}
+				});
+
+		// Workload Table Edit
 		workloadTable.setEditable(true);
 		workloadTableNameColumn.setEditable(true);
 		workloadTableNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -1180,54 +1174,56 @@ public class MainController {
 		workloadTableHoursColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		workloadTableWorkloadColumn.setEditable(true);
 		workloadTableWorkloadColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-		workloadTableNameColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SemesterActivity,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<SemesterActivity, String> event) {
-				
-				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
-					int index = event.getTablePosition().getRow();
-					event.getTableView().getItems().get(index).setActivityName(event.getNewValue());
-				}
-			}
-		});
-		workloadTableNumberColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SemesterActivity,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<SemesterActivity, String> event) {
-				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
-					int index = event.getTablePosition().getRow();
-					int value = 0;
-					try {
-						value = Integer.parseInt(event.getNewValue());
-						event.getTableView().getItems().get(index).setNumber(value);
-					} catch (NumberFormatException e) {
-						// do nothing xd
-						return;
+		workloadTableNameColumn
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SemesterActivity, String>>() {
+
+					@Override
+					public void handle(CellEditEvent<SemesterActivity, String> event) {
+
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							event.getTableView().getItems().get(index).setActivityName(event.getNewValue());
+						}
 					}
-				}
-			}
-		});
-		workloadTableHoursColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SemesterActivity,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<SemesterActivity, String> event) {
-				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
-					int index = event.getTablePosition().getRow();
-					int value = 0;
-					try {
-						value = Integer.parseInt(event.getNewValue());
-						event.getTableView().getItems().get(index).setDuration(value);
-					} catch (NumberFormatException e) {
-						// do nothing xd
-						return;
+				});
+		workloadTableNumberColumn
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SemesterActivity, String>>() {
+
+					@Override
+					public void handle(CellEditEvent<SemesterActivity, String> event) {
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							int value = 0;
+							try {
+								value = Integer.parseInt(event.getNewValue());
+								event.getTableView().getItems().get(index).setNumber(value);
+							} catch (NumberFormatException e) {
+								// do nothing xd
+								return;
+							}
+						}
 					}
-				}
-			}
-		});
-		
-		
-		//Course Competency Edit
+				});
+		workloadTableHoursColumn
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<SemesterActivity, String>>() {
+
+					@Override
+					public void handle(CellEditEvent<SemesterActivity, String> event) {
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							int value = 0;
+							try {
+								value = Integer.parseInt(event.getNewValue());
+								event.getTableView().getItems().get(index).setDuration(value);
+							} catch (NumberFormatException e) {
+								// do nothing xd
+								return;
+							}
+						}
+					}
+				});
+
+		// Course Competency Edit
 		competencyTable.setEditable(true);
 		competencyTableDescriptionColumn.setEditable(true);
 		competencyTableDescriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -1235,67 +1231,68 @@ public class MainController {
 		competencyTableContributionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		competencyTableRelatedLearningOutcomes.setEditable(true);
 		competencyTableRelatedLearningOutcomes.setCellFactory(TextFieldTableCell.forTableColumn());
-		competencyTableDescriptionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CourseCompetency,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<CourseCompetency, String> event) {
-				
-				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
-					int index = event.getTablePosition().getRow();
-					event.getTableView().getItems().get(index).setDescription(event.getNewValue());
-				}
-			}
-		});
-		competencyTableContributionColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CourseCompetency,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<CourseCompetency, String> event) {
-				if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
-					int index = event.getTablePosition().getRow();
-					int value = 0;
-					try {
-						value = Integer.parseInt(event.getNewValue());
-						event.getTableView().getItems().get(index).setContributionLevel(value);
-					} catch (NumberFormatException e) {
-						// do nothing xd
-						return;
-					}
-				}
-			}
-		});
-		competencyTableRelatedLearningOutcomes.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CourseCompetency,String>>() {
-			
-			@Override
-			public void handle(CellEditEvent<CourseCompetency, String> event) {
-				
-				String newValue = event.getNewValue();
-				if ((newValue != null) && !(newValue.isBlank())) {
-					int index = event.getTablePosition().getRow();
-					int limitValue = learningOutcomesTable.getItems().size();
-					String[] sections = newValue.split(",", limitValue);
-					LinkedHashSet<Integer> tempSet = new LinkedHashSet<Integer>();
-					for (String lo : sections) {
-						try {
-							int intValue = Integer.parseInt(lo);
-							tempSet.add(intValue);
-						} catch (NumberFormatException e) {
-							//do nothing xd
-							return;
+		competencyTableDescriptionColumn
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CourseCompetency, String>>() {
+
+					@Override
+					public void handle(CellEditEvent<CourseCompetency, String> event) {
+
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							event.getTableView().getItems().get(index).setDescription(event.getNewValue());
 						}
 					}
-					competencyTable.getItems().get(index).setRelatedLearningOutcomes(tempSet);
-					competencyTable.refresh();
-				}
-			}
-		});
+				});
+		competencyTableContributionColumn
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CourseCompetency, String>>() {
 
-		
+					@Override
+					public void handle(CellEditEvent<CourseCompetency, String> event) {
+						if ((event.getNewValue() != null) && !(event.getNewValue().isBlank())) {
+							int index = event.getTablePosition().getRow();
+							int value = 0;
+							try {
+								value = Integer.parseInt(event.getNewValue());
+								event.getTableView().getItems().get(index).setContributionLevel(value);
+							} catch (NumberFormatException e) {
+								// do nothing xd
+								return;
+							}
+						}
+					}
+				});
+		competencyTableRelatedLearningOutcomes
+				.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CourseCompetency, String>>() {
+
+					@Override
+					public void handle(CellEditEvent<CourseCompetency, String> event) {
+
+						String newValue = event.getNewValue();
+						if ((newValue != null) && !(newValue.isBlank())) {
+							int index = event.getTablePosition().getRow();
+							int limitValue = learningOutcomesTable.getItems().size();
+							String[] sections = newValue.split(",", limitValue);
+							LinkedHashSet<Integer> tempSet = new LinkedHashSet<Integer>();
+							for (String lo : sections) {
+								try {
+									int intValue = Integer.parseInt(lo);
+									tempSet.add(intValue);
+								} catch (NumberFormatException e) {
+									// do nothing xd
+									return;
+								}
+							}
+							competencyTable.getItems().get(index).setRelatedLearningOutcomes(tempSet);
+							competencyTable.refresh();
+						}
+					}
+				});
 
 		// TEST ITEM - DO NOT REMOVE UNTIL THE END OF THE DEVELOPMENT PROCESS
 		Course course = new Course();
 		course.setCourseName("Principles of Software Engineering");
 		course.setCode("SE 302");
-		course.setCourseCoordinator("Assistant Professor//Kaya//Oðuz");
+		course.setCourseCoordinator("Assistant Professor//Kaya//Oï¿½uz");
 		course.addLearningOutcome("Define engineering, software, computer and system engineering");
 		course.addLearningOutcome("Define software processes");
 		course.addLearningOutcome("Gather the software requirements");

@@ -21,7 +21,7 @@ module TermProject {
 	opens jsonModel 
 	  to com.google.gson;
 	
-	opens newui;
-
+	opens newui to javafx.fxml;
+	exports newui;
 	
 }
