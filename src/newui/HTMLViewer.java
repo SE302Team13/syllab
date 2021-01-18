@@ -11,13 +11,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class HTMLViewer {
-	
-	
-	
+
 	private HTMLViewer() {
-		
+
 	}
-	
+
 	public static void viewHTML(File HTMLFile) throws IOException {
 		Stage minorStage = new Stage(StageStyle.UNDECORATED);
 		FXMLLoader loader = new FXMLLoader(Javafxmain.class.getResource("fxml/htmlviewer.fxml"));

@@ -1,9 +1,9 @@
 package model;
 
 public class Lecturer {
-	
-	//Field(s)
-	
+
+	// Field(s)
+
 	/**
 	 * Name of the lecturer.
 	 */
@@ -16,19 +16,17 @@ public class Lecturer {
 	 * {@link AcademicTitle} for a lecturer.
 	 */
 	private AcademicTitle title;
-	
-	
-	//Constructor(s)
-	
+
+	// Constructor(s)
+
 	public Lecturer(String lecName, String lecSurname, AcademicTitle title) {
 		this.name = lecName;
 		this.surname = lecSurname;
 		this.title = title;
 	}
-	
-	
-	//Getter(s) and Setter(s)
-	
+
+	// Getter(s) and Setter(s)
+
 	public String getName() {
 		return name;
 	}
@@ -36,7 +34,7 @@ public class Lecturer {
 	public String getSurname() {
 		return surname;
 	}
-	
+
 	public String getFullname() {
 		return name + " " + surname;
 	}
@@ -60,7 +58,7 @@ public class Lecturer {
 		}
 		return false;
 	}
-	
+
 	public boolean setTitle(AcademicTitle title) {
 		if (title != null) {
 			this.title = title;
@@ -68,8 +66,7 @@ public class Lecturer {
 		}
 		return false;
 	}
-	
-	
+
 	/**
 	 * Overridden method equals() to identify object with exactly same properties
 	 */
@@ -84,6 +81,5 @@ public class Lecturer {
 		}
 		return false;
 	}
-	
 
 }

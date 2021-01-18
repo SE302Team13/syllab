@@ -2,7 +2,6 @@ package newui;
 
 import java.io.File;
 
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -48,10 +47,10 @@ public class HTMLViewerController {
 				Javafxmain.generalStage.setIconified(true);
 			}
 		});
-		
+
 		// Maximize Button functionality
 		maximizeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			
+
 			@Override
 			public void handle(MouseEvent event) {
 				Stage minorStage = (Stage) topPane.getScene().getWindow();
@@ -83,13 +82,11 @@ public class HTMLViewerController {
 			}
 		});
 	}
-	
-	
+
 	public void setHTMLFile(File file) {
 		if ((file != null) && (file.getName().endsWith(".html"))) {
-			webViewer.getEngine().load("file://" +file.getAbsolutePath());
+			webViewer.getEngine().load("file://" + file.getAbsolutePath());
 		}
 	}
-	
 
 }

@@ -2,27 +2,27 @@ package model;
 
 public class CourseBook {
 
-	//Field(s)
+	// Field(s)
 	/**
 	 * Full name of the book without specified edition
 	 */
 	private String name;
-	
+
 	/**
 	 * Edition number of the book.
 	 */
 	private int edition;
-	
+
 	/**
 	 * Author of the book.
 	 */
 	private String author;
-	
-	
-	//Constructor(s)
-	
+
+	// Constructor(s)
+
 	/**
 	 * General constructor for {@link CourseBook} class
+	 * 
 	 * @param name
 	 * @param edition
 	 * @param author
@@ -32,8 +32,8 @@ public class CourseBook {
 		this.edition = edition;
 		this.author = author;
 	}
-	
-	//Getter(s) and Setter(s)
+
+	// Getter(s) and Setter(s)
 	public String getName() {
 		return name;
 	}
@@ -47,7 +47,7 @@ public class CourseBook {
 	}
 
 	public boolean setName(String name) {
-		if((name != null) && !(name.isBlank())) {
+		if ((name != null) && !(name.isBlank())) {
 			this.name = name;
 			return true;
 		}
@@ -69,7 +69,6 @@ public class CourseBook {
 		this.author = author;
 	}
 
-	
 	/**
 	 * Overridden method equals() to identify object with exactly same properties
 	 */
@@ -83,6 +82,5 @@ public class CourseBook {
 		}
 		return false;
 	}
-
 
 }

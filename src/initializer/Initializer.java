@@ -36,8 +36,7 @@ public class Initializer {
 			save(index);
 		}
 	}
-	
-	
+
 	public static void clearDocument() {
 		File[] lastSaves = coursePath.toFile().listFiles();
 		if (lastSaves != null) {
@@ -52,10 +51,7 @@ public class Initializer {
 	public static void save(int index) throws IOException {
 		if (index < allCourseList.size()) {
 			Course course = allCourseList.get(index);
-			String fileName = course.getCode() + "-" 
-					+ course.getCreationDate()
-					.toEpochSecond(ZoneOffset.UTC)
-					+ ".syb";
+			String fileName = course.getCode() + "-" + course.getCreationDate().toEpochSecond(ZoneOffset.UTC) + ".syb";
 			Path savePath = coursePath.resolve(fileName);
 			File saveFile = savePath.toFile();
 			if (!saveFile.getParentFile().exists()) {
@@ -72,7 +68,7 @@ public class Initializer {
 			stream.close();
 		}
 	}
-	
+
 	public static void save(int index, File saveLocation) throws IOException {
 		if ((index < allCourseList.size()) && (index >= 0)) {
 			Course course = allCourseList.get(index);
@@ -91,7 +87,8 @@ public class Initializer {
 	}
 
 	public static void commitLocations() throws IOException {
-		BufferedWriter writer = Files.newBufferedWriter(locationsFile, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+		BufferedWriter writer = Files.newBufferedWriter(locationsFile, StandardOpenOption.WRITE,
+				StandardOpenOption.TRUNCATE_EXISTING);
 		writer.write("" + locations.size());
 		writer.newLine();
 		for (String location : locations) {
@@ -104,10 +101,10 @@ public class Initializer {
 
 	public static void readLocations() throws IOException {
 		File realFile = locationsFile.toFile();
-		if(!realFile.getParentFile().exists()) {
+		if (!realFile.getParentFile().exists()) {
 			realFile.getParentFile().mkdirs();
 		}
-		if(!realFile.exists()) {
+		if (!realFile.exists()) {
 			realFile.createNewFile();
 		}
 		BufferedReader reader = Files.newBufferedReader(locationsFile);
@@ -127,7 +124,7 @@ public class Initializer {
 			}
 		}
 	}
-	
+
 	public static boolean load(File file) throws FileNotFoundException, IOException, ClassNotFoundException {
 		if (file != null && file.exists()) {
 			ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file));
@@ -145,10 +142,10 @@ public class Initializer {
 
 	public static void loadAll() throws FileNotFoundException, ClassNotFoundException, IOException {
 		File realFile = locationsFile.toFile();
-		if(!realFile.getParentFile().exists()) {
+		if (!realFile.getParentFile().exists()) {
 			realFile.getParentFile().mkdirs();
 		}
-		if(!realFile.exists()) {
+		if (!realFile.exists()) {
 			realFile.createNewFile();
 		}
 		for (String location : locations) {

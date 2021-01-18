@@ -3,13 +3,12 @@ package model;
 import java.io.Serializable;
 
 public class SemesterActivity implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4684404325720795798L;
-	
-	
+
 	/**
 	 * Name of the Semester Activity.
 	 */
@@ -23,15 +22,16 @@ public class SemesterActivity implements Serializable {
 	 */
 	private int duration;
 	/**
-	 * Total workload of the activity in hour(s) for one semester. 
+	 * Total workload of the activity in hour(s) for one semester.
 	 */
 	private int workload;
 
 	/**
-	 * Constructor does not contain any validation. Arguments should be validated <b>before</b> passed to
-	 * this constructor.
-	 * @param actName Name of the Semester Activity.
-	 * @param number Number of the occurrence of the activity in one semester.
+	 * Constructor does not contain any validation. Arguments should be validated
+	 * <b>before</b> passed to this constructor.
+	 * 
+	 * @param actName  Name of the Semester Activity.
+	 * @param number   Number of the occurrence of the activity in one semester.
 	 * @param duration Expected duration for one occurrence of the activity.
 	 */
 	public SemesterActivity(String actName, int number, int duration) {
@@ -40,35 +40,30 @@ public class SemesterActivity implements Serializable {
 		this.duration = duration;
 		this.workload = duration * number;
 	}
-	
-	//Method(s)
-	
+
+	// Method(s)
+
 	public void recalculateWorkload() {
 		workload = duration * number;
 	}
 
-	
-	//Getter(s) and Setter(s)
-	
+	// Getter(s) and Setter(s)
+
 	public String getActivityName() {
 		return activityName;
 	}
-
 
 	public int getNumber() {
 		return number;
 	}
 
-
 	public int getDuration() {
 		return duration;
 	}
 
-
 	public int getWorkload() {
 		return workload;
 	}
-
 
 	public boolean setActivityName(String activityName) {
 		if ((activityName != null) && !(activityName.isBlank())) {
@@ -77,7 +72,6 @@ public class SemesterActivity implements Serializable {
 		}
 		return false;
 	}
-
 
 	public boolean setNumber(int number) {
 		if (number >= 0) {
@@ -88,7 +82,6 @@ public class SemesterActivity implements Serializable {
 		return false;
 	}
 
-
 	public boolean setDuration(int duration) {
 		if (duration > 0) {
 			this.duration = duration;
@@ -97,11 +90,7 @@ public class SemesterActivity implements Serializable {
 		}
 		return false;
 	}
-	
 
-	
-	
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof SemesterActivity) {
@@ -112,6 +101,5 @@ public class SemesterActivity implements Serializable {
 		}
 		return false;
 	}
-	
-	
+
 }

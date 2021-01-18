@@ -12,8 +12,7 @@ public class CourseCompetency implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -5542884675479939170L;
-	
-	
+
 	/**
 	 * Description for the competeceny.
 	 */
@@ -50,7 +49,7 @@ public class CourseCompetency implements Serializable {
 		} else {
 			this.relatedLearningOutcomes = new ArrayList<>();
 		}
-		
+
 	}
 
 	public String getDescription() {
@@ -66,15 +65,18 @@ public class CourseCompetency implements Serializable {
 	public ArrayList<Integer> getRelatedLearningOutcomes() {
 		return relatedLearningOutcomes;
 	}
-	
+
 	public String getRelatedLearningOutcomesString() {
 		String base = "";
-		for(Integer lo : getRelatedLearningOutcomes()) {
+		for (Integer lo : getRelatedLearningOutcomes()) {
 			base += lo + ",";
 		}
-		return base.substring(0,base.length()-1);
+		if (base.length() != 0) {
+			return base.substring(0, base.length() - 1);
+		}
+		return base;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -98,38 +100,25 @@ public class CourseCompetency implements Serializable {
 		return false;
 	}
 
-	
 	/*
-	 * NOTE
-	 * Class will stay (almost) immutable for now to keep it simple and prevent confusion.
-	 * Because these functionalities are not required by the program at the moment.
-	 * This state may change in further releases.
-	 * date : 02.01.2021 / 22:25
-	 * author : Hakan Ayaz
+	 * NOTE Class will stay (almost) immutable for now to keep it simple and prevent
+	 * confusion. Because these functionalities are not required by the program at
+	 * the moment. This state may change in further releases. date : 02.01.2021 /
+	 * 22:25 author : Hakan Ayaz
 	 */
-	
+
 	/*
-	public boolean setDescription(String description) {
-		if ((description != null) && !(description.isBlank())) {
-			this.description = description;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean setContributionLevel(int contributionLevel) {
-		if ((contributionLevel >= 0) && (contributionLevel <= 5)) {
-			this.contributionLevel = contributionLevel;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean setRelatedLearningOutcomes(ArrayList<Integer> relatedLearningOutcomes) {
-		if (relatedLearningOutcomes == null) {
-			relatedLearningOutcomes = new ArrayList<>();
-		}
-	}
-	*/
+	 * public boolean setDescription(String description) { if ((description != null)
+	 * && !(description.isBlank())) { this.description = description; return true; }
+	 * return false; }
+	 * 
+	 * public boolean setContributionLevel(int contributionLevel) { if
+	 * ((contributionLevel >= 0) && (contributionLevel <= 5)) {
+	 * this.contributionLevel = contributionLevel; return true; } return false; }
+	 * 
+	 * public boolean setRelatedLearningOutcomes(ArrayList<Integer>
+	 * relatedLearningOutcomes) { if (relatedLearningOutcomes == null) {
+	 * relatedLearningOutcomes = new ArrayList<>(); } }
+	 */
 
 }

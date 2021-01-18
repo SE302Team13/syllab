@@ -100,7 +100,6 @@ public class ImportController {
 				} else {
 					newCode = codes[0].toUpperCase();
 				}
-					
 
 				String langCode = langTurkish.isSelected() ? "tr" : "en";
 
@@ -167,7 +166,7 @@ public class ImportController {
 
 							System.out.println(course.logCourse());
 							Platform.runLater(new Runnable() {
-								
+
 								@Override
 								public void run() {
 									Initializer.getCourses().add(course);

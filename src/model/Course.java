@@ -52,13 +52,12 @@ public class Course implements Serializable {
 	 * others for the same course
 	 */
 	private transient LocalDateTime creationDate;
-	
+
 	/**
 	 * 
 	 */
 	private String timeString = null;
 
-	
 	/**
 	 * The courses that should be completed before taking this course or
 	 * requirements of this course which should be satisfied before taking the
@@ -245,40 +244,32 @@ public class Course implements Serializable {
 	 *                            outcomes.
 	 */
 	/*
-	 * Removed because of the complete validation concerns. Please use the other constructor with
-	 * setter(s) and getter(s) 
-	public Course(String courseName, String code, LinkedHashSet<String> prerequisites, Language courseLang,
-			SemesterOptions semester, int theoreticalHour, int labHour, CourseType type, String coordinator,
-			LinkedHashSet<String> lecturers, LinkedHashSet<String> assistants, String courseObjective,
-			LinkedHashSet<String> learningOutcomes, String courseDescription, CourseCategory category,
-			LinkedHashSet<WeeklySubject> schedule, CourseBook courseBook, LinkedHashSet<CourseBook> suggestedReading,
-			LinkedHashSet<EvaluationCriteria> evaluationCriterias, LinkedHashSet<SemesterActivity> workloadTable,
-			LinkedHashSet<CourseCompetency> courseCompetencies) {
-		this.courseName = courseName;
-		this.code = code;
-		this.creationDate = LocalDateTime.now();
-		this.prerequisites = new ArrayList<>(prerequisites);
-		this.courseLang = courseLang;
-		this.labHour = labHour;
-		this.theoreticalHour = theoreticalHour;
-		this.localCredit = calculateLocalCredit();
-		this.ects = calculateECTS();
-		this.type = type;
-		this.courseCoordinator = coordinator;
-		this.courseLecturers = new ArrayList<>(lecturers);
-		this.assistants = new ArrayList<>(assistants);
-		this.courseObjective = courseObjective;
-		this.courseDescription = courseDescription;
-		this.learningOutcomes = new ArrayList<>(learningOutcomes);
-		this.courseCategory = category;
-		this.courseSchedule = new ArrayList<>(schedule);
-		this.courseTextBook = courseBook;
-		this.suggestedReading = new ArrayList<>(suggestedReading);
-		this.evaluationCriterias = new ArrayList<>(evaluationCriterias);
-		this.workloadTable = new ArrayList<>(workloadTable);
-		this.courseCompetencies = new ArrayList<>(courseCompetencies);
-	}
-	*/
+	 * Removed because of the complete validation concerns. Please use the other
+	 * constructor with setter(s) and getter(s) public Course(String courseName,
+	 * String code, LinkedHashSet<String> prerequisites, Language courseLang,
+	 * SemesterOptions semester, int theoreticalHour, int labHour, CourseType type,
+	 * String coordinator, LinkedHashSet<String> lecturers, LinkedHashSet<String>
+	 * assistants, String courseObjective, LinkedHashSet<String> learningOutcomes,
+	 * String courseDescription, CourseCategory category,
+	 * LinkedHashSet<WeeklySubject> schedule, CourseBook courseBook,
+	 * LinkedHashSet<CourseBook> suggestedReading, LinkedHashSet<EvaluationCriteria>
+	 * evaluationCriterias, LinkedHashSet<SemesterActivity> workloadTable,
+	 * LinkedHashSet<CourseCompetency> courseCompetencies) { this.courseName =
+	 * courseName; this.code = code; this.creationDate = LocalDateTime.now();
+	 * this.prerequisites = new ArrayList<>(prerequisites); this.courseLang =
+	 * courseLang; this.labHour = labHour; this.theoreticalHour = theoreticalHour;
+	 * this.localCredit = calculateLocalCredit(); this.ects = calculateECTS();
+	 * this.type = type; this.courseCoordinator = coordinator; this.courseLecturers
+	 * = new ArrayList<>(lecturers); this.assistants = new ArrayList<>(assistants);
+	 * this.courseObjective = courseObjective; this.courseDescription =
+	 * courseDescription; this.learningOutcomes = new ArrayList<>(learningOutcomes);
+	 * this.courseCategory = category; this.courseSchedule = new
+	 * ArrayList<>(schedule); this.courseTextBook = courseBook;
+	 * this.suggestedReading = new ArrayList<>(suggestedReading);
+	 * this.evaluationCriterias = new ArrayList<>(evaluationCriterias);
+	 * this.workloadTable = new ArrayList<>(workloadTable); this.courseCompetencies
+	 * = new ArrayList<>(courseCompetencies); }
+	 */
 
 	// FIXME add a default constructor for newly created courses without a
 	// sufficient information supplied.
@@ -307,11 +298,15 @@ public class Course implements Serializable {
 		this.courseSchedule = WeeklySubject.createDefaultSemester();
 		this.courseTextBook = "Not given";
 		this.suggestedReading = new ArrayList<>();
-		this.evaluationCriterias = new ArrayList<>();	
+		this.evaluationCriterias = new ArrayList<>();
 	}
-	
+
 	// A constructor for imported courses.
-	public Course(String courseName, String courseCode, ArrayList<String> prerequisites, Language courseLang, SemesterOptions semester, int labHour, int theoreticalHour, ArrayList<SemesterActivity> workloadTable, CourseType type, String courseCoordinator, ArrayList<String> courseLecturers,ArrayList<String> assistants, CourseCategory courseCategory, ArrayList<WeeklySubject> courseSchedule, ArrayList<EvaluationCriteria> evaluationCriterias) {
+	public Course(String courseName, String courseCode, ArrayList<String> prerequisites, Language courseLang,
+			SemesterOptions semester, int labHour, int theoreticalHour, ArrayList<SemesterActivity> workloadTable,
+			CourseType type, String courseCoordinator, ArrayList<String> courseLecturers, ArrayList<String> assistants,
+			CourseCategory courseCategory, ArrayList<WeeklySubject> courseSchedule,
+			ArrayList<EvaluationCriteria> evaluationCriterias) {
 		this.courseName = courseName;
 		this.code = courseCode;
 		this.timeString = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
@@ -355,7 +350,7 @@ public class Course implements Serializable {
 		this.courseSchedule = courseSchedule;
 		this.courseTextBook = "Not given";
 		this.suggestedReading = new ArrayList<>();
-		this.evaluationCriterias = evaluationCriterias;	
+		this.evaluationCriterias = evaluationCriterias;
 	}
 
 	// Method(s)
@@ -416,15 +411,12 @@ public class Course implements Serializable {
 	 *         returns {@code false}.
 	 */
 	private boolean addLecturer(String lecturer) {
-		/* 
-		 * Old version simplified for the sake of implementation
-		if (doesContain(courseLecturers, lecturer)) {
-			return false;
-		} else {
-			return courseLecturers.add(lecturer);
-		}
-		*/
-		
+		/*
+		 * Old version simplified for the sake of implementation if
+		 * (doesContain(courseLecturers, lecturer)) { return false; } else { return
+		 * courseLecturers.add(lecturer); }
+		 */
+
 		if ((lecturer != null) && !(lecturer.isBlank()) && !(courseLecturers.contains(lecturer))) {
 			courseLecturers.add(lecturer);
 			return true;
@@ -432,8 +424,6 @@ public class Course implements Serializable {
 		return false;
 	}
 
-	
-	
 	/**
 	 * This overwritten method is the used to add a lecturer to the course without
 	 * creating {@link Lecturer} object.
@@ -449,18 +439,15 @@ public class Course implements Serializable {
 	 *                                  {@code lecSurname} is blank (or empty).
 	 */
 	/*
-	 * Removed method to create simplicity for other classes.
-	public boolean addLecturer(String lecName, String lecSurname, AcademicTitle title)
-			throws NullPointerException, IllegalArgumentException {
-		if ((lecName == null) || (lecSurname == null) || (title == null)) {
-			throw new NullPointerException("Lecturer name, surname or title is null.");
-		}
-		if ((lecName.isBlank()) || (lecSurname.isBlank())) {
-			throw new IllegalArgumentException("Lecturer name or surname is blank. Please fill it.");
-		}
-		return addLecturer(new Lecturer(lecName, lecSurname, title));
-	}
-	*/
+	 * Removed method to create simplicity for other classes. public boolean
+	 * addLecturer(String lecName, String lecSurname, AcademicTitle title) throws
+	 * NullPointerException, IllegalArgumentException { if ((lecName == null) ||
+	 * (lecSurname == null) || (title == null)) { throw new
+	 * NullPointerException("Lecturer name, surname or title is null."); } if
+	 * ((lecName.isBlank()) || (lecSurname.isBlank())) { throw new
+	 * IllegalArgumentException("Lecturer name or surname is blank. Please fill it."
+	 * ); } return addLecturer(new Lecturer(lecName, lecSurname, title)); }
+	 */
 
 	/**
 	 * Removes the specified lecturer from the {@link #courseLecturers} list.
@@ -482,13 +469,10 @@ public class Course implements Serializable {
 	 */
 	private boolean addAssistant(String assistant) {
 		/*
-		if (doesContain(assistants, assistant)) {
-			return false;
-		} else {
-			return courseLecturers.add(assistant);
-		}
-		*/
-		if((assistant != null) && !(assistant.isBlank()) && !(assistants.contains(assistant))) {
+		 * if (doesContain(assistants, assistant)) { return false; } else { return
+		 * courseLecturers.add(assistant); }
+		 */
+		if ((assistant != null) && !(assistant.isBlank()) && !(assistants.contains(assistant))) {
 			assistants.add(assistant);
 			return true;
 		}
@@ -510,20 +494,16 @@ public class Course implements Serializable {
 	 *                                  {@code lecSurname} is blank (or empty).
 	 */
 	/*
-	 * Removed for the simplicity.
-	public boolean addAssistant(String lecName, String lecSurname, AcademicTitle title)
-			throws NullPointerException, IllegalArgumentException {
-		if ((lecName == null) || (lecSurname == null) || (title == null)) {
-			throw new NullPointerException("Assistant name, surname or title is null.");
-		}
-		if ((lecName.isBlank()) || (lecSurname.isBlank())) {
-			throw new IllegalArgumentException("Assistant name or surname is blank. Please fill it.");
-		}
-		return addAssistant(new Lecturer(lecName, lecSurname, title));
-	}
-	*/
-	
-	
+	 * Removed for the simplicity. public boolean addAssistant(String lecName,
+	 * String lecSurname, AcademicTitle title) throws NullPointerException,
+	 * IllegalArgumentException { if ((lecName == null) || (lecSurname == null) ||
+	 * (title == null)) { throw new
+	 * NullPointerException("Assistant name, surname or title is null."); } if
+	 * ((lecName.isBlank()) || (lecSurname.isBlank())) { throw new
+	 * IllegalArgumentException("Assistant name or surname is blank. Please fill it."
+	 * ); } return addAssistant(new Lecturer(lecName, lecSurname, title)); }
+	 */
+
 	/**
 	 * Removes the specified assistant from the {@link #assistants} list.
 	 * 
@@ -561,14 +541,10 @@ public class Course implements Serializable {
 	 */
 	private boolean addReading(String book) {
 		/*
-		 * Removed version for the simplicity
-		if (doesContain(suggestedReading, book)) {
-			return false;
-		} else {
-			return suggestedReading.add(book);
-		}
-		*/
-		
+		 * Removed version for the simplicity if (doesContain(suggestedReading, book)) {
+		 * return false; } else { return suggestedReading.add(book); }
+		 */
+
 		if ((book != null) && !(book.isBlank()) && !(suggestedReading.contains(book))) {
 			suggestedReading.add(book);
 			return true;
@@ -595,22 +571,15 @@ public class Course implements Serializable {
 	 *                                  {@code IllegalArgumentException}.
 	 */
 	/*
-	 * Removed method for the simplicity.
-	public boolean addReading(String name, int edition, String author)
-			throws NullPointerException, IllegalArgumentException {
-		if (name == null) {
-			throw new NullPointerException("Book name is null.");
-		}
-		if ((name.isBlank()) || (edition < 0)) {
-			throw new IllegalArgumentException(
-					"Book name is mandatory and edition value must " + "be greater than 0 Please fill it.");
-		}
-		if ((author == null) || (author.isBlank())) {
-			author = "Anonymous";
-		}
-		return addReading(new CourseBook(name, edition, author));
-	}
-	*/
+	 * Removed method for the simplicity. public boolean addReading(String name, int
+	 * edition, String author) throws NullPointerException, IllegalArgumentException
+	 * { if (name == null) { throw new NullPointerException("Book name is null."); }
+	 * if ((name.isBlank()) || (edition < 0)) { throw new IllegalArgumentException(
+	 * "Book name is mandatory and edition value must " +
+	 * "be greater than 0 Please fill it."); } if ((author == null) ||
+	 * (author.isBlank())) { author = "Anonymous"; } return addReading(new
+	 * CourseBook(name, edition, author)); }
+	 */
 
 	/**
 	 * Method to add a book to suggested readings without specifying the edition.
@@ -621,13 +590,10 @@ public class Course implements Serializable {
 	 *         otherwise.
 	 */
 	/*
-	 * Removed for the sake of simplicity
-	public boolean addReading(String name, String author) {
-		return addReading(name, 0, author);
-	}
-	*/
-	
-	
+	 * Removed for the sake of simplicity public boolean addReading(String name,
+	 * String author) { return addReading(name, 0, author); }
+	 */
+
 	/**
 	 * Method to remove a book from the {@link #suggestedReading} Array.
 	 * 
@@ -638,7 +604,7 @@ public class Course implements Serializable {
 	public boolean removeReading(String book) {
 		return suggestedReading.remove(book);
 	}
-	
+
 	public boolean addLearningOutcome(String learningOutcome) {
 		if ((learningOutcome != null) && !(learningOutcome.isBlank())) {
 			return learningOutcomes.add(learningOutcome);
@@ -1044,7 +1010,7 @@ public class Course implements Serializable {
 	public ArrayList<CourseCompetency> getCourseCompetencies() {
 		return courseCompetencies;
 	}
-	
+
 	public int getTotalWorkload() {
 		int totalWorkload = 0;
 		for (SemesterActivity activity : workloadTable) {
@@ -1216,7 +1182,8 @@ public class Course implements Serializable {
 		boolean returnValue = true;
 		if (courseSchedule != null) {
 			for (WeeklySubject scheduleItem : courseSchedule) {
-				if (!(changeSchedule(scheduleItem.getWeek(), scheduleItem.getDescription(), scheduleItem.getRelatedMaterial()))) {
+				if (!(changeSchedule(scheduleItem.getWeek(), scheduleItem.getDescription(),
+						scheduleItem.getRelatedMaterial()))) {
 					returnValue = false;
 				}
 			}
@@ -1275,7 +1242,7 @@ public class Course implements Serializable {
 		}
 		return returnValue;
 	}
-	
+
 	@Override
 	public String toString() {
 		this.creationDate = LocalDateTime.parse(timeString);
