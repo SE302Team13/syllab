@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="438.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newui.ImportController">
    <top>
       <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
@@ -55,7 +54,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button fx:id="importButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Import" onAction="#sendRequest"/>
+                        <Button fx:id="importButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Import" />
                         <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Cancel" />
                      </children>
                   </HBox>

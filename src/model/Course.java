@@ -312,9 +312,11 @@ public class Course implements Serializable {
 	public Course(String courseName, String courseCode, ArrayList<String> prerequisites, Language courseLang, SemesterOptions semester, int labHour, int theoreticalHour, ArrayList<SemesterActivity> workloadTable, CourseType type, String courseCoordinator, ArrayList<String> courseLecturers,ArrayList<String> assistants, CourseCategory courseCategory, ArrayList<WeeklySubject> courseSchedule, ArrayList<EvaluationCriteria> evaluationCriterias) {
 		this.courseName = courseName;
 		this.code = courseCode;
-		this.creationDate = LocalDateTime.now();
+		this.timeString = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+		this.creationDate = LocalDateTime.parse(timeString);
 		this.courseDescription = new String();
 		this.prerequisites = prerequisites;
+		this.level = CourseLevel.FIRST_CYCLE;
 		this.courseLang = courseLang;
 		this.semester = semester;
 		this.labHour = labHour;

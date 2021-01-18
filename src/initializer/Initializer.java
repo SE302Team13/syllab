@@ -40,9 +40,11 @@ public class Initializer {
 	
 	public static void clearDocument() {
 		File[] lastSaves = coursePath.toFile().listFiles();
-		for (File deleted : lastSaves) {
-			if (deleted.exists() && deleted.isFile() && deleted.getName().endsWith(".syb")) {
-				deleted.delete();
+		if (lastSaves != null) {
+			for (File deleted : lastSaves) {
+				if (deleted.exists() && deleted.isFile() && deleted.getName().endsWith(".syb")) {
+					deleted.delete();
+				}
 			}
 		}
 	}
@@ -125,6 +127,13 @@ public class Initializer {
 	}
 
 	public static void loadAll() throws FileNotFoundException, ClassNotFoundException, IOException {
+		File realFile = locationsFile.toFile();
+		if(!realFile.getParentFile().exists()) {
+			realFile.getParentFile().mkdirs();
+		}
+		if(!realFile.exists()) {
+			realFile.createNewFile();
+		}
 		for (String location : locations) {
 			File file = new File(location);
 			load(file);

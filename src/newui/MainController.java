@@ -399,13 +399,14 @@ public class MainController {
 					try {
 						Initializer.load(chosenFile);
 					} catch (ClassNotFoundException | IOException e) {
-						JFXAlert<String> alert = new JFXAlert<>(Main.generalStage);
-						alert.setTitle("Local Import Error");
-						alert.setHeaderText("Error");
-						alert.setContentText("A crucial error has been occured on the local import function."
+						Alert alertbox = new Alert(AlertType.ERROR);
+						alertbox.setTitle("Local Import Error");
+						alertbox.setHeaderText("Error");
+						alertbox.setContentText("A crucial error has been occured on the local import function."
 								+ "Please notify the developers.");
-						alert.initModality(Modality.APPLICATION_MODAL);
-						alert.showAndWait();
+						alertbox.initModality(Modality.APPLICATION_MODAL);
+						alertbox.initOwner(Main.generalStage);
+						alertbox.showAndWait();
 					}
 				}
 			}
