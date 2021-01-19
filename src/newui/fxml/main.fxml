@@ -30,7 +30,7 @@
 							<graphic>
 								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 									<image>
-										<Image url="@../assets/create-syllabus.png" />
+										<Image url="@assets/create-syllabus.png" />
 									</image>
 								</ImageView>
 							</graphic>
@@ -39,7 +39,7 @@
 							<graphic>
 								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 									<image>
-										<Image url="@../assets/add-syllabus.png" />
+										<Image url="@assets/add-syllabus.png" />
 									</image>
 								</ImageView>
 							</graphic>
@@ -48,7 +48,7 @@
 							<graphic>
 								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 									<image>
-										<Image url="@../assets/import.png" />
+										<Image url="@assets/import.png" />
 									</image>
 								</ImageView>
 							</graphic>
@@ -57,7 +57,7 @@
 							<graphic>
 								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 									<image>
-										<Image url="@../assets/export.png" />
+										<Image url="@assets/export.png" />
 									</image>
 								</ImageView>
 							</graphic>
@@ -66,7 +66,7 @@
 							<graphic>
 								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 									<image>
-										<Image url="@../assets/delete-syllabus.png" />
+										<Image url="@assets/delete-syllabus.png" />
 									</image>
 								</ImageView>
 							</graphic>
@@ -80,22 +80,22 @@
 					<children>
 						<ImageView fx:id="closeButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../assets/close-button.png" />
+								<Image url="@assets/close-button.png" />
 							</image>
 						</ImageView>
 						<ImageView fx:id="minimizeButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../assets/minimize-button.png" />
+								<Image url="@assets/minimize-button.png" />
 							</image>
 						</ImageView>
 						<ImageView fx:id="helpButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../assets/help.png" />
+								<Image url="@assets/help.png" />
 							</image>
 						</ImageView>
 						<ImageView fx:id="gitHubButton" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../assets/github-logo.png" />
+								<Image url="@assets/github-logo.png" />
 							</image>
 						</ImageView>
 					</children>

@@ -17,7 +17,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTabPane;
-
 import initializer.Initializer;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -342,7 +341,7 @@ public class MainController {
 				selectedCourse.setCourseDescription(courseDescriptionArea.getText());
 				selectedCourse.setLearningOutcomes(new LinkedHashSet<>(learningOutcomesTable.getItems()));
 				selectedCourse.setCourseCategory(courseCategoryChoice.getValue());
-				selectedCourse.setCourseSchedule(new LinkedHashSet<>(scheduleTable.getItems()));
+				selectedCourse.setCourseSchedule(new ArrayList<>(scheduleTable.getItems()));
 				selectedCourse.setCourseTextBook(mainCourseBookField.getText());
 				selectedCourse.setSuggestedReading(new LinkedHashSet<>(suggestedReadingList.getItems()));
 				selectedCourse.setEvaluationCriterias(new LinkedHashSet<>(evaluationCriteriaTable.getItems()));

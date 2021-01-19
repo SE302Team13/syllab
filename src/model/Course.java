@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-import newui.MainController;
+import newui.*;
 
 /**
  * 
@@ -525,7 +525,7 @@ public class Course implements Serializable {
 	 *         case of the update is not applied.
 	 */
 	public boolean changeSchedule(int week, String desc, String rm) {
-		if ((week > 0) && (week < courseSchedule.size())) {
+		if ((week > 0) && (week <= courseSchedule.size())) {
 			WeeklySubject subj = courseSchedule.get(week - 1);
 			return subj.updateSubject(desc, rm);
 		}
@@ -1177,11 +1177,11 @@ public class Course implements Serializable {
 		return returnValue;
 	}
 
-	public boolean setCourseSchedule(LinkedHashSet<WeeklySubject> courseSchedule) {
-		this.courseSchedule = new ArrayList<>();
+	public boolean setCourseSchedule(ArrayList<WeeklySubject> courseSchedule) {
 		boolean returnValue = true;
 		if (courseSchedule != null) {
-			for (WeeklySubject scheduleItem : courseSchedule) {
+			for (int i = 0; i <courseSchedule.size(); i++) {
+				WeeklySubject scheduleItem = courseSchedule.get(i);
 				if (!(changeSchedule(scheduleItem.getWeek(), scheduleItem.getDescription(),
 						scheduleItem.getRelatedMaterial()))) {
 					returnValue = false;

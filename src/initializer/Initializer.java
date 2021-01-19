@@ -14,7 +14,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Course;
